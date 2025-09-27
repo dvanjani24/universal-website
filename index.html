@@ -24,10 +24,6 @@
             padding: 0 20px;
         }
 
-        .section {
-            padding: 80px 0;
-        }
-
         /* Header */
         header {
             background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
@@ -56,6 +52,7 @@
             font-size: 1.8rem;
             font-weight: bold;
             color: #dc2626;
+            cursor: pointer;
         }
 
         .nav-links {
@@ -69,11 +66,12 @@
             text-decoration: none;
             transition: all 0.3s ease;
             font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 20px;
+            padding: 8px 16px;
+            border-radius: 25px;
+            cursor: pointer;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover, .nav-links a.active {
             color: #dc2626;
             background: rgba(220, 38, 38, 0.1);
         }
@@ -92,11 +90,22 @@
             transition: 0.3s;
         }
 
+        /* Page Content */
+        .page {
+            display: none;
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #1e3a5f 0%, #dc2626 100%);
             color: white;
-            padding: 150px 0 100px;
+            padding: 100px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -138,11 +147,12 @@
             animation: fadeInUp 1s ease-out 0.4s both;
         }
 
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin: 3rem 0;
             animation: fadeInUp 1s ease-out 0.6s both;
         }
 
@@ -161,7 +171,79 @@
             opacity: 0.8;
         }
 
-        /* Section Titles */
+        /* World Map Section */
+        .world-map {
+            background: #f8f9fa;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .map-container {
+            max-width: 800px;
+            margin: 3rem auto;
+            position: relative;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-placeholder::before {
+            content: '🌍';
+            font-size: 4rem;
+            opacity: 0.3;
+        }
+
+        .location-pin {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #dc2626;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .location-pin:hover {
+            transform: rotate(-45deg) scale(1.2);
+        }
+
+        .location-pin::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        /* Position pins for different locations */
+        .pin-taiwan { top: 40%; right: 20%; }
+        .pin-usa { top: 35%; left: 20%; }
+        .pin-belize { top: 55%; left: 25%; }
+        .pin-mexico { top: 50%; left: 22%; }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+        }
+
         .section-title {
             text-align: center;
             font-size: 2.8rem;
@@ -190,83 +272,15 @@
             margin: 20px auto;
         }
 
-        /* Vision Mission Values */
-        .vmv {
-            background: white;
-        }
-
-        .vmv-grid {
+        /* Cards Grid */
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .vmv-card {
-            padding: 3rem 2rem;
-            border-radius: 15px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border-top: 4px solid #dc2626;
-        }
-
-        .vmv-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .vmv-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #1e3a5f, #dc2626);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .vmv-card h3 {
-            color: #1e3a5f;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .vmv-card ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .vmv-card li {
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .vmv-card li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: #dc2626;
-            font-weight: bold;
-        }
-
-        /* Companies Section */
-        .companies {
-            background: #f8f9fa;
-        }
-
-        .companies-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 4rem;
         }
 
-        .company-card {
+        .card {
             background: white;
             padding: 2.5rem 2rem;
             border-radius: 15px;
@@ -275,72 +289,73 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            border-top: 4px solid #dc2626;
         }
 
-        .company-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, #dc2626, #1e3a5f);
-        }
-
-        .company-card:hover {
+        .card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
 
-        .company-logo {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(135deg, #1e3a5f, #dc2626);
-            border-radius: 50%;
+        /* Logo placeholders with actual logo styling */
+        .logo-placeholder {
+            width: 120px;
+            height: 80px;
             margin: 0 auto 1.5rem;
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Company specific styling based on actual logos */
+        .logo-unitex {
+            background: linear-gradient(135deg, #1e3a5f, #dc2626);
             color: white;
             font-weight: bold;
-            font-size: 1.3rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: none;
         }
 
-        .company-card h3 {
-            color: #1e3a5f;
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
-        }
-
-        .company-location {
-            color: #dc2626;
+        .logo-universal-exports {
+            background: linear-gradient(135deg, #dc2626, #1e3a5f);
+            color: white;
             font-weight: bold;
-            margin-bottom: 1rem;
+            border: none;
         }
 
-        .company-card p {
-            color: #666;
-            line-height: 1.6;
+        .logo-universal-freezone {
+            background: linear-gradient(135deg, #1e3a5f, #dc2626);
+            color: white;
+            font-weight: bold;
+            border: none;
         }
 
-        /* Leadership Section */
-        .leadership {
-            background: white;
+        .logo-univex {
+            background: linear-gradient(135deg, #1e3a5f, #dc2626);
+            color: white;
+            font-weight: bold;
+            border: none;
         }
 
+        /* Leadership Grid */
         .leadership-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 4rem;
+            margin-top: 3rem;
         }
 
         .leader-card {
-            background: #f8f9fa;
+            background: white;
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             border: 2px solid transparent;
         }
@@ -350,49 +365,21 @@
             transform: translateY(-5px);
         }
 
-        .leader-avatar {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #1e3a5f, #dc2626);
+        .headshot-placeholder {
+            width: 120px;
+            height: 120px;
+            background: #f8f9fa;
+            border: 3px dashed #ddd;
             border-radius: 50%;
             margin: 0 auto 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .leader-card h4 {
-            color: #1e3a5f;
-            margin-bottom: 0.5rem;
-        }
-
-        .leader-title {
-            color: #dc2626;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .leader-email {
-            color: #666;
+            color: #999;
             font-size: 0.8rem;
-            word-break: break-word;
         }
 
-        /* Brands Section */
-        .brands {
-            background: #f8f9fa;
-        }
-
-        .brands-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
+        /* Brand Cards */
         .brand-card {
             background: white;
             border-radius: 15px;
@@ -413,17 +400,18 @@
             text-align: center;
         }
 
-        .brand-logo {
-            width: 80px;
-            height: 80px;
+        .brand-logo-placeholder {
+            width: 100px;
+            height: 60px;
             background: rgba(255,255,255,0.2);
-            border-radius: 50%;
+            border: 2px dashed rgba(255,255,255,0.5);
+            border-radius: 10px;
             margin: 0 auto 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 0.8rem;
+            text-align: center;
         }
 
         .brand-content {
@@ -437,42 +425,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Belize Section */
-        .belize {
-            background: white;
-        }
-
-        .belize-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-            padding: 2rem;
-            background: #f8f9fa;
-            border-radius: 15px;
-        }
-
-        .belize-stat {
-            text-align: center;
-        }
-
-        .belize-stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #dc2626;
-        }
-
-        .belize-stat-label {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
-            color: white;
-        }
-
+        /* Contact Cards */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -494,20 +447,39 @@
             font-size: 1.4rem;
         }
 
-        .contact-info {
+        /* Mexico 2025 Banner */
+        .mexico-banner {
+            background: linear-gradient(135deg, #dc2626, #1e3a5f);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .mexico-banner h3 {
+            font-size: 2rem;
             margin-bottom: 1rem;
         }
 
-        .contact-info strong {
-            color: #dc2626;
+        /* Image Gallery Placeholder */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 3rem 0;
         }
 
-        /* Footer */
-        footer {
-            background: #1a202c;
-            color: white;
+        .gallery-item {
+            height: 200px;
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
             text-align: center;
-            padding: 3rem 0;
         }
 
         /* Animations */
@@ -530,6 +502,18 @@
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #1e3a5f;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
             }
 
             .mobile-menu {
@@ -548,42 +532,26 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .vmv-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .companies-grid {
+            .cards-grid {
                 grid-template-columns: 1fr;
             }
 
             .leadership-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
-            .brands-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Scroll animations */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .scroll-reveal.active {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
         }
     </style>
 </head>
@@ -591,16 +559,16 @@
     <!-- Header -->
     <header id="header">
         <nav class="container">
-            <div class="logo">UNIVERSAL GROUP</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#companies">Companies</a></li>
-                <li><a href="#leadership">Leadership</a></li>
-                <li><a href="#brands">Brands</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <div class="logo" onclick="showPage('home')">UNIVERSAL GROUP</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showPage('home')" class="nav-link active">Home</a></li>
+                <li><a href="#" onclick="showPage('about')" class="nav-link">About</a></li>
+                <li><a href="#" onclick="showPage('companies')" class="nav-link">Companies</a></li>
+                <li><a href="#" onclick="showPage('leadership')" class="nav-link">Leadership</a></li>
+                <li><a href="#" onclick="showPage('brands')" class="nav-link">Brands</a></li>
+                <li><a href="#" onclick="showPage('contact')" class="nav-link">Contact</a></li>
             </ul>
-            <div class="mobile-menu">
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -608,588 +576,225 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Universal Group</h1>
-                <p class="tagline">Global Import/Export Excellence Since 1995</p>
-                <p class="subtitle">Family-owned business connecting markets across continents</p>
-                
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-number">30+</div>
-                        <div class="stat-label">Years Experience</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">5</div>
-                        <div class="stat-label">Sister Companies</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">6</div>
-                        <div class="stat-label">Countries</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">1000+</div>
-                        <div class="stat-label">Products</div>
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Universal Group</h1>
+                    <p class="tagline">Global Import/Export Excellence Since 1995</p>
+                    <p class="subtitle">Family-owned business connecting markets across continents</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">30+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4</div>
+                            <div class="stat-label">Sister Companies</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Countries</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1000+</div>
+                            <div class="stat-label">Products</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Vision Mission Values -->
-    <section id="about" class="section vmv">
-        <div class="container">
-            <h2 class="section-title">Our Foundation</h2>
-            <p class="section-subtitle">We lean on our vision, mission, and values to stay laser-focused on helping our clients achieve their goals</p>
-            
-            <div class="vmv-grid">
-                <div class="vmv-card scroll-reveal">
-                    <div class="vmv-icon">🎯</div>
-                    <h3>Vision</h3>
-                    <ul>
-                        <li>Supply businesses and consumers with high quality products across any category our clients desire</li>
-                        <li>Leverage our global presence and 30+ years of extensive experience in manufacturing, sourcing, logistics, marketing, and sales</li>
-                    </ul>
-                </div>
+        <section class="world-map">
+            <div class="container">
+                <h2 class="section-title">Global Presence</h2>
+                <p class="section-subtitle">Operating across multiple continents with strategic offices and partnerships worldwide</p>
                 
-                <div class="vmv-card scroll-reveal">
-                    <div class="vmv-icon">🚀</div>
-                    <h3>Mission</h3>
-                    <ul>
-                        <li>Drive sustainable growth and profitability for our wholesale and retail clients</li>
-                        <li>Disciplined capital management combined with global expertise</li>
-                    </ul>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <div class="location-pin pin-taiwan" title="Taiwan - Universal Exports HQ"></div>
+                        <div class="location-pin pin-usa" title="USA - Univex"></div>
+                        <div class="location-pin pin-belize" title="Belize - Universal Freezone & Unitex"></div>
+                        <div class="location-pin pin-mexico" title="Mexico - Coming 2025"></div>
+                    </div>
                 </div>
                 
-                <div class="vmv-card scroll-reveal">
-                    <div class="vmv-icon">💎</div>
-                    <h3>Values</h3>
-                    <ul>
-                        <li><strong>Integrity:</strong> Highest ethical standards and honest, trusting relationships</li>
-                        <li><strong>Customer-driven:</strong> Understanding and meeting client needs</li>
-                        <li><strong>Long-term mindset:</strong> 10+ year relationships, not short-term gains</li>
-                    </ul>
+                <div class="mexico-banner">
+                    <h3>🇲🇽 Coming to Mexico in 2025</h3>
+                    <p>Expanding our operations to serve the growing Latin American market</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Companies Section -->
-    <section id="companies" class="section companies">
-        <div class="container">
-            <h2 class="section-title">Our Global Network</h2>
-            <p class="section-subtitle">Family-owned business comprising multiple subsidiary companies with offices across the world</p>
-
-            <div class="companies-grid">
-                <div class="company-card scroll-reveal">
-                    <div class="company-logo">UE</div>
-                    <h3>Universal Exports</h3>
-                    <div class="company-location">Taiwan / China</div>
-                    <p>Founded in 1995, our flagship company with 30 years of experience in manufacturing, wholesale buying, quality control, and logistics. Serving clients on every continent.</p>
-                </div>
-
-                <div class="company-card scroll-reveal">
-                    <div class="company-logo">UFZ</div>
-                    <h3>Universal Freezone</h3>
-                    <div class="company-location">Belize</div>
-                    <p>Strategic Caribbean operations through the Corozal Freezone, serving wholesale and retail clients in Mexico and Belize markets.</p>
-                </div>
-
-                <div class="company-card scroll-reveal">
-                    <div class="company-logo">UTX</div>
-                    <h3>Unitex</h3>
-                    <div class="company-location">Belize</div>
-                    <p>Founded in 2002, specializing in wholesale distribution and retail operations with over 20 years of market experience in Central America.</p>
-                </div>
-
-                <div class="company-card scroll-reveal">
-                    <div class="company-logo">UVX</div>
-                    <h3>Univex</h3>
-                    <div class="company-location">USA</div>
-                    <p>Founded in 2019 in NYC, managing strategic initiatives including authorized distributor partnerships, e-commerce strategy, and technology adoption.</p>
-                </div>
-
-                <div class="company-card scroll-reveal">
-                    <div class="company-logo">UMX</div>
-                    <h3>Unimex</h3>
-                    <div class="company-location">Mexico</div>
-                    <p>Expanding into Mexico in 2025, providing comprehensive Latin American operations and cross-border trade solutions.</p>
+        <section class="section" style="background: white;">
+            <div class="container">
+                <h2 class="section-title">Company Gallery</h2>
+                <p class="section-subtitle">A glimpse into our operations around the world</p>
+                
+                <div class="gallery">
+                    <div class="gallery-item">Taiwan HQ Office<br>Photo Placeholder</div>
+                    <div class="gallery-item">Belize Warehouse<br>Photo Placeholder</div>
+                    <div class="gallery-item">Yiwu Market<br>Photo Placeholder</div>
+                    <div class="gallery-item">Guangzhou Operations<br>Photo Placeholder</div>
+                    <div class="gallery-item">Product Showcase<br>Photo Placeholder</div>
+                    <div class="gallery-item">Team Meeting<br>Photo Placeholder</div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- Leadership Section -->
-    <section id="leadership" class="section leadership">
-        <div class="container">
-            <h2 class="section-title">Meet Our Leadership</h2>
-            <p class="section-subtitle">Experienced executives and sales professionals driving global operations</p>
-
-            <h3 style="color: #1e3a5f; font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">Executive Leadership</h3>
-            <div class="leadership-grid">
-                <div class="leader-card scroll-reveal">
-                    <div class="leader-avatar">JV</div>
-                    <h4>Jimmy V.</h4>
-                    <div class="leader-title">Founder/CEO of Universal Group & Universal Exports</div>
-                    <div class="leader-email">jimmy@universaltgy.com</div>
-                </div>
-
-                <div class="leader-card scroll-reveal">
-                    <div class="leader-avatar">KV</div>
-                    <h4>Kenny V.</h4>
-                    <div class="leader-title">CEO of Universal Belize & Unimex</div>
-                    <div class="leader-email">universalbelize@hotmail.com</div>
-                </div>
-
-                <div class="leader-card scroll-reveal">
-                    <div class="leader-avatar">DV</div>
-                    <h4>Deepak V.</h4>
-                    <div class="leader-title">CEO of Univex & Unimex</div>
-                    <div class="leader-email">deepak@univexcompany.com</div>
-                </div>
-
-                <div class="leader-card scroll-reveal">
-                    <div class="leader-avatar">SC</div>
-                    <h4>Sunny C.</h4>
-                    <div class="leader-title">Head of Universal Guangzhou & Panama</div>
-                    <div class="leader-email">sunny@universaltgy.com</div>
-                </div>
-
-                <div class="leader-card scroll-reveal">
-                    <div class="leader-avatar">MS</div>
-                    <h4>Mike S.</h4>
-                    <div class="leader-title">Head of Universal Yiwu</div>
-                    <div class="leader-email">mike@universaltgy.com</div>
-                </div>
-            </div>
-
-            <h3 style="color: #1e3a5f; font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">Sales, Marketing & Logistics Leadership</h3>
-            <div class="leadership-grid">
-                <div class="leader-card scroll-reveal">
-                    <div class="leader-avatar">S</div>
-                    <h4>Shirley</h4>
-                    <div class="leader-title">Head of Logistics</div>
-                </div>
-
-                <div class="leader-card scroll-reveal">
-                    <div class="leader-avatar">BM</div>
-                    <h4>Bhagwan</h4>
-                    <div class="leader-title">Belize Sales Manager</div>
-                </div>
-
-                <div class="leader-card scroll-reveal">
-                    <div class="leader-avatar">HM</div>
-                    <h4>Hitesh</h4>
-                    <div class="leader-title">Belize Sales Manager</div>
-                </div>
-
-                <div class="leader-card scroll-reveal">
-                    <div class="leader-avatar">SM</div>
-                    <h4>Sakshi</h4>
-                    <div class="leader-title">Belize Marketing Manager</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Belize Market Section -->
-    <section class="section belize">
-        <div class="container">
-            <h2 class="section-title">Universal Belize Market Leadership</h2>
-            <p class="section-subtitle">Leading wholesale distributor and retailer in Belize's rapidly growing economy</p>
-
-            <div class="belize-stats scroll-reveal">
-                <div class="belize-stat">
-                    <div class="belize-stat-number">10.5%</div>
-                    <div class="belize-stat-label">GDP Growth 2024</div>
-                </div>
-                <div class="belize-stat">
-                    <div class="belize-stat-number">2.1%</div>
-                    <div class="belize-stat-label">Unemployment Rate</div>
-                </div>
-                <div class="belize-stat">
-                    <div class="belize-stat-number">600K</div>
-                    <div class="belize-stat-label">Tourist Arrivals 2024</div>
-                </div>
-                <div class="belize-stat">
-                    <div class="belize-stat-number">45%</div>
-                    <div class="belize-stat-label">Tourism GDP Contribution</div>
-                </div>
-                <div class="belize-stat">
-                    <div class="belize-stat-number">145K</div>
-                    <div class="belize-stat-label">sq. ft. Total Facilities</div>
-                </div>
-                <div class="belize-stat">
-                    <div class="belize-stat-number">30+</div>
-                    <div class="belize-stat-label">Person Sales Team</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Exclusive Brands Section -->
-    <section id="brands" class="section brands">
-        <div class="container">
-            <h2 class="section-title">Exclusive Brand Partnerships</h2>
-            <p class="section-subtitle">Proud exclusive authorized distributor for internationally recognized brands</p>
-
-            <div class="brands-grid">
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">B</div>
-                        <h3>Bauducco</h3>
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <section class="section" style="padding-top: 120px; background: white;">
+            <div class="container">
+                <h2 class="section-title">Our Foundation</h2>
+                <p class="section-subtitle">We lean on our vision, mission, and values to stay laser-focused on helping our clients achieve their goals</p>
+                
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3 style="color: #1e3a5f; margin-bottom: 1rem;">🎯 Vision</h3>
+                        <ul style="list-style: none; text-align: left;">
+                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
+                                Supply businesses and consumers with high quality products across any category our clients desire
+                            </li>
+                            <li style="padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
+                                Leverage our global presence and 30+ years of extensive experience in manufacturing, sourcing, logistics, marketing, and sales
+                            </li>
+                        </ul>
                     </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Since 1952 • Brazil</div>
-                        <p>Brazilian multinational company and one of the world's largest producers of panettone and baked goods. #1 global market share for panettone (~75%) and #3 for wafers (~28%). Partnership began in 2025.</p>
+                    
+                    <div class="card">
+                        <h3 style="color: #1e3a5f; margin-bottom: 1rem;">🚀 Mission</h3>
+                        <ul style="list-style: none; text-align: left;">
+                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
+                                Drive sustainable growth and profitability for our wholesale and retail clients
+                            </li>
+                            <li style="padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
+                                Disciplined capital management combined with global expertise
+                            </li>
+                        </ul>
                     </div>
-                </div>
-
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">MB</div>
-                        <h3>Mr. Brown Coffee</h3>
-                    </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Since 1998 • Taiwan</div>
-                        <p>100% real and fresh Arabica coffee series with no added preservatives, delivering rich coffee flavor served iced or hot. Partnership established in 2021.</p>
-                    </div>
-                </div>
-
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">MH</div>
-                        <h3>Madam Hong Lady Boba</h3>
-                    </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Since 1991 • Taiwan</div>
-                        <p>First company from Taiwan to commercialize ready-to-drink bubble tea with bursting boba. Premium bubble tea products made with fresh ingredients from Taiwan, the global hub for bubble tea innovation. Partnership since 2021.</p>
+                    
+                    <div class="card">
+                        <h3 style="color: #1e3a5f; margin-bottom: 1rem;">💎 Values</h3>
+                        <ul style="list-style: none; text-align: left;">
+                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
+                                <strong>Integrity:</strong> Highest ethical standards and honest, trusting relationships
+                            </li>
+                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
+                                <strong>Customer-driven:</strong> Understanding and meeting client needs
+                            </li>
+                            <li style="padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
+                                <strong>Long-term mindset:</strong> 10+ year relationships, not short-term gains
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- Private Labels Section -->
-    <section class="section" style="background: white;">
-        <div class="container">
-            <h2 class="section-title">Our Private Label Brands</h2>
-            <p class="section-subtitle">Globally recognized private label brands across multiple product categories</p>
+    <!-- COMPANIES PAGE -->
+    <div id="companies" class="page">
+        <section class="section" style="padding-top: 120px; background: #f8f9fa;">
+            <div class="container">
+                <h2 class="section-title">Our Global Network</h2>
+                <p class="section-subtitle">Family-owned business comprising multiple subsidiary companies with offices across the world</p>
 
-            <div class="brands-grid">
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">D</div>
-                        <h3>Deconique</h3>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="logo-placeholder logo-universal-exports">UNIVERSAL<br>EXPORTS</div>
+                        <h3 style="color: #1e3a5f;">Universal Exports</h3>
+                        <div style="color: #dc2626; font-weight: bold; margin-bottom: 1rem;">Taiwan / China</div>
+                        <p>Founded in 1995, our flagship company with 30 years of experience in manufacturing, wholesale buying, quality control, and logistics. Serving clients on every continent.</p>
                     </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Electronics</div>
-                        <p>High-quality consumer electronics and accessories distributed globally through our network.</p>
+
+                    <div class="card">
+                        <div class="logo-placeholder logo-universal-freezone">UNIVERSAL<br>FREEZONE</div>
+                        <h3 style="color: #1e3a5f;">Universal Freezone</h3>
+                        <div style="color: #dc2626; font-weight: bold; margin-bottom: 1rem;">Belize</div>
+                        <p>Strategic Caribbean operations through the Corozal Freezone, serving wholesale and retail clients in Mexico and Belize markets.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="logo-placeholder logo-unitex">UNITEX</div>
+                        <h3 style="color: #1e3a5f;">Unitex</h3>
+                        <div style="color: #dc2626; font-weight: bold; margin-bottom: 1rem;">Belize</div>
+                        <p>Founded in 2002, specializing in wholesale distribution and retail operations with over 20 years of market experience in Central America.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="logo-placeholder logo-univex">UNIVEX</div>
+                        <h3 style="color: #1e3a5f;">Univex</h3>
+                        <div style="color: #dc2626; font-weight: bold; margin-bottom: 1rem;">USA</div>
+                        <p>Founded in 2019 in NYC, managing strategic initiatives including authorized distributor partnerships, e-commerce strategy, and technology adoption.</p>
                     </div>
                 </div>
 
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">LS</div>
-                        <h3>Linen Secrets</h3>
-                    </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Bedding</div>
-                        <p>Premium bedding and home textile products for comfort and quality sleep solutions.</p>
-                    </div>
-                </div>
-
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">NRG</div>
-                        <h3>NRG Fitness</h3>
-                    </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Fitness Products</div>
-                        <p>Complete range of fitness equipment and accessories for health-conscious consumers.</p>
-                    </div>
-                </div>
-
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">S</div>
-                        <h3>Siempre</h3>
-                    </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Salon Items</div>
-                        <p>Professional salon and beauty products for the personal care industry.</p>
-                    </div>
-                </div>
-
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">A</div>
-                        <h3>Alectura</h3>
-                    </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Stationery</div>
-                        <p>Complete range of office and school stationery products for educational and professional use.</p>
-                    </div>
-                </div>
-
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">K</div>
-                        <h3>Kidacious</h3>
-                    </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Toys</div>
-                        <p>Fun and educational toys designed to inspire creativity and learning in children.</p>
-                    </div>
-                </div>
-
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">SP</div>
-                        <h3>Spark</h3>
-                    </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Home Essentials • Belize/Mexico</div>
-                        <p>Nationally recognized home essentials brand throughout Mexico and Belize markets.</p>
-                    </div>
-                </div>
-
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">AR</div>
-                        <h3>Aria</h3>
-                    </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Food & Beverages • Belize/Mexico</div>
-                        <p>Quality food and beverage products with national recognition in Mexico and Belize.</p>
-                    </div>
+                <div class="mexico-banner">
+                    <h3>🇲🇽 Expanding to Mexico in 2025</h3>
+                    <p>New market entry planned for comprehensive Latin American operations and cross-border trade solutions</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section contact">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">Global Contact Information</h2>
-            <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Connect with Universal Group offices worldwide</p>
+    <!-- LEADERSHIP PAGE -->
+    <div id="leadership" class="page">
+        <section class="section" style="padding-top: 120px; background: white;">
+            <div class="container">
+                <h2 class="section-title">Meet Our Leadership</h2>
+                <p class="section-subtitle">Experienced executives and sales professionals driving global operations</p>
 
-            <div class="contact-grid">
-                <div class="contact-card scroll-reveal">
-                    <h3>Universal Belize</h3>
-                    <div class="contact-info">
-                        <strong>Address:</strong><br>
-                        Freedom Avenue, Corozal Freezone, Belize
+                <h3 style="color: #1e3a5f; font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">Executive Leadership</h3>
+                <div class="leadership-grid">
+                    <div class="leader-card">
+                        <div class="headshot-placeholder">Jimmy V.<br>Photo</div>
+                        <h4 style="color: #1e3a5f;">Jimmy V.</h4>
+                        <div style="color: #dc2626; font-size: 0.9rem; margin-bottom: 1rem;">Founder/CEO of Universal Group & Universal Exports</div>
+                        <div style="color: #666; font-size: 0.8rem;">jimmy@universaltgy.com</div>
                     </div>
-                    <div class="contact-info">
-                        <strong>Email:</strong><br>
-                        universalbelize@hotmail.com
-                    </div>
-                    <div class="contact-info">
-                        <strong>Phone:</strong><br>
-                        +501 610 3626
-                    </div>
-                    <div class="contact-info">
-                        <strong>Social:</strong><br>
-                        Facebook: universalfreezone123<br>
-                        Instagram: @universalbelize
-                    </div>
-                </div>
 
-                <div class="contact-card scroll-reveal">
-                    <h3>Universal Exports</h3>
-                    <div class="contact-info">
-                        <strong>Headquarters:</strong><br>
-                        162, 11F-1, Chung Shan N. Rd., Sec. 2<br>
-                        Taipei, Taiwan
+                    <div class="leader-card">
+                        <div class="headshot-placeholder">Kenny V.<br>Photo</div>
+                        <h4 style="color: #1e3a5f;">Kenny V.</h4>
+                        <div style="color: #dc2626; font-size: 0.9rem; margin-bottom: 1rem;">CEO of Universal Belize</div>
+                        <div style="color: #666; font-size: 0.8rem;">universalbelize@hotmail.com</div>
                     </div>
-                    <div class="contact-info">
-                        <strong>Email:</strong><br>
-                        business@universal-tgy.com
+
+                    <div class="leader-card">
+                        <div class="headshot-placeholder">Deepak V.<br>Photo</div>
+                        <h4 style="color: #1e3a5f;">Deepak V.</h4>
+                        <div style="color: #dc2626; font-size: 0.9rem; margin-bottom: 1rem;">CEO of Univex</div>
+                        <div style="color: #666; font-size: 0.8rem;">deepak@univexcompany.com</div>
                     </div>
-                    <div class="contact-info">
-                        <strong>Phone:</strong><br>
-                        +886 2 2595 9198
+
+                    <div class="leader-card">
+                        <div class="headshot-placeholder">Sunny C.<br>Photo</div>
+                        <h4 style="color: #1e3a5f;">Sunny C.</h4>
+                        <div style="color: #dc2626; font-size: 0.9rem; margin-bottom: 1rem;">Head of Universal Guangzhou & Panama</div>
+                        <div style="color: #666; font-size: 0.8rem;">sunny@universaltgy.com</div>
                     </div>
-                    <div class="contact-info">
-                        <strong>Website:</strong><br>
-                        universal-tgy.com<br>
-                        Instagram: @universaltgy
+
+                    <div class="leader-card">
+                        <div class="headshot-placeholder">Mike S.<br>Photo</div>
+                        <h4 style="color: #1e3a5f;">Mike S.</h4>
+                        <div style="color: #dc2626; font-size: 0.9rem; margin-bottom: 1rem;">Head of Universal Yiwu</div>
+                        <div style="color: #666; font-size: 0.8rem;">mike@universaltgy.com</div>
                     </div>
                 </div>
 
-                <div class="contact-card scroll-reveal">
-                    <h3>Univex</h3>
-                    <div class="contact-info">
-                        <strong>Headquarters:</strong><br>
-                        418 Broadway Suite N<br>
-                        Albany, NY 12207, United States
-                    </div>
-                    <div class="contact-info">
-                        <strong>Email:</strong><br>
-                        business@univexcompany.com
-                    </div>
-                    <div class="contact-info">
-                        <strong>Phone:</strong><br>
-                        +1 914 208 1477
-                    </div>
-                    <div class="contact-info">
-                        <strong>Website:</strong><br>
-                        univexcompany.com<br>
-                        Instagram: @univexco
-                    </div>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 15px;">
-                <h3 style="color: #dc2626; margin-bottom: 1rem;">Ready to Partner With Us?</h3>
-                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Explore international trade opportunities with Universal Group's global network</p>
-                <a href="mailto:business@universal-tgy.com" style="display: inline-block; background: #dc2626; color: white; padding: 12px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; transition: all 0.3s ease;">Get In Touch</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Universal Group. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; opacity: 0.8;">Family-owned business • 30+ Years of Excellence • Global Import/Export Solutions</p>
-        </div>
-    </footer>
-
-    <script>
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('header-scrolled');
-            } else {
-                header.classList.remove('header-scrolled');
-            }
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Scroll reveal animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all scroll-reveal elements
-        document.querySelectorAll('.scroll-reveal').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Mobile menu functionality
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        });
-
-        // Counter animation for stats
-        function animateCounters() {
-            const counters = document.querySelectorAll('.stat-number, .belize-stat-number');
-            counters.forEach(counter => {
-                const target = parseFloat(counter.textContent.replace(/[^\d.]/g, ''));
-                const suffix = counter.textContent.replace(/[\d.]/g, '');
-                let current = 0;
-                const increment = target / 100;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        counter.textContent = target + suffix;
-                        clearInterval(timer);
-                    } else {
-                        counter.textContent = Math.floor(current) + suffix;
-                    }
-                }, 20);
-            });
-        }
-
-        // Trigger counter animation when stats section is visible
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        });
-
-        const statsSection = document.querySelector('.stats-grid');
-        if (statsSection) {
-            statsObserver.observe(statsSection);
-        }
-    </script>
-</body>
-</html>brand-logo">A</div>
-                        <h3>A-Cheese</h3>
-                    </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Since 1962 • Netherlands</div>
-                        <p>Premium quality cheese representing pure quality and honest, natural cheese with a fresh look. Exclusive partnership since 2015, now a leading premium cheese brand in Belize and Mexico.</p>
-                    </div>
-                </div>
-
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">K</div>
-                        <h3>Kägi Chocolates</h3>
-                    </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Since 1934 • Switzerland</div>
-                        <p>100% Swiss-made chocolates with unique balance of genuine Swiss chocolate, crispy-baked light wafers and mousse-like filling. Partnership established in 2024.</p>
-                    </div>
-                </div>
-
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">G</div>
-                        <h3>Gorilla Energy</h3>
-                    </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Since 2008 • Poland</div>
-                        <p>Functional beverage for active and ambitious people, backed by prominent athletes like UFC champion Khabib Nurmagomedov. Partnership began in 2024.</p>
-                    </div>
-                </div>
-
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="brand-logo">KB</div>
-                        <h3>Kent Boringer</h3>
-                    </div>
-                    <div class="brand-content">
-                        <div class="brand-since">Since 1960 • Turkey</div>
-                        <p>Packaged foods and oil manufacturer with 42,000 sq-meter production facility producing over 300 products. Partnership established in 2024.</p>
-                    </div>
-                </div>
-
-                <div class="brand-card scroll-reveal">
-                    <div class="brand-header">
-                        <div class="
+                <h3 style="color: #1e3a5f; font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">Sales, Marketing & Logistics Leadership</h3>
+                <div class="leadership-grid">
+                    <div class="leader-card">
+                        <div class="headshot-placeholder">Shirley<br>Photo</div>
+                        <h4 style="
