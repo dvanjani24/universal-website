@@ -3,18 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Group - Global Import/Export Solutions</title>
+    <title>Universal Group - Global Import & Export Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --navy: #0B132B;
+            --maroon: #A4161A;
+            --light-bg: #f8f9fa;
+            --dark-text: #1C1C1E;
+            --light-text: #6c757d;
+            --white: #ffffff;
+            --border-color: #dee2e6;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text);
+            background-color: var(--white);
             overflow-x: hidden;
         }
 
@@ -26,20 +44,15 @@
 
         /* Header */
         header {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
-            color: white;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
             padding: 1rem 0;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            border-bottom: 1px solid var(--border-color);
             transition: all 0.3s ease;
-        }
-
-        .header-scrolled {
-            background: rgba(30, 58, 95, 0.95);
-            backdrop-filter: blur(10px);
         }
 
         nav {
@@ -49,1161 +62,793 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #dc2626;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy);
             cursor: pointer;
+            letter-spacing: -1px;
+            text-decoration: none;
+        }
+        .logo img {
+            height: 40px;
+        }
+        .logo span {
+            color: var(--maroon);
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1rem;
         }
 
-        .nav-links a {
-            color: white;
+        /* Dropdown Styling */
+        .nav-item {
+            position: relative;
+        }
+
+/* REPLACEMENT for .dropdown-menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            list-style: none;
+            padding: 0.5rem 0;
+            margin-top: 0; /* Problematic margin removed */
+            min-width: 200px;
+            z-index: 1001;
+            opacity: 0;
+            transform: translateY(10px);
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+
+        /* This new rule makes the hover effect smoother */
+        .nav-item:hover .dropdown-menu {
+            display: block;
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-item:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu li a {
+            padding: 10px 20px;
+            display: block;
+            white-space: nowrap;
+            font-size: 0.95rem;
+        }
+        .dropdown-menu li a:after {
+            display: none; /* No underline for dropdown items */
+        }
+        .dropdown-menu li a:hover {
+            background-color: var(--light-bg);
+        }
+
+
+        .nav-links a, .nav-item > a {
+            color: var(--dark-text);
             text-decoration: none;
             transition: all 0.3s ease;
             font-weight: 500;
             padding: 8px 16px;
-            border-radius: 25px;
+            border-radius: 8px;
             cursor: pointer;
+            position: relative;
+            display: block;
         }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: #dc2626;
-            background: rgba(220, 38, 38, 0.1);
+        .nav-links a:after, .nav-item > a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--maroon);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover:after, .nav-links a.active:after,
+        .nav-item > a:hover:after, .nav-item > a.active:after {
+            width: 50%;
+        }
+        .nav-links a:hover, .nav-links a.active,
+        .nav-item > a:hover, .nav-item > a.active {
+            color: var(--navy);
         }
 
         .mobile-menu {
             display: none;
-            flex-direction: column;
             cursor: pointer;
         }
-
         .mobile-menu span {
             width: 25px;
-            height: 3px;
-            background: white;
-            margin: 3px 0;
+            height: 2px;
+            background: var(--navy);
+            margin: 4px 0;
             transition: 0.3s;
         }
 
         /* Page Content */
-        .page {
-            display: none;
-            padding-top: 80px;
-            min-height: 100vh;
-        }
+        .page { display: none; }
+        .page.active { display: block; }
+        .page-header { padding-top: 120px; text-align: center; }
 
-        .page.active {
-            display: block;
+        /* Section Styles */
+        .section { padding: 100px 0; }
+        .section-heading { margin-bottom: 4rem; }
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--navy);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--light-text);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #1e3a5f 0%, #dc2626 100%);
-            color: white;
-            padding: 100px 0;
+            background-color: var(--white);
+            padding: 160px 0 100px 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
         .hero h1 {
             font-size: 4rem;
-            margin-bottom: 1rem;
-            font-weight: 300;
+            color: var(--navy);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            line-height: 1.2;
             animation: fadeInUp 1s ease-out;
         }
-
         .hero .tagline {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
+            font-size: 1.2rem;
+            color: var(--light-text);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
             animation: fadeInUp 1s ease-out 0.2s both;
-        }
-
-        .hero .subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            opacity: 0.8;
-            animation: fadeInUp 1s ease-out 0.4s both;
         }
 
         /* Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 4rem;
+            padding: 2rem;
+            background-color: var(--light-bg);
+            border-radius: 12px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 2.8rem; font-weight: 700; color: var(--navy); }
+        .stat-label { font-size: 0.9rem; color: var(--light-text); font-weight: 500; }
+        
+        /* Content Split */
+        .content-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .content-split .text-content h3 { font-size: 2rem; color: var(--navy); margin-bottom: 1rem; }
+        .content-split .image-content img { width: 100%; height: auto; border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .content-split.reversed .image-content { order: -1; }
+
+        /* New Presence Map Section */
+        .presence-map-section {
+            background-color: var(--light-bg);
+        }
+        .presence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin: 3rem 0;
-            animation: fadeInUp 1s ease-out 0.6s both;
         }
-
-        .stat-item {
-            text-align: center;
+        .presence-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
         }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #dc2626;
+        .presence-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: var(--maroon);
         }
-
-        .stat-label {
+        .presence-card h4 {
+            font-size: 1.4rem;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+        .presence-card p {
+            color: var(--light-text);
             font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .presence-card .coming-soon {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--maroon);
+            text-transform: uppercase;
+        }
+        .presence-card .card-link {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 1.5rem;
+            color: var(--maroon);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+        .presence-card:hover .card-link {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .presence-card.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+         .presence-card.disabled:hover {
+            transform: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-color: var(--border-color);
+        }
+
+        /* Other Component Styles from previous version */
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .card { background: var(--white); padding: 2rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.07); transition: all 0.3s ease; border: 1px solid var(--border-color); text-align: center; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .card .logo-image { max-width: 150px; height: 60px; object-fit: contain; margin: 0 auto 1.5rem; }
+        .card h3 { color: var(--navy); margin-bottom: 0.5rem; }
+        .card .card-subtitle { color: var(--maroon); font-weight: 600; margin-bottom: 1rem; }
+        .leadership-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .leader-card { background: var(--light-bg); padding: 2rem; border-radius: 12px; text-align: center; transition: all 0.3s ease; border: 1px solid transparent; }
+        .leader-card:hover { transform: translateY(-5px); border-color: var(--maroon); }
+        .leader-card img { width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 1.5rem; object-fit: cover; border: 3px solid var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .leader-card h4 { color: var(--navy); font-size: 1.2rem; }
+        .leader-card .leader-title { color: var(--maroon); font-size: 0.9rem; margin-bottom: 1rem; font-weight: 500; min-height: 40px; }
+        .leader-card .leader-email { color: var(--light-text); font-size: 0.8rem; word-break: break-all; }
+        .brand-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.07); transition: all 0.3s ease; border: 1px solid var(--border-color); display: flex; flex-direction: column; }
+        .brand-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .brand-header { padding: 2rem; background-color: var(--light-bg); text-align: center; border-bottom: 1px solid var(--border-color); min-height: 120px; display: flex; align-items: center; justify-content: center; }
+        .brand-header img { max-width: 150px; max-height: 60px; object-fit: contain; margin: 0 auto; }
+        .brand-content { padding: 2rem; flex-grow: 1; }
+        .brand-since { color: var(--maroon); font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; display: block; }
+        .contact-section { background: var(--light-bg); }
+        .contact-section .section-title { color: var(--navy); }
+        .contact-section .section-subtitle { color: var(--light-text); }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem; }
+        .contact-card { background: var(--white); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color); }
+        .contact-card h3 { color: var(--maroon); margin-bottom: 1.5rem; font-size: 1.4rem; }
+        .contact-card strong { color: var(--navy); }
+        .contact-card div { margin-bottom: 1rem; color: var(--light-text); }
+        .contact-card a { color: var(--navy); text-decoration: none; }
+        .contact-card a:hover { text-decoration: underline; }
+        .cta-button { display: inline-block; background: var(--maroon); color: white; padding: 14px 35px; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; }
+        .cta-button:hover { background: var(--navy); transform: translateY(-3px); }
+        footer { background: var(--navy); color: var(--light-bg); text-align: center; padding: 3rem 0; }
+        footer p { opacity: 0.8; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .content-split, .content-split.reversed { grid-template-columns: 1fr; }
+            .content-split .image-content { order: -1; margin-bottom: 2rem; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); flex-direction: column; padding: 1rem; box-shadow: 0 5px 10px rgba(0,0,0,0.1); border-top: 1px solid var(--border-color); }
+            .nav-links.active { display: flex; }
+            .nav-item { position: static; }
+            .dropdown-menu { display: none !important; } /* Hide dropdowns on mobile for simplicity */
+            .mobile-menu { display: flex; flex-direction: column; }
+            .hero h1 { font-size: 2.8rem; }
+            .section-title { font-size: 2.2rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .leadership-grid { grid-template-columns: 1fr; }
+        }
+        .enhanced-presence-section {
+            background-color: var(--light-bg);
+        }
+
+        .enhanced-presence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .presence-card-enhanced {
+            position: relative;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            color: var(--white);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .presence-card-enhanced:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .card-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.4s ease;
+        }
+
+        .presence-card-enhanced:hover .card-background {
+            transform: scale(1.1);
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.4) 100%);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-icons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-icons .flag {
+            width: 40px;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .card-icons .logo {
+            max-height: 30px;
+            max-width: 100px;
             opacity: 0.8;
         }
 
-        /* World Map Section */
-        .world-map {
-            background: #f8f9fa;
-            padding: 80px 0;
-            text-align: center;
+        .card-text-content h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            line-height: 1.2;
         }
 
-        .map-container {
-            max-width: 800px;
-            margin: 3rem auto;
-            position: relative;
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .card-text-content .explore-link {
+            font-weight: 600;
+            color: var(--white);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+            display: inline-block;
+            margin-top: 0.5rem;
         }
 
-        .map-placeholder {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
+        .presence-card-enhanced:hover .explore-link {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .map-placeholder::before {
-            content: '🌍';
-            font-size: 4rem;
-            opacity: 0.3;
+        .presence-card-enhanced.disabled {
+            cursor: default;
         }
 
-        .location-pin {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: #dc2626;
-            border-radius: 50% 50% 50% 0;
-            transform: rotate(-45deg);
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .presence-card-enhanced.disabled .card-background {
+            filter: grayscale(80%);
         }
 
-        .location-pin:hover {
-            transform: rotate(-45deg) scale(1.2);
+        .presence-card-enhanced.disabled:hover {
+            transform: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .location-pin::before {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: white;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(45deg);
+        .presence-card-enhanced.disabled:hover .card-background {
+            transform: none;
         }
-
-        /* Position pins for different locations */
-        .pin-taiwan { top: 40%; right: 20%; }
-        .pin-usa { top: 35%; left: 20%; }
-        .pin-belize { top: 55%; left: 25%; }
-        .pin-mexico { top: 50%; left: 22%; }
-
-        /* Section Styles */
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            color: #1e3a5f;
-            position: relative;
-            font-weight: 300;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 4rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(135deg, #dc2626, #1e3a5f);
-            margin: 20px auto;
-        }
-
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .card {
-            background: white;
-            padding: 2.5rem 2rem;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border-top: 4px solid #dc2626;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        /* Logo placeholders with actual logo styling */
-        .logo-placeholder {
-            width: 120px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            background: #f8f9fa;
-            border: 2px dashed #ddd;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-
-        /* Company specific styling based on actual logos */
-        .logo-unitex {
-            background: linear-gradient(135deg, #1e3a5f, #dc2626);
-            color: white;
-            font-weight: bold;
-            border: none;
-        }
-
-        .logo-universal-exports {
-            background: linear-gradient(135deg, #dc2626, #1e3a5f);
-            color: white;
-            font-weight: bold;
-            border: none;
-        }
-
-        .logo-universal-freezone {
-            background: linear-gradient(135deg, #1e3a5f, #dc2626);
-            color: white;
-            font-weight: bold;
-            border: none;
-        }
-
-        .logo-univex {
-            background: linear-gradient(135deg, #1e3a5f, #dc2626);
-            color: white;
-            font-weight: bold;
-            border: none;
-        }
-
-        /* Leadership Grid */
-        .leadership-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .leader-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .leader-card:hover {
-            border-color: #dc2626;
-            transform: translateY(-5px);
-        }
-
-        .headshot-placeholder {
-            width: 120px;
-            height: 120px;
-            background: #f8f9fa;
-            border: 3px dashed #ddd;
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 0.8rem;
-        }
-
-        /* Brand Cards */
-        .brand-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        .brand-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .brand-header {
-            padding: 2rem;
-            background: linear-gradient(135deg, #1e3a5f, #dc2626);
-            color: white;
-            text-align: center;
-        }
-
-        .brand-logo-placeholder {
-            width: 100px;
-            height: 60px;
-            background: rgba(255,255,255,0.2);
-            border: 2px dashed rgba(255,255,255,0.5);
-            border-radius: 10px;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            text-align: center;
-        }
-
-        .brand-content {
-            padding: 2rem;
-        }
-
-        .brand-since {
-            color: #dc2626;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        /* Contact Cards */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .contact-card {
-            background: rgba(255,255,255,0.1);
-            padding: 2.5rem 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .contact-card h3 {
-            color: #dc2626;
-            margin-bottom: 1.5rem;
-            font-size: 1.4rem;
-        }
-
-        /* Mexico 2025 Banner */
-        .mexico-banner {
-            background: linear-gradient(135deg, #dc2626, #1e3a5f);
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-            margin: 4rem 0;
-        }
-
-        .mexico-banner h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Image Gallery Placeholder */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin: 3rem 0;
-        }
-
-        .gallery-item {
-            height: 200px;
-            background: #f8f9fa;
-            border: 2px dashed #ddd;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: #1e3a5f;
-                flex-direction: column;
-                padding: 1rem;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .leadership-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Footer */
-        footer {
-            background: #1a202c;
-            color: white;
-            text-align: center;
-            padding: 3rem 0;
-        }
+        /* END: Add this new CSS for the Enhanced Presence Cards */
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header id="header">
         <nav class="container">
-            <div class="logo" onclick="showPage('home')">UNIVERSAL GROUP</div>
+            <a href="#" class="logo" onclick="showPage('universal', event)">
+                <img src="images/universal-logo.png" alt="Universal Group Logo">
+                <div>UNIVERSAL<span>.</span>GROUP</div>
+            </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#" onclick="showPage('home')" class="nav-link active">Home</a></li>
-                <li><a href="#" onclick="showPage('about')" class="nav-link">About</a></li>
-                <li><a href="#" onclick="showPage('companies')" class="nav-link">Companies</a></li>
-                <li><a href="#" onclick="showPage('leadership')" class="nav-link">Leadership</a></li>
-                <li><a href="#" onclick="showPage('brands')" class="nav-link">Brands</a></li>
-                <li><a href="#" onclick="showPage('contact')" class="nav-link">Contact</a></li>
+                <li class="nav-item">
+                    <a href="#" onclick="showPage('universal', event)" class="nav-link active">Universal</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="showPage('taiwan-china', event)">Taiwan & China</a></li>
+                        <li><a href="#" onclick="showPage('belize', event)">Belize</a></li>
+                        <li><a href="#" onclick="showPage('usa', event)">USA</a></li>
+                        <li><a href="#" onclick="showPage('mexico', event)">Mexico</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="showPage('brands-partnerships', event)" class="nav-link">Brands & Partnerships</a></li>
+                <li><a href="#" onclick="showPage('leadership', event)" class="nav-link">Leadership</a></li>
+                <li><a href="#" onclick="showPage('contact', event)" class="nav-link">Contact</a></li>
             </ul>
             <div class="mobile-menu" onclick="toggleMobileMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </div>
         </nav>
     </header>
 
-    <!-- HOME PAGE -->
-    <div id="home" class="page active">
+    <div id="universal" class="page active">
         <section class="hero">
             <div class="container">
-                <div class="hero-content">
-                    <h1>Universal Group</h1>
-                    <p class="tagline">Global Import/Export Excellence Since 1995</p>
-                    <p class="subtitle">Family-owned business connecting markets across continents</p>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-number">30+</div>
-                            <div class="stat-label">Years Experience</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">4</div>
-                            <div class="stat-label">Sister Companies</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">5</div>
-                            <div class="stat-label">Countries</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">1000+</div>
-                            <div class="stat-label">Products</div>
-                        </div>
+                <h1>Global leader in international trade<span>.</span></h1>
+                <p class="tagline">A family-owned business founded in 1995 with deep experience connecting global markets through manufacturing, sourcing, wholesale distribution, and logistics excellence.</p>
+                <a href="#" onclick="showPage('contact', event)" class="cta-button">Partner With Us</a>
+                <div class="stats-grid">
+                    <div class="stat-item"><div class="stat-number">30+</div><div class="stat-label">Years of Experience</div></div>
+                    <div class="stat-item"><div class="stat-number">5</div><div class="stat-label">Subsidiary Companies</div></div>
+                    <div class="stat-item"><div class="stat-number">8</div><div class="stat-label">Global Offices</div></div>
+                    <div class="stat-item"><div class="stat-number">10,000+</div><div class="stat-label">Products</div></div>
+                    <div class="stat-item"><div class="stat-number">250+</div><div class="stat-label">Wholesale Clients</div></div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <div class="content-split">
+                    <div class="text-content">
+                        <h3>Our Foundation: Vision, Mission & Values</h3>
+                        <p>Our vision is to supply businesses and consumers with high-quality products across any category our clients desire. Our mission is to leverage our global presence and extensive experience to drive sustainable growth and profitability for our clients.</p><br>
+                        <ul>
+                            <li><strong>Integrity:</strong> Upholding the highest ethical standards in every relationship.</li>
+                            <li><strong>Customer-Driven:</strong> Working tirelessly to understand and meet client needs.</li>
+                            <li><strong>Long-Term Mindset:</strong> Building client relationships that last for 10+ years.</li>
+                        </ul>
+                    </div>
+                    <div class="image-content">
+                        <img src="images/global-shipping.jpg" alt="Global Shipping and Logistics">
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="world-map">
+        <section class="section enhanced-presence-section">
             <div class="container">
-                <h2 class="section-title">Global Presence</h2>
-                <p class="section-subtitle">Operating across multiple continents with strategic offices and partnerships worldwide</p>
-                
-                <div class="map-container">
-                    <div class="map-placeholder">
-                        <div class="location-pin pin-taiwan" title="Taiwan - Universal Exports HQ"></div>
-                        <div class="location-pin pin-usa" title="USA - Univex"></div>
-                        <div class="location-pin pin-belize" title="Belize - Universal Freezone & Unitex"></div>
-                        <div class="location-pin pin-mexico" title="Mexico - Coming 2025"></div>
-                    </div>
+                <div class="section-heading">
+                    <h2 class="section-title">Explore Our Global Operations</h2>
+                    <p class="section-subtitle">From our headquarters in Asia to our distribution hubs in the Americas, discover the specialized companies that form our global network.</p>
                 </div>
-                
-                <div class="mexico-banner">
-                    <h3>🇲🇽 Coming to Mexico in 2025</h3>
-                    <p>Expanding our operations to serve the growing Latin American market</p>
-                </div>
-            </div>
-        </section>
+                <div class="enhanced-presence-grid">
 
-        <section class="section" style="background: white;">
-            <div class="container">
-                <h2 class="section-title">Company Gallery</h2>
-                <p class="section-subtitle">A glimpse into our operations around the world</p>
-                
-                <div class="gallery">
-                    <div class="gallery-item">Taiwan HQ Office<br>Photo Placeholder</div>
-                    <div class="gallery-item">Belize Warehouse<br>Photo Placeholder</div>
-                    <div class="gallery-item">Yiwu Market<br>Photo Placeholder</div>
-                    <div class="gallery-item">Guangzhou Operations<br>Photo Placeholder</div>
-                    <div class="gallery-item">Product Showcase<br>Photo Placeholder</div>
-                    <div class="gallery-item">Team Meeting<br>Photo Placeholder</div>
+                    <a class="presence-card-enhanced" onclick="showPage('taiwan-china', event)">
+                        <div class="card-background" style="background-image: url('images/bg-asia.jpg');"></div>
+                        <div class="card-overlay">
+                            <div class="card-icons">
+                                <img src="images/flag-tw.png" alt="Taiwan Flag" class="flag">
+                                <img src="images/logo-uexports.png" alt="Universal Exports Logo" class="logo">
+                            </div>
+                            <div class="card-text-content">
+                                <h3>Taiwan & China</h3>
+                                <span class="explore-link">Explore Operations &rarr;</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="presence-card-enhanced" onclick="showPage('belize', event)">
+                        <div class="card-background" style="background-image: url('images/bg-belize.jpg');"></div>
+                        <div class="card-overlay">
+                            <div class="card-icons">
+                                <img src="images/flag-bz.png" alt="Belize Flag" class="flag">
+                                <img src="images/logo-unitex.png" alt="Unitex Logo" class="logo">
+                            </div>
+                            <div class="card-text-content">
+                                <h3>Belize</h3>
+                                <span class="explore-link">Explore Operations &rarr;</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="presence-card-enhanced" onclick="showPage('usa', event)">
+                        <div class="card-background" style="background-image: url('images/bg-usa.jpg');"></div>
+                        <div class="card-overlay">
+                            <div class="card-icons">
+                                <img src="images/flag-us.png" alt="USA Flag" class="flag">
+                                <img src="images/logo-univex.png" alt="Univex Logo" class="logo">
+                            </div>
+                            <div class="card-text-content">
+                                <h3>USA</h3>
+                                <span class="explore-link">Explore Operations &rarr;</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="presence-card-enhanced disabled" onclick="showPage('mexico', event)">
+                        <div class="card-background" style="background-image: url('images/bg-mexico.jpg');"></div>
+                        <div class="card-overlay">
+                            <div class="card-icons">
+                                <img src="images/flag-mx.png" alt="Mexico Flag" class="flag">
+                            </div>
+                            <div class="card-text-content">
+                                <h3>Mexico</h3>
+                                <span class="explore-link">Coming 2025</span>
+                            </div>
+                        </div>
+                    </a>
+
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- ABOUT PAGE -->
-    <div id="about" class="page">
-        <section class="section" style="padding-top: 120px; background: white;">
+    <div id="taiwan-china" class="page">
+        <div class="page-header">
+            <h1 class="section-title">Universal Exports</h1>
+            <p class="section-subtitle">Taiwan & China • Est. 1995</p>
+        </div>
+        <section class="section" style="padding-top: 50px;">
             <div class="container">
-                <h2 class="section-title">Our Foundation</h2>
-                <p class="section-subtitle">We lean on our vision, mission, and values to stay laser-focused on helping our clients achieve their goals</p>
-                
+                <div class="content-split">
+                    <div class="text-content">
+                        <h3>The Engine of Global Sourcing</h3>
+                        <p>Founded in 1995, Universal Exports is our flagship company and the headquarters for the Universal Group. With over 30 years of industry experience, this division excels in manufacturing, wholesale buying, quality control, and logistics.</p>
+                        <p>Our teams in Taiwan, Guangzhou, and Yiwu work with a vast network of factories and suppliers to serve clients on every continent, from national chain stores to large wholesalers.</p>
+                    </div>
+                    <div class="image-content">
+                        <img src="images/office-taiwan.jpg" alt="Universal Exports Office in Taipei">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="belize" class="page">
+        <div class="page-header">
+            <h1 class="section-title">Universal Belize</h1>
+            <p class="section-subtitle">Belize • Est. 2002</p>
+        </div>
+        <section class="section" style="padding-top: 50px;">
+            <div class="container">
+                <div class="content-split reversed">
+                    <div class="text-content">
+                        <h3>Gateway to Central America</h3>
+                        <p>Comprising <strong>Unitex</strong> and <strong>Universal Freezone</strong>, our Belize operations are a cornerstone of our presence in the Americas. Founded in 2002, this division has over 20 years of deep market experience.</p>
+                        <p>We operate as a leading wholesale distributor and retailer, serving local Belizean cities and the neighboring Mexican market through the Corozal Freezone. This strategic location allows us to efficiently manage distribution for our private labels and exclusive brand partners throughout the region.</p>
+                    </div>
+                    <div class="image-content">
+                        <img src="images/storefront-belize.jpg" alt="Universal Belize Storefront">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="usa" class="page">
+        <div class="page-header">
+            <h1 class="section-title">Univex</h1>
+            <p class="section-subtitle">USA • Est. 2019</p>
+        </div>
+        <section class="section" style="padding-top: 50px;">
+            <div class="container">
+                <div class="content-split">
+                    <div class="text-content">
+                        <h3>Driving Strategy and Innovation</h3>
+                        <p>Established in 2019 in New York City, Univex solidifies our presence in the dominant US market. This division is responsible for the broad strategic initiatives that propel the entire Universal Group forward.</p>
+                        <p>Key functions include establishing authorized distributor partnerships with major international brands, developing our e-commerce strategy, and spearheading technology adoption to modernize our global operations.</p>
+                    </div>
+                    <div class="image-content">
+                        <img src="images/office-usa.jpg" alt="Univex Office in New York City">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div id="mexico" class="page">
+        <section class="section" style="padding-top: 120px; text-align: center;">
+            <div class="container">
+                <h1 class="section-title">Expanding to Mexico in 2025</h1>
+                <p class="section-subtitle" style="font-size: 1.5rem;">We are excited to announce our upcoming expansion into Latin America.</p>
+                <img src="images/flag-mexico.jpg" alt="Flag of Mexico" style="max-width: 400px; margin: 2rem auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <p>Our new operations will provide comprehensive, cross-border trade solutions, further strengthening our global network and better serving our clients in the Americas. Stay tuned for more details.</p>
+            </div>
+        </section>
+    </div>
+
+
+    <div id="brands-partnerships" class="page">
+        <section class="section" style="padding-top: 120px;">
+            <div class="container">
+                <div class="section-heading"><h2 class="section-title">Exclusive Brand Partnerships</h2><p class="section-subtitle">We are the proud exclusive authorized distributor for a curated portfolio of internationally recognized brands.</p></div>
                 <div class="cards-grid">
-                    <div class="card">
-                        <h3 style="color: #1e3a5f; margin-bottom: 1rem;">🎯 Vision</h3>
-                        <ul style="list-style: none; text-align: left;">
-                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
-                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
-                                Supply businesses and consumers with high quality products across any category our clients desire
-                            </li>
-                            <li style="padding-left: 1.5rem; position: relative;">
-                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
-                                Leverage our global presence and 30+ years of extensive experience in manufacturing, sourcing, logistics, marketing, and sales
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="card">
-                        <h3 style="color: #1e3a5f; margin-bottom: 1rem;">🚀 Mission</h3>
-                        <ul style="list-style: none; text-align: left;">
-                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
-                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
-                                Drive sustainable growth and profitability for our wholesale and retail clients
-                            </li>
-                            <li style="padding-left: 1.5rem; position: relative;">
-                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
-                                Disciplined capital management combined with global expertise
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="card">
-                        <h3 style="color: #1e3a5f; margin-bottom: 1rem;">💎 Values</h3>
-                        <ul style="list-style: none; text-align: left;">
-                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
-                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
-                                <strong>Integrity:</strong> Highest ethical standards and honest, trusting relationships
-                            </li>
-                            <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
-                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
-                                <strong>Customer-driven:</strong> Understanding and meeting client needs
-                            </li>
-                            <li style="padding-left: 1.5rem; position: relative;">
-                                <span style="position: absolute; left: 0; color: #dc2626; font-weight: bold;">→</span>
-                                <strong>Long-term mindset:</strong> 10+ year relationships, not short-term gains
-                            </li>
-                        </ul>
-                    </div>
+                    <div class="brand-card"><div class="brand-header"><img src="images/logo-a-cheese.png" alt="A-Cheese Logo"></div><div class="brand-content"><h3>A-Cheese</h3><span class="brand-since">Since 1962 • Netherlands</span><p>Premium quality cheese that has become a leading brand in Belize and Mexico through our exclusive partnership since 2015.</p></div></div>
+                    <div class="brand-card"><div class="brand-header"><img src="images/logo-kagi.png" alt="Kägi Logo"></div><div class="brand-content"><h3>Kägi Chocolates</h3><span class="brand-since">Since 1934 • Switzerland</span><p>100% Swiss-made chocolate wafers offering a unique balance of genuine Swiss chocolate, crispy wafers, and a mousse-like filling.</p></div></div>
+                    <div class="brand-card"><div class="brand-header"><img src="images/logo-gorilla.png" alt="Gorilla Energy Logo"></div><div class="brand-content"><h3>Gorilla Energy</h3><span class="brand-since">Since 2008 • Poland</span><p>A functional beverage for active people, backed by prominent athletes like UFC champion Khabib Nurmagomedov.</p></div></div>
+                    <div class="brand-card"><div class="brand-header"><img src="images/logo-bauducco.png" alt="Bauducco Logo"></div><div class="brand-content"><h3>Bauducco</h3><span class="brand-since">Since 1952 • Brazil</span><p>A world leader in baked goods, with #1 global market share for panettone and #3 for wafers. Our partnership began in 2025.</p></div></div>
                 </div>
             </div>
         </section>
-    </div>
-
-    <!-- COMPANIES PAGE -->
-    <div id="companies" class="page">
-        <section class="section" style="padding-top: 120px; background: #f8f9fa;">
+        <section class="section" style="background: var(--light-bg);">
             <div class="container">
-                <h2 class="section-title">Our Global Network</h2>
-                <p class="section-subtitle">Family-owned business comprising multiple subsidiary companies with offices across the world</p>
-
+                <div class="section-heading"><h2 class="section-title">Our Private Label Brands</h2><p class="section-subtitle">We own and operate a diverse portfolio of globally recognized private label brands across multiple product categories.</p></div>
                 <div class="cards-grid">
-                    <div class="card">
-                        <div class="logo-placeholder logo-universal-exports">UNIVERSAL<br>EXPORTS</div>
-                        <h3 style="color: #1e3a5f;">Universal Exports</h3>
-                        <div style="color: #dc2626; font-weight: bold; margin-bottom: 1rem;">Taiwan / China</div>
-                        <p>Founded in 1995, our flagship company with 30 years of experience in manufacturing, wholesale buying, quality control, and logistics. Serving clients on every continent.</p>
-                    </div>
-
-                    <div class="card">
-                        <div class="logo-placeholder logo-universal-freezone">UNIVERSAL<br>FREEZONE</div>
-                        <h3 style="color: #1e3a5f;">Universal Freezone</h3>
-                        <div style="color: #dc2626; font-weight: bold; margin-bottom: 1rem;">Belize</div>
-                        <p>Strategic Caribbean operations through the Corozal Freezone, serving wholesale and retail clients in Mexico and Belize markets.</p>
-                    </div>
-
-                    <div class="card">
-                        <img src="images/unitex.png" alt="Unitex Logo" class="logo-placeholder logo-unitex">
-                        <h3 style="color: #1e3a5f;">Unitex</h3>
-                        <div style="color: #dc2626; font-weight: bold; margin-bottom: 1rem;">Belize</div>
-                        <p>Founded in 2002, specializing in wholesale distribution and retail operations with over 20 years of market experience in Central America.</p>
-                    </div>
-
-                    <div class="card">
-                        <div class="logo-placeholder logo-univex">UNIVEX</div>
-                        <h3 style="color: #1e3a5f;">Univex</h3>
-                        <div style="color: #dc2626; font-weight: bold; margin-bottom: 1rem;">USA</div>
-                        <p>Founded in 2019 in NYC, managing strategic initiatives including authorized distributor partnerships, e-commerce strategy, and technology adoption.</p>
-                    </div>
-                </div>
-
-                <div class="mexico-banner">
-                    <h3>🇲🇽 Expanding to Mexico in 2025</h3>
-                    <p>New market entry planned for comprehensive Latin American operations and cross-border trade solutions</p>
+                    <div class="brand-card"><div class="brand-content"><h3>Deconique</h3><span class="brand-since">Electronics</span></div></div>
+                    <div class="brand-card"><div class="brand-content"><h3>Linen Secrets</h3><span class="brand-since">Bedding</span></div></div>
+                    <div class="brand-card"><div class="brand-content"><h3>NRG Fitness</h3><span class="brand-since">Fitness Products</span></div></div>
+                    <div class="brand-card"><div class="brand-content"><h3>Siempre</h3><span class="brand-since">Salon Items</span></div></div>
+                    <div class="brand-card"><div class="brand-content"><h3>Alectura</h3><span class="brand-since">Stationery</span></div></div>
+                    <div class="brand-card"><div class="brand-content"><h3>Kidacious</h3><span class="brand-since">Toys</span></div></div>
+                    <div class="brand-card"><div class="brand-content"><h3>Spark</h3><span class="brand-since">Home Essentials</span></div></div>
+                    <div class="brand-card"><div class="brand-content"><h3>Aria</h3><span class="brand-since">Food & Beverages</span></div></div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- LEADERSHIP PAGE -->
     <div id="leadership" class="page">
-        <section class="section" style="padding-top: 120px; background: white;">
+        <section class="section" style="padding-top: 120px;">
             <div class="container">
-                <h2 class="section-title">Meet Our Leadership</h2>
-                <p class="section-subtitle">Experienced executives and sales professionals driving global operations</p>
-
-                <h3 style="color: #1e3a5f; font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">Executive Leadership</h3>
+                <div class="section-heading"><h2 class="section-title">Meet Our Leadership</h2><p class="section-subtitle">Our global operations are guided by a team of experienced executives and dedicated regional managers.</p></div>
+                <h3 style="text-align: center; color: var(--navy); font-size: 1.8rem; margin-bottom: 2.5rem;">Executive Leadership</h3>
                 <div class="leadership-grid">
-                    <div class="leader-card">
-                        <div class="headshot-placeholder">Jimmy V.<br>Photo</div>
-                        <h4 style="color: #1e3a5f;">Jimmy V.</h4>
-                        <div style="color: #dc2626; font-size: 0.9rem; margin-bottom: 1rem;">Founder/CEO of Universal Group & Universal Exports</div>
-                        <div style="color: #666; font-size: 0.8rem;">jimmy@universaltgy.com</div>
-                    </div>
-
-                    <div class="leader-card">
-                        <div class="headshot-placeholder">Kenny V.<br>Photo</div>
-                        <h4 style="color: #1e3a5f;">Kenny V.</h4>
-                        <div style="color: #dc2626; font-size: 0.9rem; margin-bottom: 1rem;">CEO of Universal Belize</div>
-                        <div style="color: #666; font-size: 0.8rem;">universalbelize@hotmail.com</div>
-                    </div>
-
-                    <div class="leader-card">
-                        <div class="headshot-placeholder">Deepak V.<br>Photo</div>
-                        <h4 style="color: #1e3a5f;">Deepak V.</h4>
-                        <div style="color: #dc2626; font-size: 0.9rem; margin-bottom: 1rem;">CEO of Univex</div>
-                        <div style="color: #666; font-size: 0.8rem;">deepak@univexcompany.com</div>
-                    </div>
-
-                    <div class="leader-card">
-                        <div class="headshot-placeholder">Sunny C.<br>Photo</div>
-                        <h4 style="color: #1e3a5f;">Sunny C.</h4>
-                        <div style="color: #dc2626; font-size: 0.9rem; margin-bottom: 1rem;">Head of Universal Guangzhou & Panama</div>
-                        <div style="color: #666; font-size: 0.8rem;">sunny@universaltgy.com</div>
-                    </div>
-
-                    <div class="leader-card">
-                        <div class="headshot-placeholder">Mike S.<br>Photo</div>
-                        <h4 style="color: #1e3a5f;">Mike S.</h4>
-                        <div style="color: #dc2626; font-size: 0.9rem; margin-bottom: 1rem;">Head of Universal Yiwu</div>
-                        <div style="color: #666; font-size: 0.8rem;">mike@universaltgy.com</div>
-                    </div>
+                    <div class="leader-card"><img src="images/headshot-jimmy-v.jpg" alt="Headshot of Jimmy V."><h4>Jimmy V.</h4><div class="leader-title">Founder/CEO of Universal Group & Universal Exports</div><div class="leader-email">jimmy@universaltgy.com</div></div>
+                    <div class="leader-card"><img src="images/headshot-kenny-v.jpg" alt="Headshot of Kenny V."><h4>Kenny V.</h4><div class="leader-title">CEO of Universal Belize</div><div class="leader-email">universalbelize@hotmail.com</div></div>
+                    <div class="leader-card"><img src="images/headshot-deepak-v.jpg" alt="Headshot of Deepak V."><h4>Deepak V.</h4><div class="leader-title">CEO of Univex</div><div class="leader-email">deepak@univexcompany.com</div></div>
+                    <div class="leader-card"><img src="images/headshot-sunny-c.jpg" alt="Headshot of Sunny C."><h4>Sunny C.</h4><div class="leader-title">Head of Universal Guangzhou & Panama</div><div class="leader-email">sunny@universaltgy.com</div></div>
+                    <div class="leader-card"><img src="images/headshot-mike-s.jpg" alt="Headshot of Mike S."><h4>Mike S.</h4><div class="leader-title">Head of Universal Yiwu</div><div class="leader-email">mike@universaltgy.com</div></div>
+                    <div class="leader-card"><img src="images/headshot-sakshi.jpg" alt="Headshot of Sakshi"><h4>Sakshi</h4><div class="leader-title">Director of Universal Belize</div><div class="leader-email">universal.sv12@gmail.com</div></div>
                 </div>
-
-                <h3 style="color: #1e3a5f; font-size: 1.5rem; margin: 3rem 0 2rem 0; text-align: center;">Sales, Marketing & Logistics Leadership</h3>
+                <h3 style="text-align: center; color: var(--navy); font-size: 1.8rem; margin-top: 5rem; margin-bottom: 2.5rem;">Sales, Marketing & Logistics Leadership</h3>
                 <div class="leadership-grid">
-                    <div class="leader-card">
-                        <div class="headshot-placeholder">Shirley<br>Photo</div>
-                        <h4 style="color: #1e3a5f;">Shirley</h4>
-                        <div style="color: #dc2626; font-size: 0.9rem;">Head of Logistics</div>
-                    </div>
-
-                    <div class="leader-card">
-                        <div class="headshot-placeholder">Bhagwan<br>Photo</div>
-                        <h4 style="color: #1e3a5f;">Bhagwan</h4>
-                        <div style="color: #dc2626; font-size: 0.9rem;">Belize Sales Manager</div>
-                    </div>
-
-                    <div class="leader-card">
-                        <div class="headshot-placeholder">Hitesh<br>Photo</div>
-                        <h4 style="color: #1e3a5f;">Hitesh</h4>
-                        <div style="color: #dc2626; font-size: 0.9rem;">Belize Sales Manager</div>
-                    </div>
-
-                    <div class="leader-card">
-                        <div class="headshot-placeholder">Sakshi<br>Photo</div>
-                        <h4 style="color: #1e3a5f;">Sakshi</h4>
-                        <div style="color: #dc2626; font-size: 0.9rem;">Belize Marketing Manager</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" style="background: #f8f9fa;">
-            <div class="container">
-                <h2 class="section-title">Universal Belize Market Leadership</h2>
-                <p class="section-subtitle">Leading wholesale distributor and retailer in Belize's rapidly growing economy</p>
-
-                <div class="stats-grid" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                    <div class="stat-item">
-                        <div class="stat-number">10.5%</div>
-                        <div class="stat-label">GDP Growth 2024</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">2.1%</div>
-                        <div class="stat-label">Unemployment Rate</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">600K</div>
-                        <div class="stat-label">Tourist Arrivals 2024</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">45%</div>
-                        <div class="stat-label">Tourism GDP Contribution</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">145K</div>
-                        <div class="stat-label">sq. ft. Total Facilities</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">30+</div>
-                        <div class="stat-label">Person Sales Team</div>
-                    </div>
+                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Shirley</h4><div class="leader-title">Head of Logistics</div></div>
+                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Bella</h4><div class="leader-title">Guangzhou Sales</div></div>
+                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Cici</h4><div class="leader-title">Guangzhou Sales</div></div>
+                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Annie</h4><div class="leader-title">Guangzhou Sales</div></div>
+                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Hitesh</h4><div class="leader-title">Belize Sales Manager</div></div>
+                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Bhagwan</h4><div class="leader-title">Belize Sales Manager</div></div>
+                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Mohit</h4><div class="leader-title">Belize Sales Manager</div></div>
+                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Ji</h4><div class="leader-title">Yiwu Sales</div></div>
+                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Max</h4><div class="leader-title">Yiwu Sales</div></div>
+                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>DJ</h4><div class="leader-title">Yiwu Sales</div></div>
+                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Wang</h4><div class="leader-title">Yiwu Sales</div></div>
+                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Jisel</h4><div class="leader-title">Belize Retail Supervisor</div></div>
+                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Nacho</h4><div class="leader-title">Belize Retail Supervisor</div></div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- BRANDS PAGE -->
-    <div id="brands" class="page">
-        <section class="section" style="padding-top: 120px; background: #f8f9fa;">
-            <div class="container">
-                <h2 class="section-title">Exclusive Brand Partnerships</h2>
-                <p class="section-subtitle">Proud exclusive authorized distributor for internationally recognized brands</p>
-
-                <div class="cards-grid">
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">A-Cheese<br>Logo</div>
-                            <h3>A-Cheese</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Since 1962 • Netherlands</div>
-                            <p>Premium quality cheese representing pure quality and honest, natural cheese with a fresh look. Exclusive partnership since 2015, now a leading premium cheese brand in Belize and Mexico.</p>
-                        </div>
-                    </div>
-
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">Kägi<br>Logo</div>
-                            <h3>Kägi Chocolates</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Since 1934 • Switzerland</div>
-                            <p>100% Swiss-made chocolates with unique balance of genuine Swiss chocolate, crispy-baked light wafers and mousse-like filling. Partnership established in 2024.</p>
-                        </div>
-                    </div>
-
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">Gorilla<br>Logo</div>
-                            <h3>Gorilla Energy</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Since 2008 • Poland</div>
-                            <p>Functional beverage for active and ambitious people, backed by prominent athletes like UFC champion Khabib Nurmagomedov. Partnership began in 2024.</p>
-                        </div>
-                    </div>
-
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">Kent<br>Logo</div>
-                            <h3>Kent Boringer</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Since 1960 • Turkey</div>
-                            <p>Packaged foods and oil manufacturer with 42,000 sq-meter production facility producing over 300 products. Partnership established in 2024.</p>
-                        </div>
-                    </div>
-
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">Bauducco<br>Logo</div>
-                            <h3>Bauducco</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Since 1952 • Brazil</div>
-                            <p>Brazilian multinational company and one of the world's largest producers of panettone and baked goods. #1 global market share for panettone (~75%) and #3 for wafers (~28%). Partnership began in 2025.</p>
-                        </div>
-                    </div>
-
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">Mr. Brown<br>Logo</div>
-                            <h3>Mr. Brown Coffee</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Since 1998 • Taiwan</div>
-                            <p>100% real and fresh Arabica coffee series with no added preservatives, delivering rich coffee flavor served iced or hot. Partnership established in 2021.</p>
-                        </div>
-                    </div>
-
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">Lady Boba<br>Logo</div>
-                            <h3>Madam Hong Lady Boba</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Since 1991 • Taiwan</div>
-                            <p>First company from Taiwan to commercialize ready-to-drink bubble tea with bursting boba. Premium bubble tea products made with fresh ingredients from Taiwan, the global hub for bubble tea innovation. Partnership since 2021.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Private Labels Section -->
-        <section class="section" style="background: white;">
-            <div class="container">
-                <h2 class="section-title">Our Private Label Brands</h2>
-                <p class="section-subtitle">Globally recognized private label brands across multiple product categories</p>
-
-                <div class="cards-grid">
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">Deconique<br>Logo</div>
-                            <h3>Deconique</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Electronics</div>
-                            <p>High-quality consumer electronics and accessories distributed globally through our network.</p>
-                        </div>
-                    </div>
-
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">Linen Secrets<br>Logo</div>
-                            <h3>Linen Secrets</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Bedding</div>
-                            <p>Premium bedding and home textile products for comfort and quality sleep solutions.</p>
-                        </div>
-                    </div>
-
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">NRG Fitness<br>Logo</div>
-                            <h3>NRG Fitness</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Fitness Products</div>
-                            <p>Complete range of fitness equipment and accessories for health-conscious consumers.</p>
-                        </div>
-                    </div>
-
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">Siempre<br>Logo</div>
-                            <h3>Siempre</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Salon Items</div>
-                            <p>Professional salon and beauty products for the personal care industry.</p>
-                        </div>
-                    </div>
-
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">Alectura<br>Logo</div>
-                            <h3>Alectura</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Stationery</div>
-                            <p>Complete range of office and school stationery products for educational and professional use.</p>
-                        </div>
-                    </div>
-
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">Kidacious<br>Logo</div>
-                            <h3>Kidacious</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Toys</div>
-                            <p>Fun and educational toys designed to inspire creativity and learning in children.</p>
-                        </div>
-                    </div>
-
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">Spark<br>Logo</div>
-                            <h3>Spark</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Home Essentials • Belize/Mexico</div>
-                            <p>Nationally recognized home essentials brand throughout Mexico and Belize markets.</p>
-                        </div>
-                    </div>
-
-                    <div class="brand-card">
-                        <div class="brand-header">
-                            <div class="brand-logo-placeholder">Aria<br>Logo</div>
-                            <h3>Aria</h3>
-                        </div>
-                        <div class="brand-content">
-                            <div class="brand-since">Food & Beverages • Belize/Mexico</div>
-                            <p>Quality food and beverage products with national recognition in Mexico and Belize.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- CONTACT PAGE -->
     <div id="contact" class="page">
-        <section class="section" style="padding-top: 120px; background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%); color: white;">
+        <section class="section contact-section" style="padding-top: 120px;">
             <div class="container">
-                <h2 class="section-title" style="color: white;">Global Contact Information</h2>
-                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Connect with Universal Group offices worldwide</p>
-
+                <div class="section-heading"><h2 class="section-title">Get In Touch</h2><p class="section-subtitle">Connect with our offices around the world. We look forward to exploring partnership opportunities with you.</p></div>
                 <div class="contact-grid">
-                    <div class="contact-card">
-                        <h3>Universal Belize</h3>
-                        <div style="margin-bottom: 1rem;">
-                            <strong>Address:</strong><br>
-                            Freedom Avenue, Corozal Freezone, Belize
-                        </div>
-                        <div style="margin-bottom: 1rem;">
-                            <strong>Email:</strong><br>
-                            universalbelize@hotmail.com
-                        </div>
-                        <div style="margin-bottom: 1rem;">
-                            <strong>Phone:</strong><br>
-                            +501 610 3626
-                        </div>
-                        <div>
-                            <strong>Social:</strong><br>
-                            Facebook: universalfreezone123<br>
-                            Instagram: @universalbelize
-                        </div>
-                    </div>
-
-                    <div class="contact-card">
-                        <h3>Universal Exports</h3>
-                        <div style="margin-bottom: 1rem;">
-                            <strong>Headquarters:</strong><br>
-                            162, 11F-1, Chung Shan N. Rd., Sec. 2<br>
-                            Taipei, Taiwan
-                        </div>
-                        <div style="margin-bottom: 1rem;">
-                            <strong>Email:</strong><br>
-                            business@universal-tgy.com
-                        </div>
-                        <div style="margin-bottom: 1rem;">
-                            <strong>Phone:</strong><br>
-                            +886 2 2595 9198
-                        </div>
-                        <div>
-                            <strong>Website:</strong><br>
-                            universal-tgy.com<br>
-                            Instagram: @universaltgy
-                        </div>
-                    </div>
-
-                    <div class="contact-card">
-                        <h3>Univex</h3>
-                        <div style="margin-bottom: 1rem;">
-                            <strong>Headquarters:</strong><br>
-                            418 Broadway Suite N<br>
-                            Albany, NY 12207, United States
-                        </div>
-                        <div style="margin-bottom: 1rem;">
-                            <strong>Email:</strong><br>
-                            business@univexcompany.com
-                        </div>
-                        <div style="margin-bottom: 1rem;">
-                            <strong>Phone:</strong><br>
-                            +1 914 208 1477
-                        </div>
-                        <div>
-                            <strong>Website:</strong><br>
-                            univexcompany.com<br>
-                            Instagram: @univexco
-                        </div>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 15px;">
-                    <h3 style="color: #dc2626; margin-bottom: 1rem;">Ready to Partner With Us?</h3>
-                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Explore international trade opportunities with Universal Group's global network</p>
-                    <a href="mailto:business@universal-tgy.com" style="display: inline-block; background: #dc2626; color: white; padding: 12px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; transition: all 0.3s ease;">Get In Touch</a>
+                    <div class="contact-card"><h3>Universal Belize</h3><div><strong>Address:</strong><br>Freedom Avenue, Corozal Freezone, Belize</div><div><strong>Email:</strong><br><a href="mailto:universalbelize@hotmail.com">universalbelize@hotmail.com</a></div><div><strong>Phone:</strong><br><a href="tel:+5016103626">+501 610 3626</a></div></div>
+                    <div class="contact-card"><h3>Universal Exports (HQ)</h3><div><strong>Address:</strong><br>162, 11F-1, Chung Shan N. Rd., Sec. 2, Taipei, Taiwan</div><div><strong>Email:</strong><br><a href="mailto:business@universal-tgy.com">business@universal-tgy.com</a></div><div><strong>Phone:</strong><br><a href="tel:+886225959198">+886 2 2595 9198</a></div></div>
+                    <div class="contact-card"><h3>Univex (USA)</h3><div><strong>Address:</strong><br>418 Broadway Ste N, Albany, NY 12207</div><div><strong>Email:</strong><br><a href="mailto:business@univexcompany.com">business@univexcompany.com</a></div><div><strong>Phone:</strong><br><a href="tel:+19142081477">+1 914 208 1477</a></div></div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 Universal Group. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; opacity: 0.8;">Family-owned business • 30+ Years of Excellence • Global Import/Export Solutions</p>
+            <p>&copy; 2025 Universal Group. All Rights Reserved.</p>
+            <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">Family-Owned • 30+ Years of Excellence • Global Import/Export Solutions</p>
         </div>
     </footer>
 
     <script>
-        // Page Navigation
-        function showPage(pageId) {
-            // Hide all pages
+        function showPage(pageId, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
             
-            // Show selected page
-            document.getElementById(pageId).classList.add('active');
+            const newPage = document.getElementById(pageId);
+            if (newPage) {
+                newPage.classList.add('active');
+            }
             
-            // Update navigation active state
             const navLinks = document.querySelectorAll('.nav-link');
+            const universalLink = document.querySelector('.nav-item > .nav-link');
+            const countryPages = ['taiwan-china', 'belize', 'usa', 'mexico'];
+
             navLinks.forEach(link => link.classList.remove('active'));
-            event.target.classList.add('active');
+
+            const targetLink = document.querySelector(`.nav-link[onclick*="'${pageId}'"]`);
+            if (targetLink && !targetLink.closest('.dropdown-menu')) {
+                 targetLink.classList.add('active');
+            }
+
+            if (countryPages.includes(pageId) || pageId === 'universal') {
+                if(universalLink) universalLink.classList.add('active');
+            }
             
-            // Close mobile menu if open
-            document.getElementById('navLinks').classList.remove('active');
+            const navLinksContainer = document.getElementById('navLinks');
+            if (navLinksContainer.classList.contains('active')) {
+                 navLinksContainer.classList.remove('active');
+            }
             
-            // Scroll to top
             window.scrollTo(0, 0);
         }
 
-        // Mobile Menu Toggle
         function toggleMobileMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         }
 
-        // Header scroll effect
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('header-scrolled');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 15px rgba(0,0,0,0.1)';
             } else {
-                header.classList.remove('header-scrolled');
+                header.style.boxShadow = 'none';
             }
         });
-
-        // Interactive map pins
-        document.querySelectorAll('.location-pin').forEach(pin => {
-            pin.addEventListener('click', function() {
-                const title = this.getAttribute('title');
-                alert(title);
-            });
-        });
-
-        // Counter animation for stats
+        
         function animateCounters() {
-            const counters = document.querySelectorAll('.stat-number');
-            counters.forEach(counter => {
-                const target = parseFloat(counter.textContent.replace(/[^\d.]/g, ''));
-                const suffix = counter.textContent.replace(/[\d.]/g, '');
-                let current = 0;
-                const increment = target / 100;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        counter.textContent = target + suffix;
-                        clearInterval(timer);
+            document.querySelectorAll('.stat-number').forEach(counter => {
+                const targetText = counter.innerText;
+                const target = +targetText.replace(/[^0-9]/g, '');
+                const suffix = targetText.replace(/[0-9,]/g, '');
+                const duration = 2000;
+                let startTime = null;
+
+                const step = (timestamp) => {
+                    if (!startTime) startTime = timestamp;
+                    const progress = Math.min((timestamp - startTime) / duration, 1);
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    const currentNum = Math.floor(easeOut * target);
+                    counter.innerText = currentNum.toLocaleString('en-US') + suffix;
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
                     } else {
-                        counter.textContent = Math.floor(current) + suffix;
+                        counter.innerText = target.toLocaleString('en-US') + suffix;
                     }
-                }, 20);
+                };
+                requestAnimationFrame(step);
             });
         }
 
-        // Trigger animations when page loads
         window.addEventListener('load', () => {
-            animateCounters();
+            if(document.getElementById('universal').classList.contains('active')){
+                animateCounters();
+            }
         });
     </script>
 </body>
