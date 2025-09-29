@@ -524,7 +524,6 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        /* REPLACEMENT for .presence-card-enhanced.disabled:hover .card-background */
         .presence-card-enhanced.disabled:hover .card-background {
             transform: scale(1.1); /* Adds a very subtle zoom effect */
         }
@@ -543,7 +542,6 @@
             position: static; /* Let it sit normally */
             transform: none;
         }
-        /* START: Add this new CSS for the Hero Logo Row */
         .hero-logo-row {
             display: flex;
             justify-content: center;
@@ -568,7 +566,123 @@
             filter: grayscale(0%);
             transform: scale(1.05);
         }
-        /* END: Add this new CSS for the Hero Logo Row */
+
+        /* START: Add this new CSS for the Belize Page */
+        .business-split-section {
+            padding: 50px 0;
+        }
+
+        .business-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 5rem;
+            background-color: var(--light-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .business-card .image-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .business-card .text-content {
+            padding: 3rem;
+        }
+
+        .business-card .text-content h3 {
+            font-size: 2.2rem;
+            color: var(--navy);
+        }
+
+        .business-card .text-content .market-focus {
+            font-weight: 600;
+            color: var(--maroon);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Reverse layout for the second card */
+        .business-card.reversed {
+            grid-template-columns: 1fr 1fr; /* Maintain order */
+        }
+        .business-card.reversed .image-content {
+            order: 2; /* Move image to the right */
+        }
+
+        .partner-brands-section {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 2rem;
+        }
+
+        .brand-logo-card {
+            position: relative;
+            background-color: var(--light-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .brand-logo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border-color: var(--maroon);
+        }
+
+        .brand-logo-card img {
+            max-height: 70px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .exclusive-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--maroon);
+            color: var(--white);
+            padding: 3px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border-radius: 5px;
+            text-transform: uppercase;
+        }
+
+        /* START: Add this new CSS for the Business Card Header */
+        .business-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .business-header h3 {
+            margin: 0; /* Remove default margin */
+        }
+
+        .business-header .logo {
+            max-height: 50px;
+            max-width: 140px;
+            object-fit: contain;
+            flex-shrink: 0; /* Prevent the logo from shrinking */
+        }
+        /* END: Add this new CSS for the Business Card Header */  
     </style>
 </head>
 <body>
@@ -584,7 +698,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="#" onclick="showPage('taiwan-china', event)">Taiwan & China</a></li>
                         <li><a href="#" onclick="showPage('belize', event)">Belize</a></li>
-                        <li><a href="#" onclick="showPage('usa', event)">USA</a></li>
+                        <li><a href="#" onclick="showPage('usa', event)">United States</a></li>
                         <li><a href="#" onclick="showPage('mexico', event)">Mexico</a></li>
                     </ul>
                 </li>
@@ -611,7 +725,6 @@
                     <p class="tagline">Since 1995, Universal Group has connected global trading markets and delivered its clients consistent excellence in manufacturing, wholesale distribution, logistics, and brand partnerships.</p>
                     <a href="#" onclick="showPage('contact', event)" class="cta-button">Partner With Us</a>
                 </div>
-            </div>
         </section>
         <section class="section">
             <div class="container">
@@ -713,12 +826,10 @@
                             </div>
                         </div>
                     </a>
-
                 </div>
             </div>
         </section>
     </div>
-
     <div id="taiwan-china" class="page">
         <div class="page-header">
             <h1 class="section-title">Universal Exports</h1>
@@ -742,24 +853,93 @@
 
     <div id="belize" class="page">
         <div class="page-header">
-            <h1 class="section-title">Universal Belize</h1>
-            <p class="section-subtitle">Belize • Est. 2002</p>
+            <h1 class="section-title">Belize's leading wholesale distributor & retailer.</h1>
+            <p class="section-subtitle">Our strategic presence in Belize is divided into two core businesses, each serving a distinct and vital market.</p>
         </div>
-        <section class="section" style="padding-top: 50px;">
+
+        <!-- Business Split Section -->
+        <section class="business-split-section">
             <div class="container">
-                <div class="content-split reversed">
-                    <div class="text-content">
-                        <h3>Gateway to Central America</h3>
-                        <p>Comprising <strong>Unitex</strong> and <strong>Universal Freezone</strong>, our Belize operations are a cornerstone of our presence in the Americas. Founded in 2002, this division has over 20 years of deep market experience.</p>
-                        <p>We operate as a leading wholesale distributor and retailer, serving local Belizean cities and the neighboring Mexican market through the Corozal Freezone. This strategic location allows us to efficiently manage distribution for our private labels and exclusive brand partners throughout the region.</p>
-                    </div>
+                <!-- Universal Freezone -->
+                <div class="business-card">
                     <div class="image-content">
-                        <img src="images/storefront-belize.jpg" alt="Universal Belize Storefront">
+                        <img src="images/belize-freezone.jpg" alt="A busy commercial area at the Belize-Mexico border">
+                    </div>
+                    <!-- REPLACEMENT for the Unitex text-content -->
+                    <div class="text-content">
+                        <div class="business-header">
+                            <h3>Unitex</h3>
+                            <img src="images/logo-unitex-color.png" alt="Unitex Logo" class="logo">
+                        </div>
+                        <span class="market-focus">Serving the Domestic Belize Market</span>
+                        <p>Unitex is focused on serving wholesale and retail clients within local Belizean cities. With a strong distribution network and a deep understanding of the domestic market, we connect Belizean consumers with top international and private label brands.</p>
+                    </div>
+                </div>
+
+                <!-- Unitex -->
+                <div class="business-card reversed">
+                    <div class="image-content">
+                        <img src="images/belize-local.jpg" alt="A vibrant local market street in a Belizean city">
+                    </div>
+                    <div class="text-content">
+                        <h3>Unitex</h3>
+                        <span class="market-focus">Serving the Domestic Belize Market</span>
+                        <p>Unitex is focused on serving wholesale and retail clients within local Belizean cities. With a strong distribution network and a deep understanding of the domestic market, we connect Belizean consumers with top international and private label brands.</p>
+                        <!-- Add more text here if you wish -->
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Partner Brands Section -->
+        <section class="partner-brands-section">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="section-title">Our Partner Brands</h2>
+                    <p class="section-subtitle">We are proud to be the trusted distribution partner for a wide range of renowned international brands in the region.</p>
+                </div>
+
+                <div class="brand-grid">
+                    <!-- Example: Exclusive Brand -->
+                    <div class="brand-logo-card">
+                        <div class="exclusive-tag">Exclusive</div>
+                        <img src="images/logo-a-cheese.png" alt="A-Cheese Logo">
+                    </div>
+                    
+                    <!-- Example: Standard Brand -->
+                    <div class="brand-logo-card">
+                        <img src="images/logo-bauducco.png" alt="Bauducco Logo">
+                    </div>
+                    
+                    <!-- Add more brand logos here by copying the template -->
+                    <div class="brand-logo-card">
+                        <img src="images/logo-gorilla.png" alt="Gorilla Energy Logo">
+                    </div>
+                    
+                    <div class="brand-logo-card">
+                        <img src="images/logo-kagi.png" alt="Kagi Logo">
+                    </div>
+                    
+                    <div class="brand-logo-card">
+                        <img src="images/logo-kent.png" alt="Kent Logo">
+                    </div>
+                    
+                    <div class="brand-logo-card">
+                        <img src="images/logo-mrbrown.png" alt="Mr. Brown Coffee Logo">
+                    </div>
+                    
+                    <!-- To add another exclusive brand, copy this block -->
+                    <!-- 
+                    <div class="brand-logo-card">
+                        <div class="exclusive-tag">Exclusive</div>
+                        <img src="images/logo-new-exclusive-brand.png" alt="New Brand Logo">
+                    </div> 
+                    -->
+                </div>
+            </div>
+        </section>
     </div>
+    <!-- END REPLACEMENT -->
 
     <div id="usa" class="page">
         <div class="page-header">
