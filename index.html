@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Group - Global Import & Export Solutions</title>
+    <title>Universal Group</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -73,7 +73,7 @@
             text-decoration: none;
         }
         .logo img {
-            height: 40px;
+            height: 55px;
         }
         .logo span {
             color: var(--maroon);
@@ -371,13 +371,14 @@
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .leadership-grid { grid-template-columns: 1fr; }
         }
+        /* REPLACEMENT for all Enhanced Presence Card styles */
         .enhanced-presence-section {
             background-color: var(--light-bg);
         }
 
         .enhanced-presence-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
         }
 
@@ -418,51 +419,95 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.4) 100%);
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.0) 50%, rgba(0,0,0,0.2) 100%);
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: background 0.4s ease;
         }
 
-        .card-icons {
+        .presence-card-enhanced:hover .card-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.5) 100%);
+        }
+
+        .flag-container {
             display: flex;
-            justify-content: space-between;
+            gap: 8px;
             align-items: center;
         }
 
-        .card-icons .flag {
-            width: 40px;
+        .flag-container .flag {
+            width: 55px;
+            height: 38px;
+            object-fit: cover;
             border-radius: 4px;
             border: 1px solid rgba(255,255,255,0.5);
         }
 
-        .card-icons .logo {
-            max-height: 30px;
-            max-width: 100px;
-            opacity: 0.8;
+        .card-text-content {
+            /* This container now holds all text and logos */
+        }
+
+        /* REPLACEMENT for card text, logo, and hover styles */
+        .card-text-content {
+            /* This container now just holds the title */
         }
 
         .card-text-content h3 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
             line-height: 1.2;
+            margin-bottom: 0.5rem;
         }
 
-        .card-text-content .explore-link {
+        /* This is a new container for the swappable elements at the bottom */
+        .card-footer {
+            position: relative;
+            min-height: 50px; /* Ensures space for the logos */
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container, .explore-link {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .logo-container {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            opacity: 1; /* Visible by default */
+        }
+
+        .logo-container .logo {
+            max-height: 50px; /* Slightly smaller for a cleaner look at the bottom */
+            max-width: 120px;
+        }
+
+        .logo-container .logo:nth-child(2) {
+                margin-left: -10px;
+                margin-bottom: 8px; /* Adjust this negative value to get the exact spacing you want */
+            }
+
+        .explore-link {
             font-weight: 600;
             color: var(--white);
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.4s ease;
-            display: inline-block;
-            margin-top: 0.5rem;
+            position: absolute; /* Occupy the same space as logos */
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0; /* Hidden by default */
+        }
+
+        /* The new hover logic */
+        .presence-card-enhanced:hover .logo-container {
+            opacity: 0; /* HIDE logos on hover */
         }
 
         .presence-card-enhanced:hover .explore-link {
-            opacity: 1;
-            transform: translateY(0);
+            opacity: 1; /* SHOW text on hover */
         }
 
         .presence-card-enhanced.disabled {
@@ -478,10 +523,22 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .presence-card-enhanced.disabled:hover .card-background {
+        .presence-card-enhanced.disabled:hover .card-background,
+        .presence-card-enhanced.disabled:hover .card-overlay {
+            transform: none;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.0) 50%, rgba(0,0,0,0.2) 100%);
+        }
+
+        /* Make sure logos and text are always visible on the disabled card */
+        .presence-card-enhanced.disabled .logo-container {
+            opacity: 1;
+        }
+        .presence-card-enhanced.disabled .explore-link {
+            opacity: 1;
+            position: static; /* Let it sit normally */
             transform: none;
         }
-        /* END: Add this new CSS for the Enhanced Presence Cards */
+        /* END REPLACEMENT */
     </style>
 </head>
 <body>
@@ -515,7 +572,7 @@
         <section class="hero">
             <div class="container">
                 <h1>Powered by Family.<br>Built for Global Trade.</h1>
-                <p class="tagline">A family-owned business founded in 1995 with deep experience connecting global markets through manufacturing, sourcing, wholesale distribution, and logistics excellence.</p>
+                <p class="tagline">Since 1995, Universal Group has connected global trading markets through consistent excellence in manufacturing, wholesale distribution, brand partnerships, and logistics.</p>
                 <a href="#" onclick="showPage('contact', event)" class="cta-button">Partner With Us</a>
                 <div class="stats-grid">
                     <div class="stat-item"><div class="stat-number">30+</div><div class="stat-label">Years of Experience</div></div>
@@ -530,12 +587,13 @@
             <div class="container">
                 <div class="content-split">
                     <div class="text-content">
-                        <h3>Our Foundation: Vision, Mission & Values</h3>
-                        <p>Our vision is to supply businesses and consumers with high-quality products across any category our clients desire. Our mission is to leverage our global presence and extensive experience to drive sustainable growth and profitability for our clients.</p><br>
-                        <ul>
-                            <li><strong>Integrity:</strong> Upholding the highest ethical standards in every relationship.</li>
-                            <li><strong>Customer-Driven:</strong> Working tirelessly to understand and meet client needs.</li>
-                            <li><strong>Long-Term Mindset:</strong> Building client relationships that last for 10+ years.</li>
+                        <h3>We Are Grounded in Our Vision</h3>
+                        <p>Our vision is to supply high-quality products across any category our clients desire. We aim to leverage our global scale and extensive experience to drive sustainable growth and profitability for our wholesale and retail clients.</p><br>
+                        <h2 style="margin: 0; padding: 0; font-weight: bold;">Our values:</h2><br>
+                        <ul style="margin: 0; padding-left: 1.2em;">
+                            <li><strong>Integrity:</strong> Upholding the highest ethical standards of honesty and trust in every business relationship.</li><br>
+                            <li><strong>Customer-Driven:</strong> Working tirelessly to understand and meet client needs, as we are nothing without them.</li><br>
+                            <li><strong>Long-Term Mindset:</strong> Building client relationships & business partnerships to last decades not months.</li><br>
                         </ul>
                     </div>
                     <div class="image-content">
@@ -550,18 +608,24 @@
                     <h2 class="section-title">Explore Our Global Operations</h2>
                     <p class="section-subtitle">From our headquarters in Asia to our distribution hubs in the Americas, discover the specialized companies that form our global network.</p>
                 </div>
+
                 <div class="enhanced-presence-grid">
 
                     <a class="presence-card-enhanced" onclick="showPage('taiwan-china', event)">
                         <div class="card-background" style="background-image: url('images/bg-asia.jpg');"></div>
                         <div class="card-overlay">
-                            <div class="card-icons">
+                            <div class="flag-container">
                                 <img src="images/flag-tw.png" alt="Taiwan Flag" class="flag">
-                                <img src="images/logo-uexports.png" alt="Universal Exports Logo" class="logo">
+                                <img src="images/flag-cn.png" alt="China Flag" class="flag">
                             </div>
                             <div class="card-text-content">
                                 <h3>Taiwan & China</h3>
-                                <span class="explore-link">Explore Operations &rarr;</span>
+                                <div class="card-footer">
+                                    <div class="logo-container">
+                                        <img src="images/logo-uexports.png" alt="Universal Exports Logo" class="logo">
+                                    </div>
+                                    <span class="explore-link">Explore Operations &rarr;</span>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -569,13 +633,18 @@
                     <a class="presence-card-enhanced" onclick="showPage('belize', event)">
                         <div class="card-background" style="background-image: url('images/bg-belize.jpg');"></div>
                         <div class="card-overlay">
-                            <div class="card-icons">
+                            <div class="flag-container">
                                 <img src="images/flag-bz.png" alt="Belize Flag" class="flag">
-                                <img src="images/logo-unitex.png" alt="Unitex Logo" class="logo">
                             </div>
                             <div class="card-text-content">
                                 <h3>Belize</h3>
-                                <span class="explore-link">Explore Operations &rarr;</span>
+                                <div class="card-footer">
+                                    <div class="logo-container">
+                                        <img src="images/logo-unitex.png" alt="Universal Freezone Logo" class="logo">
+                                        <img src="images/logo-freezone.png" alt="Unitex Logo" class="logo">
+                                    </div>
+                                    <span class="explore-link">Explore Operations &rarr;</span>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -583,13 +652,17 @@
                     <a class="presence-card-enhanced" onclick="showPage('usa', event)">
                         <div class="card-background" style="background-image: url('images/bg-usa.jpg');"></div>
                         <div class="card-overlay">
-                            <div class="card-icons">
+                            <div class="flag-container">
                                 <img src="images/flag-us.png" alt="USA Flag" class="flag">
-                                <img src="images/logo-univex.png" alt="Univex Logo" class="logo">
                             </div>
                             <div class="card-text-content">
-                                <h3>USA</h3>
-                                <span class="explore-link">Explore Operations &rarr;</span>
+                                <h3>United States</h3>
+                                <div class="card-footer">
+                                    <div class="logo-container">
+                                        <img src="images/logo-univex.png" alt="Univex Logo" class="logo">
+                                    </div>
+                                    <span class="explore-link">Explore Operations &rarr;</span>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -597,12 +670,16 @@
                     <a class="presence-card-enhanced disabled" onclick="showPage('mexico', event)">
                         <div class="card-background" style="background-image: url('images/bg-mexico.jpg');"></div>
                         <div class="card-overlay">
-                            <div class="card-icons">
+                            <div class="flag-container">
                                 <img src="images/flag-mx.png" alt="Mexico Flag" class="flag">
                             </div>
                             <div class="card-text-content">
                                 <h3>Mexico</h3>
-                                <span class="explore-link">Coming 2025</span>
+                                <div class="card-footer">
+                                    <div class="logo-container">
+                                        </div>
+                                    <span class="explore-link">Coming 2025</span>
+                                </div>
                             </div>
                         </div>
                     </a>
