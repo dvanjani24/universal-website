@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Group</title>
+    <link rel="icon" type="image/png" href="universal-logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -523,7 +524,11 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .presence-card-enhanced.disabled:hover .card-background,
+        /* REPLACEMENT for .presence-card-enhanced.disabled:hover .card-background */
+        .presence-card-enhanced.disabled:hover .card-background {
+            transform: scale(1.1); /* Adds a very subtle zoom effect */
+        }
+
         .presence-card-enhanced.disabled:hover .card-overlay {
             transform: none;
             background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.0) 50%, rgba(0,0,0,0.2) 100%);
@@ -538,7 +543,32 @@
             position: static; /* Let it sit normally */
             transform: none;
         }
-        /* END REPLACEMENT */
+        /* START: Add this new CSS for the Hero Logo Row */
+        .hero-logo-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem; /* Controls space between logos */
+            margin: 2.5rem 0; /* Controls space above and below the row */
+            flex-wrap: wrap; /* Allows logos to wrap on smaller screens */
+        }
+
+        /* REPLACEMENT for .hero-logo-row img */
+        .hero-logo-row img {
+            height: 55px; /* Sets a larger, fixed height for all logos */
+            width: 140px; /* Sets a fixed width for the logo's "box" */
+            object-fit: contain; /* Fits the logo inside the box without stretching */
+            opacity: 0.6;
+            filter: grayscale(0%);
+            transition: all 0.3s ease;
+        }
+
+        .hero-logo-row img:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+        /* END: Add this new CSS for the Hero Logo Row */
     </style>
 </head>
 <body>
@@ -572,14 +602,14 @@
         <section class="hero">
             <div class="container">
                 <h1>Powered by Family.<br>Built for Global Trade.</h1>
-                <p class="tagline">Since 1995, Universal Group has connected global trading markets through consistent excellence in manufacturing, wholesale distribution, brand partnerships, and logistics.</p>
-                <a href="#" onclick="showPage('contact', event)" class="cta-button">Partner With Us</a>
-                <div class="stats-grid">
-                    <div class="stat-item"><div class="stat-number">30+</div><div class="stat-label">Years of Experience</div></div>
-                    <div class="stat-item"><div class="stat-number">5</div><div class="stat-label">Subsidiary Companies</div></div>
-                    <div class="stat-item"><div class="stat-number">8</div><div class="stat-label">Global Offices</div></div>
-                    <div class="stat-item"><div class="stat-number">10,000+</div><div class="stat-label">Products</div></div>
-                    <div class="stat-item"><div class="stat-number">250+</div><div class="stat-label">Wholesale Clients</div></div>
+                <div class="hero-logo-row">
+                    <img src="images/logo-exports-color.png" alt="Universal Exports Logo" class="hero-logo-img">
+                    <img src="images/logo-freezone-color.png" alt="Unitex Logo" class="hero-logo-img">
+                    <img src="images/logo-unitex-color.png" alt="Univex Logo" class="hero-logo-img">
+                    <img src="images/logo-univex-color.png" alt="Universal Freezone Logo" class="hero-logo-img">
+                </div>            
+                    <p class="tagline">Since 1995, Universal Group has connected global trading markets and delivered its clients consistent excellence in manufacturing, wholesale distribution, logistics, and brand partnerships.</p>
+                    <a href="#" onclick="showPage('contact', event)" class="cta-button">Partner With Us</a>
                 </div>
             </div>
         </section>
@@ -842,7 +872,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 Universal Group. All Rights Reserved.</p>
-            <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">Family-Owned • 30+ Years of Excellence • Global Import/Export Solutions</p>
+            <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">30+ Years of Excellence in International Trade</p>
         </div>
     </footer>
 
