@@ -620,48 +620,52 @@
             background-color: var(--white);
         }
 
+        /* REPLACEMENT for all Brand Grid styles */
         .brand-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 2rem;
+            gap: 3rem 2rem; /* More vertical space */
         }
 
-        .brand-logo-card {
-            position: relative;
-            background-color: var(--light-bg);
-            padding: 2rem;
-            border-radius: 12px;
+        .brand-logo-item {
+            position: relative; /* For the exclusive tag */
+            height: 80px; /* This is the key to uniform sizing */
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
         }
 
-        .brand-logo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-            border-color: var(--maroon);
+        .brand-logo-item:hover {
+            transform: scale(1.05);
         }
 
-        .brand-logo-card img {
-            max-height: 70px;
+        .brand-logo-item img {
+            max-height: 100%;
             max-width: 100%;
             object-fit: contain;
+            filter: grayscale(0%);
+            transition: all 0.3s ease;
         }
 
-        .exclusive-tag {
+        .brand-logo-item:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* New, more subtle exclusive tag */
+        .brand-logo-item.exclusive::after {
+            content: 'EXCLUSIVE';
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: var(--maroon);
-            color: var(--white);
-            padding: 3px 8px;
+            bottom: -25px; /* Position it below the logo */
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--maroon);
             font-size: 0.7rem;
             font-weight: 600;
-            border-radius: 5px;
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
+        /* END REPLACEMENT */
 
         /* START: Add this new CSS for the Business Card Header */
         .business-header {
@@ -677,7 +681,7 @@
         }
 
         .business-header .logo {
-            max-height: 50px;
+            max-height: 85px;
             max-width: 140px;
             object-fit: contain;
             flex-shrink: 0; /* Prevent the logo from shrinking */
@@ -865,14 +869,16 @@
                     <div class="image-content">
                         <img src="images/belize-freezone.jpg" alt="A busy commercial area at the Belize-Mexico border">
                     </div>
-                    <!-- REPLACEMENT for the Unitex text-content -->
                     <div class="text-content">
                         <div class="business-header">
-                            <h3>Unitex</h3>
-                            <img src="images/logo-unitex-color.png" alt="Unitex Logo" class="logo">
+                            <h2>Universal Freezone</h2>
+                            <img src="images/universal freezone.png" alt="Unitex Logo" class="logo">
                         </div>
-                        <span class="market-focus">Serving the Domestic Belize Market</span>
-                        <p>Unitex is focused on serving wholesale and retail clients within local Belizean cities. With a strong distribution network and a deep understanding of the domestic market, we connect Belizean consumers with top international and private label brands.</p>
+                        <span class="market-focus">Our Gateway to the Neighboring Mexico Market</span>
+                        <p>
+                            Catering to bustling cross-border trade, Universal Freezone operates out of the Corozal Freezone. Our 100k+ square foot warehousing facilities have a dual-purpose layout, serving both as wholesale distribution hubs and retail stores for clients in both Mexico and Belize.
+                        </p>
+                        <!-- Add more text here if you wish -->
                     </div>
                 </div>
 
@@ -882,10 +888,12 @@
                         <img src="images/belize-local.jpg" alt="A vibrant local market street in a Belizean city">
                     </div>
                     <div class="text-content">
-                        <h3>Unitex</h3>
-                        <span class="market-focus">Serving the Domestic Belize Market</span>
-                        <p>Unitex is focused on serving wholesale and retail clients within local Belizean cities. With a strong distribution network and a deep understanding of the domestic market, we connect Belizean consumers with top international and private label brands.</p>
-                        <!-- Add more text here if you wish -->
+                        <div class="business-header">
+                            <h2>Unitex</h2>
+                            <img src="images/unitex.png" alt="Unitex Logo" class="logo">
+                        </div>
+                        <span class="market-focus">Serving the Booming Domestic Belize Market</span>
+                        <p>Unitex is focused on serving wholesale and retail clients within local Belizean cities. With a strong distribution network fueled by our 3-acre warehouse and a deep understanding of the domestic market, we connect Belizean consumers with top international and private label brands.</p>
                     </div>
                 </div>
             </div>
@@ -896,45 +904,123 @@
             <div class="container">
                 <div class="section-heading">
                     <h2 class="section-title">Our Partner Brands</h2>
-                    <p class="section-subtitle">We are proud to be the trusted distribution partner for a wide range of renowned international brands in the region.</p>
+                    <p class="section-subtitle">We are proud to be the trusted distribution partner for a wide range of renowned international brands.</p>
+                </div>
+                <div class="brand-grid">
+
+                    <!-- To add an EXCLUSIVE brand, add the "exclusive" class -->
+                    <div class="brand-logo-item">
+                        <img src="images/a-cheese.svg" alt="A-Cheese Logo">
+                    </div>
+                    
+                    <!-- For a standard brand, use this structure -->
+                    <div class="brand-logo-item">
+                        <img src="images/bauducco.png" alt="Bauducco Logo">
+                    </div>
+                    
+                    <div class="brand-logo-item">
+                        <img src="images/gorilla.png" alt="Gorilla Energy Logo">
+                    </div>
+                    
+                    <div class="brand-logo-item">
+                        <img src="images/kagi.svg" alt="Kagi Logo">
+                    </div>
+                    
+                    <div class="brand-logo-item">
+                        <img src="images/kent.png" alt="Kent Logo">
+                    </div>
+                    
+                    <div class="brand-logo-item">
+                        <img src="images/mrbrown.png" alt="Mr. Brown Coffee Logo">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/madamhong.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/ferrara.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/unilever.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/brut.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/collection2000.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/hombre.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/badia.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/kellanova.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/kellogs.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/axe.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/arizona.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/planters.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/hormel.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/mondelez.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/kraft.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/lotus.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/nestle.svg">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/ritz.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/pringles.svg">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/pepperidge.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/goldfish.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/cheezeit.png">
+                    </div>
+                    <div class="brand-logo-item">
+                        <img src="images/campbells.png">
+                    </div>
+                     <div class="brand-logo-item">
+                        <img src="images/poptarts.jpeg">
+                    </div>
+                     <div class="brand-logo-item">
+                        <img src="images/nescafe.png">
+                    </div>
                 </div>
 
+                <div class="section-heading">
+                    <h2 class="section-title"><br>Our Private Label Brands</h2>
+                    <p class="section-subtitle">With our client's trust and strong market position, we are proud to be kicking off our private labeling journey.</p>
+                </div>
                 <div class="brand-grid">
-                    <!-- Example: Exclusive Brand -->
-                    <div class="brand-logo-card">
-                        <div class="exclusive-tag">Exclusive</div>
-                        <img src="images/logo-a-cheese.png" alt="A-Cheese Logo">
+                    <div class="brand-logo-item">
+                        <img src="images/aria.png">
                     </div>
-                    
-                    <!-- Example: Standard Brand -->
-                    <div class="brand-logo-card">
-                        <img src="images/logo-bauducco.png" alt="Bauducco Logo">
+                    <div class="brand-logo-item">
+                        <img src="images/spark.jpg">
                     </div>
-                    
-                    <!-- Add more brand logos here by copying the template -->
-                    <div class="brand-logo-card">
-                        <img src="images/logo-gorilla.png" alt="Gorilla Energy Logo">
-                    </div>
-                    
-                    <div class="brand-logo-card">
-                        <img src="images/logo-kagi.png" alt="Kagi Logo">
-                    </div>
-                    
-                    <div class="brand-logo-card">
-                        <img src="images/logo-kent.png" alt="Kent Logo">
-                    </div>
-                    
-                    <div class="brand-logo-card">
-                        <img src="images/logo-mrbrown.png" alt="Mr. Brown Coffee Logo">
-                    </div>
-                    
-                    <!-- To add another exclusive brand, copy this block -->
-                    <!-- 
-                    <div class="brand-logo-card">
-                        <div class="exclusive-tag">Exclusive</div>
-                        <img src="images/logo-new-exclusive-brand.png" alt="New Brand Logo">
-                    </div> 
-                    -->
                 </div>
             </div>
         </section>
