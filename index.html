@@ -250,7 +250,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            align-items: center;
+            align-items: flex-start;
         }
         .content-split .text-content h3 { font-size: 2rem; color: var(--navy); margin-bottom: 1rem; }
         .content-split .image-content img { width: 100%; height: auto; border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
@@ -577,11 +577,16 @@
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
             align-items: center;
-            margin-bottom: 5rem;
+            margin-bottom: 5rem; /* This keeps space between Freezone and Unitex */
             background-color: var(--light-bg);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        /* ADD THIS NEW RULE to remove space after the LAST card (Unitex) */
+        .business-card:last-of-type {
+            margin-bottom: 0;
         }
 
         .business-card .image-content img {
@@ -616,7 +621,7 @@
         }
 
         .partner-brands-section {
-            padding: 80px 0;
+            padding: 40px 0 80px 0;
             background-color: var(--white);
         }
 
@@ -686,7 +691,288 @@
             object-fit: contain;
             flex-shrink: 0; /* Prevent the logo from shrinking */
         }
-        /* END: Add this new CSS for the Business Card Header */  
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem; /* Add some space above the icons */
+        }
+
+        .social-links a {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+
+        .social-links svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--light-text); /* Default color */
+            transition: fill 0.3s ease;
+        }
+
+        .social-links a:hover svg {
+            fill: var(--navy); /* Darker color on hover */
+        }
+        /* START: Add this new CSS for Taiwan & China Page */
+        .office-locations-section {
+            padding: 60px 0;
+            background-color: var(--white);
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr; /* Column for flags, column for text */
+            gap: 2rem 3rem;
+            align-items: center;
+        }
+
+        .location-item {
+            display: contents; /* Makes grid children direct children of the grid */
+        }
+
+        .location-flag-col {
+            background-color: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .location-flag-col img {
+            width: 60px;
+            margin-bottom: 0.5rem;
+        }
+
+        .location-flag-col h4 {
+            color: var(--navy);
+            margin: 0;
+        }
+
+        .location-desc-col {
+            background-color: var(--light-bg);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+        }
+
+        .product-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 250px;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .category-card .label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 1.5rem 1rem 1rem;
+            font-weight: 600;
+        }
+
+        .photo-slider-section {
+            padding: 60px 0;
+            background-color: var(--navy);
+            color: white;
+        }
+        .photo-slider-section .section-title, .photo-slider-section .section-subtitle {
+            color: white;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            display: block;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            text-align: center;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+
+        .slider-nav button {
+            background-color: rgba(255,255,255,0.8);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--navy);
+            transition: background-color 0.3s ease;
+        }
+
+        .slider-nav button:hover {
+            background-color: white;
+        }
+
+        /* START: Add this new CSS for the Page Title Header */
+        .page-title-header {
+            display: flex;
+            justify-content: center; /* Aligns content to the left */
+            align-items: center;
+            gap: 1.5rem; /* Space between logo and text */
+            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+        }
+
+        .page-title-header img {
+            height: 80px; /* Adjust size as needed */
+        }
+
+        .page-title-text .section-title,
+        .page-title-text .section-subtitle {
+            text-align: left; /* Align text to the left within its container */
+            margin: 0;
+        }
+
+        .page-title-text .section-subtitle {
+            padding-left: 2px; /* Small adjustment for visual alignment */
+        }
+        /* END: Add this new CSS for the Page Title Header */
+        /* ADD THIS NEW RULE */
+        .content-split .text-content .sub-headline {
+            font-size: 1.2rem; /* Reduced font size */
+            color: var(--maroon); /* Maroon color */
+            margin-bottom: 1rem;
+        }
+        /* ADD THIS NEW RULE */
+        .page-header .container {
+            max-width: 1200px; /* Or your standard container width */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+    /* START: Add this new CSS for the Branches & Factories Timeline */
+        /* REPLACEMENT for all Timeline and Spacing CSS */
+        .timeline-section {
+            padding: 60px 0;
+            background-color: var(--white);
+        }
+
+        .timeline-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20px;
+            height: 100%;
+            width: 4px;
+            background-color: var(--light-bg);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-left: 50px;
+            margin-bottom: 50px;
+            padding-left: 30px;
+            opacity: 0; /* Initially hidden for animation */
+            transform: translateY(20px);
+            transition: opacity 1.2s ease, transform 1.2s ease; /* Slower animation */
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* This rule removes the extra space after the last item */
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* This rule restores a subtle, non-intrusive dot */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--light-bg); /* Subtle gray dot */
+            border: 4px solid var(--white);
+            z-index: 1; /* Ensures it's on top of the line */
+        }
+
+        .timeline-flag {
+            width: 40px;
+            margin-right: 1rem;
+            vertical-align: middle;
+        }
+
+        .timeline-title {
+            display: inline-block;
+            color: var(--navy);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .timeline-description {
+            margin-top: 0.5rem;
+            padding-left: 55px; /* Aligns description with title */
+            color: var(--light-text);
+        }
+        /* END REPLACEMENT */
+        /* END: Add this new CSS for the Branches & Factories Timeline */
     </style>
 </head>
 <body>
@@ -706,7 +992,6 @@
                         <li><a href="#" onclick="showPage('mexico', event)">Mexico</a></li>
                     </ul>
                 </li>
-                <li><a href="#" onclick="showPage('brands-partnerships', event)" class="nav-link">Brands & Partnerships</a></li>
                 <li><a href="#" onclick="showPage('leadership', event)" class="nav-link">Leadership</a></li>
                 <li><a href="#" onclick="showPage('contact', event)" class="nav-link">Contact</a></li>
             </ul>
@@ -834,26 +1119,150 @@
             </div>
         </section>
     </div>
+    <!-- REPLACEMENT for the entire Taiwan & China page -->
     <div id="taiwan-china" class="page">
+        <!-- 1. Overview Section -->
+        <!-- REPLACEMENT for the Taiwan & China Page Header -->
         <div class="page-header">
-            <h1 class="section-title">Universal Exports</h1>
-            <p class="section-subtitle">Taiwan & China • Est. 1995</p>
+            <div class="container">
+                <div class="page-title-header">
+                    <div class="page-title-text">
+                        <h1 class="section-title">Universal Exports</h1>
+                    </div>
+                    <img src="images/universal exports (transparent).png" alt="Universal Exports Logo">
+                </div>
+            </div>
         </div>
-        <section class="section" style="padding-top: 50px;">
+        <!-- END REPLACEMENT -->
+        <section class="section" style="padding-top: 30px; padding-bottom: 0;">
             <div class="container">
                 <div class="content-split">
                     <div class="text-content">
-                        <h3>The Engine of Global Sourcing</h3>
-                        <p>Founded in 1995, Universal Exports is our flagship company and the headquarters for the Universal Group. With over 30 years of industry experience, this division excels in manufacturing, wholesale buying, quality control, and logistics.</p>
-                        <p>Our teams in Taiwan, Guangzhou, and Yiwu work with a vast network of factories and suppliers to serve clients on every continent, from national chain stores to large wholesalers.</p>
+                        <h2 class="sub-headline">Our engine of global supply, manufacturing, and banking fueling all aspects of the Universal Group.</h2>
+                        <p><li><strong>Founded in 1995, Universal Exports is our flagship company</strong> and the headquarters for the Universal Group.<br><br><li>Deep expertise & experience in <strong>manufacturing, wholesale buying, quality control, and logistics.</strong><br><br></p>
+                        <p><li>Leveraging our strategically located branches and factories across Asia & Panama, we are <strong>proud to serve clients on every continent,from national chain stores to large wholesalers.</strong></p>
                     </div>
                     <div class="image-content">
-                        <img src="images/office-taiwan.jpg" alt="Universal Exports Office in Taipei">
+                        <img src="images/taiwan.jpg" alt="Universal Exports Office in Taipei">
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- 2. Branch Offices & Factories -->
+        <!-- REPLACEMENT for the entire Branches & Factories section -->
+        <section class="timeline-section">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="section-title">Branches & Factories</h2>
+                    <p class="section-subtitle">Our strategic presence across Asia and the Americas gives us unparalleled access to the world's largest manufacturing and wholesale ecosystems.</p>
+                </div>
+                <div class="timeline-container">
+                    <!-- Taiwan -->
+                    <div class="timeline-item">
+                        <h4 class="timeline-title">
+                            <img src="images/flag-tw.png" alt="Taiwan Flag" class="timeline-flag">
+                            Taiwan (HQ)
+                        </h4>
+                        <p class="timeline-description">Managing all banking, payments, logistics, and shipping activities for the Universal Group.</p>
+                    </div>
+                    <!-- Guangzhou -->
+                    <div class="timeline-item">
+                        <h4 class="timeline-title">
+                            <img src="images/flag-cn.png" alt="China Flag" class="timeline-flag">
+                            Guangzhou, China
+                        </h4>
+                        <p class="timeline-description">Supplying products from major manufacturing hubs including Shenzhen, Tianjin, Xiamen, and more.</p>
+                    </div>
+                    <!-- Yiwu -->
+                    <div class="timeline-item">
+                        <h4 class="timeline-title">
+                            <img src="images/flag-cn.png" alt="China Flag" class="timeline-flag">
+                            Yiwu, China
+                        </h4>
+                        <p class="timeline-description">Sourcing products from Yiwu's large and dynamic wholesale market complex.</p>
+                    </div>
+                    <!-- Panama -->
+                    <div class="timeline-item">
+                        <h4 class="timeline-title">
+                            <img src="images/flag-pa.png" alt="Panama Flag" class="timeline-flag">
+                            Panama
+                        </h4>
+                        <p class="timeline-description">Import and export distribution network catering to the Colon Free Trade Zone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END REPLACEMENT -->
+
+        <!-- 3. Product Categories -->
+        <section class="section" style="padding-top: 10px;">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="section-title">Multi-category Product Expertise</h2>
+                    <p class="section-subtitle">Our strength is the breadth of our product portfolio and depth of expertise in design, manufacturing, sourcing, and marketing across a wide range of categories.</p>
+                </div>
+                <div class="product-category-grid">
+                    <!-- Add category cards here -->
+                    <div class="category-card"><img src="images/fans.png" alt="Electric Fans"><div class="label">Electric Fans</div></div>
+                    <div class="category-card"><img src="images/fitness.png" alt="Fitness Equipment"><div class="label">Fitness</div></div>
+                    <div class="category-card"><img src="images/stationery.png" alt="Stationery"><div class="label">Stationery</div></div>
+                    <div class="category-card"><img src="images/seasonal.png" alt="Seasonal"><div class="label">Seasonal Products</div></div>
+                    <div class="category-card"><img src="images/bedding.png" alt="Bedding"><div class="label">Bedding</div></div>
+                    <div class="category-card"><img src="images/toys.png" alt="Toys"><div class="label">Toys</div></div>
+                    <div class="category-card"><img src="images/confectionery.png" alt="Kitchenware"><div class="label">Kitchenware</div></div>
+                    <div class="category-card"><img src="images/superglue.png" alt="Super Glue"><div class="label">Super Glue</div></div>
+                    <div class="category-card"><img src="images/kitchenware.png" alt="Kitchenware"><div class="label">Kitchenware</div></div>
+                    <div class="category-card"><img src="images/shapewear.png" alt="Shapewear"><div class="label">Shapewear</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Private Label Brands -->
+        <section class="partner-brands-section">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="section-title">Our Private Label Brands</h2>
+                    <p class="section-subtitle">We own and operate a diverse portfolio of globally recognized private label brands, developed in-house to meet specific market demands.</p>
+                </div>
+                <div class="brand-grid">
+                    <div class="brand-logo-item"><img src="images/venideco.jpg" alt="Deconique Logo"></div>
+                    <div class="brand-logo-item"><img src="images/deconique.jpg" alt="Deconique Logo"></div>
+                    <div class="brand-logo-item"><img src="images/linensecrets.png" alt="Linen Secrets Logo"></div>
+                    <div class="brand-logo-item"><img src="images/aria.png" alt="Deconique Logo"></div>
+                    <div class="brand-logo-item"><img src="images/nrg.png" alt="NRG Fitness Logo"></div>
+                    <div class="brand-logo-item"><img src="images/spark.jpg" alt="Deconique Logo"></div>
+                    <div class="brand-logo-item"><img src="images/curvy skin.png" alt="Alectura Logo"></div>
+                    <div class="brand-logo-item"><img src="images/kidacious.png" alt="Kidacious Logo"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Photo Showcase -->
+        <section class="photo-slider-section">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="section-title">A View Inside Our Operations</h2>
+                    <p class="section-subtitle">From modern offices to large-scale factory floors, get a glimpse into the heart of Universal Exports.</p>
+                </div>
+                <div class="slider-container">
+                    <div class="slider-wrapper">
+                        <!-- Add slides here -->
+                        <div class="slide"><img src="images/taiwan.jpg" alt="Taipei Office"><div class="slide-caption">Taipei, Taiwan (HQ)</div></div>
+                        <div class="slide"><img src="images/showcase-guangzhou.jpg" alt="Guangzhou Office"><div class="slide-caption">Guangzhou, China</div></div>
+                        <div class="slide"><img src="images/showcase-yiwu.jpg" alt="Yiwu Wholesale Market"><div class="slide-caption">Yiwu Wholesale Market</div></div>
+                        <div class="slide"><img src="images/showcase-factory.jpg" alt="Factory Production Line"><div class="slide-caption">Our Partner Factory Network</div></div>
+                    </div>
+                    <div class="slider-nav">
+                        <button class="prev-slide">&lt;</button>
+                        <button class="next-slide">&gt;</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div>
+    <!-- END REPLACEMENT -->
 
     <div id="belize" class="page">
         <div class="page-header">
@@ -878,6 +1287,15 @@
                         <p>
                             Catering to bustling cross-border trade, Universal Freezone operates out of the Corozal Freezone. Our 100k+ square foot warehousing facilities have a dual-purpose layout, serving both as wholesale distribution hubs and retail stores for clients in both Mexico and Belize.
                         </p>
+                        <!-- ADD THIS BLOCK for Universal Freezone social links -->
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/universalfreezone123" target="_blank" title="Facebook">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.494v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.323-1.325z"/></svg>
+                            </a>
+                            <a href="https://www.instagram.com/universalbelize/" target="_blank" title="Instagram">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.585.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
+                            </a>
+                        </div>
                         <!-- Add more text here if you wish -->
                     </div>
                 </div>
@@ -894,6 +1312,11 @@
                         </div>
                         <span class="market-focus">Serving the Booming Domestic Belize Market</span>
                         <p>Unitex is focused on serving wholesale and retail clients within local Belizean cities. With a strong distribution network fueled by our 3-acre warehouse and a deep understanding of the domestic market, we connect Belizean consumers with top international and private label brands.</p>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/unitexbelize" target="_blank" title="Facebook">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.494v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.323-1.325z"/></svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1127,9 +1550,9 @@
             <div class="container">
                 <div class="section-heading"><h2 class="section-title">Get In Touch</h2><p class="section-subtitle">Connect with our offices around the world. We look forward to exploring partnership opportunities with you.</p></div>
                 <div class="contact-grid">
-                    <div class="contact-card"><h3>Universal Belize</h3><div><strong>Address:</strong><br>Freedom Avenue, Corozal Freezone, Belize</div><div><strong>Email:</strong><br><a href="mailto:universalbelize@hotmail.com">universalbelize@hotmail.com</a></div><div><strong>Phone:</strong><br><a href="tel:+5016103626">+501 610 3626</a></div></div>
-                    <div class="contact-card"><h3>Universal Exports (HQ)</h3><div><strong>Address:</strong><br>162, 11F-1, Chung Shan N. Rd., Sec. 2, Taipei, Taiwan</div><div><strong>Email:</strong><br><a href="mailto:business@universal-tgy.com">business@universal-tgy.com</a></div><div><strong>Phone:</strong><br><a href="tel:+886225959198">+886 2 2595 9198</a></div></div>
-                    <div class="contact-card"><h3>Univex (USA)</h3><div><strong>Address:</strong><br>418 Broadway Ste N, Albany, NY 12207</div><div><strong>Email:</strong><br><a href="mailto:business@univexcompany.com">business@univexcompany.com</a></div><div><strong>Phone:</strong><br><a href="tel:+19142081477">+1 914 208 1477</a></div></div>
+                    <div class="contact-card"><h3>Universal Exports</h3><div><strong>Address:</strong><br>162, 11F-1, Chung Shan N. Rd., Sec. 2, Taipei, Taiwan</div><div><strong>Email:</strong><br><a href="mailto:business@universal-tgy.com">business@universal-tgy.com</a></div><div><strong>Phone:</strong><br><a href="tel:+886225959198">+886 2 2595 9198</a></div></div>
+                    <div class="contact-card"><h3>Universal Belize</h3><div><strong>Address:</strong><br>Freedom Avenue, Corozal Freezone, Belize</div><div><strong>Email:</strong><br><a href="mailto:business@unitex.bz">business@unitex.bz</a></div><div><strong>Phone:</strong><br><a href="tel:+5016103626">+501 610 3626</a></div></div>
+                    <div class="contact-card"><h3>Univex</h3><div><strong>Address:</strong><br>418 Broadway Ste N, Albany, NY 12207</div><div><strong>Email:</strong><br><a href="mailto:business@univexcompany.com">business@univexcompany.com</a></div><div><strong>Phone:</strong><br><a href="tel:+19142081477">+1 914 208 1477</a></div></div>
                 </div>
             </div>
         </section>
@@ -1178,6 +1601,7 @@
             }
             
             window.scrollTo(0, 0);
+            onPageChange();
         }
 
         function toggleMobileMenu() {
@@ -1224,5 +1648,85 @@
             }
         });
     </script>
+    <!-- Add this new script block at the end of your body -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sliderWrappers = document.querySelectorAll('.slider-wrapper');
+
+        sliderWrappers.forEach(wrapper => {
+            const container = wrapper.closest('.slider-container');
+            if (!container) return;
+
+            const prevButton = container.querySelector('.prev-slide');
+            const nextButton = container.querySelector('.next-slide');
+            const slides = wrapper.querySelectorAll('.slide');
+            
+            if (!prevButton || !nextButton || slides.length === 0) return;
+
+            let currentIndex = 0;
+
+            function updateSlider() {
+                const offset = -currentIndex * 100;
+                wrapper.style.transform = `translateX(${offset}%)`;
+            }
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateSlider();
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateSlider();
+            });
+            
+            updateSlider();
+        });
+        // Add this code INSIDE your existing DOMContentLoaded listener
+        // REPLACE your old timeline animation script with this new logic
+        const timelineItems = document.querySelectorAll('.timeline-item');
+
+        if ("IntersectionObserver" in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            const setupObserver = () => {
+                timelineItems.forEach(item => {
+                    // Reset visibility on page change before observing
+                    item.classList.remove('visible');
+                    observer.observe(item);
+                });
+            };
+
+            // The function to call when the user navigates to a new page
+            const onPageChange = () => {
+                setTimeout(setupObserver, 50);
+            };
+
+            // Find your showPage function and add onPageChange() to the end of it
+            // Example:
+            // function showPage(pageId, event) {
+            //     ... existing code ...
+            //     window.scrollTo(0, 0);
+            //     onPageChange(); // Make sure this line is there
+            // }
+            
+            // Initial check for the first page load
+            onPageChange();
+
+        } else {
+            // Fallback for older browsers without IntersectionObserver
+            timelineItems.forEach(item => item.classList.add('visible'));
+        }
+
+        // We need to modify the showPage function to call our new onPageChange function.
+        // This is a simple but important change. Find your showPage function and add `onPageChange();` at the end.
+    });
+</script>
 </body>
 </html>
