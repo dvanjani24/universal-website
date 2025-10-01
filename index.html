@@ -350,7 +350,7 @@
         .contact-card div { margin-bottom: 1rem; color: var(--light-text); }
         .contact-card a { color: var(--navy); text-decoration: none; }
         .contact-card a:hover { text-decoration: underline; }
-        .cta-button { display: inline-block; background: var(--maroon); color: white; padding: 14px 35px; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; }
+        .cta-button { display: inline-block; background: var(--navy); color: white; padding: 14px 35px; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; }
         .cta-button:hover { background: var(--navy); transform: translateY(-3px); }
         footer { background: var(--navy); color: var(--light-bg); text-align: center; padding: 3rem 0; }
         footer p { opacity: 0.8; }
@@ -861,12 +861,13 @@
         }
 
         /* START: Add this new CSS for the Page Title Header */
+        /* REPLACEMENT for .page-title-header */
         .page-title-header {
             display: flex;
-            justify-content: center; /* Aligns content to the left */
+            justify-content: flex-start; /* Aligns content to the left */
             align-items: center;
-            gap: 1.5rem; /* Space between logo and text */
-            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .page-title-header img {
@@ -966,13 +967,320 @@
             font-weight: 600;
         }
 
+        /* REPLACEMENT for the timeline description and new slide caption styles */
         .timeline-description {
             margin-top: 0.5rem;
             padding-left: 55px; /* Aligns description with title */
-            color: var(--light-text);
+            color: var(--dark-text); /* CHANGED: Now uses the main dark text color */
+        }
+
+        .slide {
+            height: 100%;
+            position: relative; /* ADDED: This is needed for caption positioning */
+        }
+        
+        /* NEW: This styles the caption you just added */
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 1rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+            color: white;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
         }
         /* END REPLACEMENT */
         /* END: Add this new CSS for the Branches & Factories Timeline */
+        /* START: Add this CSS for the new Branches & Slider Layout */
+        .branches-layout-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr; /* Text gets slightly more space */
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* Adjustments for the timeline container */
+        .timeline-container {
+            max-width: none;
+            margin: 0;
+            padding: 1rem 0 0 0; /* Add a little top padding */
+        }
+        
+        /* Adjustments for the slider container */
+        .slider-container {
+            max-width: none;
+            margin: 0;
+            height: 100%; /* This makes the slider tall */
+            min-height: 550px; /* Ensures a minimum height */
+        }
+
+        .slider-wrapper,
+        .slide {
+            height: 100%;
+        }
+
+        .slide img {
+            height: 100%;
+            object-fit: cover; /* Ensures images fill the tall container */
+        }
+        
+        /* Responsive stacking for mobile */
+        @media (max-width: 992px) {
+            .branches-layout-grid {
+                grid-template-columns: 1fr;
+            }
+            .slider-container {
+                margin-top: 2rem;
+                min-height: 400px; /* Adjust height for mobile */
+            }
+        }
+        
+        /* REPLACEMENT for the ENTIRE Univex Page CSS block */
+        /* REPLACEMENT for the ENTIRE Univex Page CSS block */
+        .strategy-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 2rem;
+        }
+
+        .strategy-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--dark-text);
+            
+            /* Animation properties */
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* New hover effect with its own transition */
+        .strategy-list li:hover {
+            transform: scale(1.03);
+            transition: transform 0.3s ease; /* Makes hover zoom smooth */
+        }
+
+        /* This class will be added by JavaScript to trigger the animation */
+        .strategy-list li.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .strategy-list .icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            background-color: var(--navy);
+            border: 1px solid var(--border-color);
+            color: var(--light-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* START: Add this new CSS for the Univex Page Header */
+        .univex-page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem; /* Creates space below the header */
+        }
+
+        .univex-page-header .header-logo {
+            height: 80px; /* Controls the size of the logo */
+            flex-shrink: 0; /* Prevents the logo from shrinking */
+        }
+        /* END: Add this new CSS for the Univex Page Header */
+
+        /* START: Add this new CSS for the Mexico Page */
+        .mexico-hero {
+            position: relative;
+            padding: 160px 0;
+            text-align: center;
+            color: var(--white);
+            background-image: url('images/mexicobackdrop2.png'); /* Uses the same image from the home page card */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .mexico-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(11, 19, 43, 0.8); /* Dark navy overlay for readability */
+            z-index: 1;
+        }
+
+        .mexico-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title-mexico {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle-mexico {
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+        
+        .feature-icon {
+            margin-bottom: 1.5rem;
+            color: var(--maroon);
+        }
+        /* END: Add this new CSS for the Mexico Page */
+
+        .text-highlight {
+            color: var(--maroon); /* A brighter, more distinct navy */
+        }
+
+        /* START: Add this new CSS for the redesigned Contact Page */
+
+        /* New Contact Card Styles */
+        .contact-card-v2 {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .contact-card-v2:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-color: var(--maroon);
+        }
+
+        .card-header-contact {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .card-header-contact h3 {
+            margin: 0;
+            color: var(--navy);
+            font-size: 1.5rem;
+        }
+        .contact-flag {
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+        .contact-info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-info-item a {
+            color: var(--dark-text); /* Keeps text color black */
+            font-weight: normal; /* Removes bolding */
+            text-decoration: none; /* Removes underline */
+        }
+
+        .contact-info-item a:hover {
+            color: var(--dark-text); /* Keeps text color black on hover */
+            text-decoration: underline; /* Adds underline on hover for feedback */
+        }
+
+        /* New Contact Form Styles */
+        .contact-form {
+            max-width: 750px;
+            margin: 2rem auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--maroon);
+            box-shadow: 0 0 0 3px rgba(164, 22, 26, 0.1);
+        }
+        .contact-form button {
+            align-self: flex-start; /* Aligns button to the left */
+            border: none;
+            cursor: pointer;
+        }
+=
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* END: Add this new CSS for the redesigned Contact Page */
+
+        /* New three-card grid layout */
+        .contact-grid-v2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* This is the main rule that sets the size for ALL icons */
+        .contact-icon {
+            width: 20px !important;   /* Forces the width */
+            height: 20px !important;  /* Forces the height */
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        /* This sets the color for the inline SVGs (location, email) */
+        .contact-icon path {
+             fill: var(--dark-text);
+        }
+
+        /* This removes the color filter from the external phone.svg */
+        img.contact-icon {
+            filter: none;
+        }
+
+        .contact-info-item span {
+            color: var(--dark-text);
+        }
+
     </style>
 </head>
 <body>
@@ -984,7 +1292,7 @@
             </a>
             <ul class="nav-links" id="navLinks">
                 <li class="nav-item">
-                    <a href="#" onclick="showPage('universal', event)" class="nav-link active">Universal</a>
+                    <a href="#" onclick="showPage('universal', event)" class="nav-link active">Universal Group</a>
                     <ul class="dropdown-menu">
                         <li><a href="#" onclick="showPage('taiwan-china', event)">Taiwan & China</a></li>
                         <li><a href="#" onclick="showPage('belize', event)">Belize</a></li>
@@ -993,6 +1301,7 @@
                     </ul>
                 </li>
                 <li><a href="#" onclick="showPage('leadership', event)" class="nav-link">Leadership</a></li>
+                <li><a href="#" onclick="showPage('our-brands', event)" class="nav-link">Our Brands</a></li>
                 <li><a href="#" onclick="showPage('contact', event)" class="nav-link">Contact</a></li>
             </ul>
             <div class="mobile-menu" onclick="toggleMobileMenu()">
@@ -1004,35 +1313,24 @@
     <div id="universal" class="page active">
         <section class="hero">
             <div class="container">
-                <h1>Powered by Family.<br>Built for Global Trade.</h1>
+                <h1>Powered by <span class="text-highlight">Family.</span><br>Built for Global <span class="text-highlight">Trade.</span></h1>
                 <div class="hero-logo-row">
-                    <img src="images/logo-exports-color.png" alt="Universal Exports Logo" class="hero-logo-img">
-                    <img src="images/logo-freezone-color.png" alt="Unitex Logo" class="hero-logo-img">
-                    <img src="images/logo-unitex-color.png" alt="Univex Logo" class="hero-logo-img">
-                    <img src="images/logo-univex-color.png" alt="Universal Freezone Logo" class="hero-logo-img">
-                </div>            
+                    <a href="#" onclick="showPage('taiwan-china', event)">
+                        <img src="images/logo-exports-color.png" alt="Universal Exports Logo" class="hero-logo-img">
+                    </a>
+                    <a href="#" onclick="showPage('belize', event)">
+                        <img src="images/logo-freezone-color.png" alt="Universal Freezone Logo" class="hero-logo-img">
+                    </a>
+                    <a href="#" onclick="showPage('belize', event)">
+                        <img src="images/logo-unitex-color.png" alt="Unitex Logo" class="hero-logo-img">
+                    </a>
+                    <a href="#" onclick="showPage('usa', event)">
+                        <img src="images/logo-univex-color.png" alt="Univex Logo" class="hero-logo-img">
+                    </a>
+                </div>           
                     <p class="tagline">Since 1995, Universal Group has connected global trading markets and delivered its clients consistent excellence in manufacturing, wholesale distribution, logistics, and brand partnerships.</p>
                     <a href="#" onclick="showPage('contact', event)" class="cta-button">Partner With Us</a>
                 </div>
-        </section>
-        <section class="section">
-            <div class="container">
-                <div class="content-split">
-                    <div class="text-content">
-                        <h3>We Are Grounded in Our Vision</h3>
-                        <p>Our vision is to supply high-quality products across any category our clients desire. We aim to leverage our global scale and extensive experience to drive sustainable growth and profitability for our wholesale and retail clients.</p><br>
-                        <h2 style="margin: 0; padding: 0; font-weight: bold;">Our values:</h2><br>
-                        <ul style="margin: 0; padding-left: 1.2em;">
-                            <li><strong>Integrity:</strong> Upholding the highest ethical standards of honesty and trust in every business relationship.</li><br>
-                            <li><strong>Customer-Driven:</strong> Working tirelessly to understand and meet client needs, as we are nothing without them.</li><br>
-                            <li><strong>Long-Term Mindset:</strong> Building client relationships & business partnerships to last decades not months.</li><br>
-                        </ul>
-                    </div>
-                    <div class="image-content">
-                        <img src="images/global-shipping.jpg" alt="Global Shipping and Logistics">
-                    </div>
-                </div>
-            </div>
         </section>
         <section class="section enhanced-presence-section">
             <div class="container">
@@ -1118,11 +1416,29 @@
                 </div>
             </div>
         </section>
+        <section class="section">
+            <div class="container">
+                <div class="content-split">
+                    <div class="text-content">
+                        <h3>We Are Grounded in Our Vision</h3>
+                        <p>Our vision is to supply high-quality products across any category our clients desire. We aim to leverage our global scale and extensive experience to drive sustainable growth and profitability for our wholesale and retail clients.</p><br>
+                        <h2 style="margin: 0; padding: 0; font-weight: bold;">Our values:</h2><br>
+                        <ul style="margin: 0; padding-left: 1.2em;">
+                            <li><strong>Integrity:</strong> Upholding the highest ethical standards of honesty and trust in every business relationship.</li><br>
+                            <li><strong>Customer-Driven:</strong> Working tirelessly to understand and meet client needs, as we are nothing without them.</li><br>
+                            <li><strong>Long-Term Mindset:</strong> Building client relationships & business partnerships to last decades not months.</li><br>
+                        </ul>
+                    </div>
+                    <div class="image-content">
+                        <img src="images/global-shipping.jpg" alt="Global Shipping and Logistics">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
     </div>
     <!-- REPLACEMENT for the entire Taiwan & China page -->
     <div id="taiwan-china" class="page">
-        <!-- 1. Overview Section -->
-        <!-- REPLACEMENT for the Taiwan & China Page Header -->
         <div class="page-header">
             <div class="container">
                 <div class="page-title-header">
@@ -1133,7 +1449,6 @@
                 </div>
             </div>
         </div>
-        <!-- END REPLACEMENT -->
         <section class="section" style="padding-top: 30px; padding-bottom: 0;">
             <div class="container">
                 <div class="content-split">
@@ -1149,53 +1464,95 @@
             </div>
         </section>
 
-        <!-- 2. Branch Offices & Factories -->
-        <!-- REPLACEMENT for the entire Branches & Factories section -->
         <section class="timeline-section">
             <div class="container">
                 <div class="section-heading">
                     <h2 class="section-title">Branches & Factories</h2>
                     <p class="section-subtitle">Our strategic presence across Asia and the Americas gives us unparalleled access to the world's largest manufacturing and wholesale ecosystems.</p>
                 </div>
-                <div class="timeline-container">
-                    <!-- Taiwan -->
-                    <div class="timeline-item">
-                        <h4 class="timeline-title">
-                            <img src="images/flag-tw.png" alt="Taiwan Flag" class="timeline-flag">
-                            Taiwan (HQ)
-                        </h4>
-                        <p class="timeline-description">Managing all banking, payments, logistics, and shipping activities for the Universal Group.</p>
+                <div class="branches-layout-grid">
+                    <div class="timeline-container">
+                        <div class="timeline-item">
+                            <h4 class="timeline-title">
+                                <img src="images/flag-tw.png" alt="Taiwan Flag" class="timeline-flag">
+                                Taipei, Taiwan (HQ)
+                            </h4>
+                            <p class="timeline-description">Managing all banking, payments, logistics, and shipping activities for the Universal Group.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="timeline-title">
+                                <img src="images/flag-cn.png" alt="China Flag" class="timeline-flag">
+                                Guangzhou, China
+                            </h4>
+                            <p class="timeline-description">Partnering with manufacturers across key production hubs such as Shenzhen, Tianjin, Xiamen, Nantong across numerous of high-volume categories.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="timeline-title">
+                                <img src="images/flag-cn.png" alt="China Flag" class="timeline-flag">
+                                Yiwu, China
+                            </h4>
+                            <p class="timeline-description">Sourcing, manufacturing, and consolidating products from the world's largest and most dynamic 59 million square foot wholesale market complex.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="timeline-title">
+                                <img src="images/flag-pa.png" alt="Panama Flag" class="timeline-flag">
+                                Panama
+                            </h4>
+                            <p class="timeline-description">Import and export distribution network catering to the Colon Free Trade Zone.</p>
+                        </div>
                     </div>
-                    <!-- Guangzhou -->
-                    <div class="timeline-item">
-                        <h4 class="timeline-title">
-                            <img src="images/flag-cn.png" alt="China Flag" class="timeline-flag">
-                            Guangzhou, China
-                        </h4>
-                        <p class="timeline-description">Supplying products from major manufacturing hubs including Shenzhen, Tianjin, Xiamen, and more.</p>
-                    </div>
-                    <!-- Yiwu -->
-                    <div class="timeline-item">
-                        <h4 class="timeline-title">
-                            <img src="images/flag-cn.png" alt="China Flag" class="timeline-flag">
-                            Yiwu, China
-                        </h4>
-                        <p class="timeline-description">Sourcing products from Yiwu's large and dynamic wholesale market complex.</p>
-                    </div>
-                    <!-- Panama -->
-                    <div class="timeline-item">
-                        <h4 class="timeline-title">
-                            <img src="images/flag-pa.png" alt="Panama Flag" class="timeline-flag">
-                            Panama
-                        </h4>
-                        <p class="timeline-description">Import and export distribution network catering to the Colon Free Trade Zone.</p>
+                    <div class="slider-container">
+                        <div class="slider-wrapper">
+                            <div class="slide">
+                                <img src="images/stock.png">
+                                <div class="slide-caption"></div>
+                            </div>
+                            <div class="slide">
+                                <img src="images/twoffice1.png">
+                                <div class="slide-caption">Taipei Office</div>
+                            </div>
+                            <div class="slide">
+                                <img src="images/twoffice2.png">
+                                <div class="slide-caption">Taipei Office</div>
+                            </div>
+                            <div class="slide">
+                                <img src="images/gzoffice1.png">
+                                <div class="slide-caption">Guangzhou Office</div>
+                            </div>
+                            <div class="slide">
+                                <img src="images/gzoffice2.png">
+                                <div class="slide-caption">Guangzhou Office</div>
+                            </div>
+                            <div class="slide">
+                                <img src="images/yiwuoffice1.png">
+                                <div class="slide-caption">Yiwu Office</div>
+                            </div>
+                            <div class="slide">
+                                <img src="images/yiwuoffice2.png">
+                                <div class="slide-caption">Yiwu Office</div>
+                            </div>
+                            <div class="slide">
+                                <img src="images/yiwumarket.jpg">
+                                <div class="slide-caption">Yiwu Market</div>
+                            </div>
+                            <div class="slide">
+                                <img src="images/yiwumarket2.png">
+                                <div class="slide-caption">Yiwu Market</div>
+                            </div>
+                            <div class="slide">
+                                <img src="images/yiwumarket1.jpg">
+                                <div class="slide-caption">Yiwu Market</div>
+                            </div>
+                        </div>
+                        <div class="slider-nav">
+                            <button class="prev-slide">&lt;</button>
+                            <button class="next-slide">&gt;</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- END REPLACEMENT -->
 
-        <!-- 3. Product Categories -->
         <section class="section" style="padding-top: 10px;">
             <div class="container">
                 <div class="section-heading">
@@ -1203,7 +1560,6 @@
                     <p class="section-subtitle">Our strength is the breadth of our product portfolio and depth of expertise in design, manufacturing, sourcing, and marketing across a wide range of categories.</p>
                 </div>
                 <div class="product-category-grid">
-                    <!-- Add category cards here -->
                     <div class="category-card"><img src="images/fans.png" alt="Electric Fans"><div class="label">Electric Fans</div></div>
                     <div class="category-card"><img src="images/fitness.png" alt="Fitness Equipment"><div class="label">Fitness</div></div>
                     <div class="category-card"><img src="images/stationery.png" alt="Stationery"><div class="label">Stationery</div></div>
@@ -1218,7 +1574,6 @@
             </div>
         </section>
 
-        <!-- 4. Private Label Brands -->
         <section class="partner-brands-section">
             <div class="container">
                 <div class="section-heading">
@@ -1226,42 +1581,20 @@
                     <p class="section-subtitle">We own and operate a diverse portfolio of globally recognized private label brands, developed in-house to meet specific market demands.</p>
                 </div>
                 <div class="brand-grid">
-                    <div class="brand-logo-item"><img src="images/venideco.jpg" alt="Deconique Logo"></div>
-                    <div class="brand-logo-item"><img src="images/deconique.jpg" alt="Deconique Logo"></div>
-                    <div class="brand-logo-item"><img src="images/linensecrets.png" alt="Linen Secrets Logo"></div>
                     <div class="brand-logo-item"><img src="images/aria.png" alt="Deconique Logo"></div>
+                    <div class="brand-logo-item"><img src="images/curvy skin.png" alt="Alectura Logo"></div>
+                    <div class="brand-logo-item"><img src="images/deconique.jpg" alt="Deconique Logo"></div>
+                    <div class="brand-logo-item"><img src="images/kidacious.png" alt="Kidacious Logo"></div>
+                    <div class="brand-logo-item"><img src="images/linensecrets.png" alt="Linen Secrets Logo"></div>
                     <div class="brand-logo-item"><img src="images/nrg.png" alt="NRG Fitness Logo"></div>
                     <div class="brand-logo-item"><img src="images/spark.jpg" alt="Deconique Logo"></div>
-                    <div class="brand-logo-item"><img src="images/curvy skin.png" alt="Alectura Logo"></div>
-                    <div class="brand-logo-item"><img src="images/kidacious.png" alt="Kidacious Logo"></div>
+                    <div class="brand-logo-item"><img src="images/supervec.png" alt="Kidacious Logo"></div>
+                    <div class="brand-logo-item"><img src="images/venideco.jpg" alt="Deconique Logo"></div>
                 </div>
             </div>
         </section>
-
-        <!-- 5. Photo Showcase -->
-        <section class="photo-slider-section">
-            <div class="container">
-                <div class="section-heading">
-                    <h2 class="section-title">A View Inside Our Operations</h2>
-                    <p class="section-subtitle">From modern offices to large-scale factory floors, get a glimpse into the heart of Universal Exports.</p>
-                </div>
-                <div class="slider-container">
-                    <div class="slider-wrapper">
-                        <!-- Add slides here -->
-                        <div class="slide"><img src="images/taiwan.jpg" alt="Taipei Office"><div class="slide-caption">Taipei, Taiwan (HQ)</div></div>
-                        <div class="slide"><img src="images/showcase-guangzhou.jpg" alt="Guangzhou Office"><div class="slide-caption">Guangzhou, China</div></div>
-                        <div class="slide"><img src="images/showcase-yiwu.jpg" alt="Yiwu Wholesale Market"><div class="slide-caption">Yiwu Wholesale Market</div></div>
-                        <div class="slide"><img src="images/showcase-factory.jpg" alt="Factory Production Line"><div class="slide-caption">Our Partner Factory Network</div></div>
-                    </div>
-                    <div class="slider-nav">
-                        <button class="prev-slide">&lt;</button>
-                        <button class="next-slide">&gt;</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </div>
+        
+        </div>
     <!-- END REPLACEMENT -->
 
     <div id="belize" class="page">
@@ -1330,108 +1663,127 @@
                     <p class="section-subtitle">We are proud to be the trusted distribution partner for a wide range of renowned international brands.</p>
                 </div>
                 <div class="brand-grid">
+                  <div class="brand-logo-item">
+                    <img src="images/a-cheese.svg" alt="A-Cheese Logo">
+                  </div>
 
-                    <!-- To add an EXCLUSIVE brand, add the "exclusive" class -->
-                    <div class="brand-logo-item">
-                        <img src="images/a-cheese.svg" alt="A-Cheese Logo">
-                    </div>
-                    
-                    <!-- For a standard brand, use this structure -->
-                    <div class="brand-logo-item">
-                        <img src="images/bauducco.png" alt="Bauducco Logo">
-                    </div>
-                    
-                    <div class="brand-logo-item">
-                        <img src="images/gorilla.png" alt="Gorilla Energy Logo">
-                    </div>
-                    
-                    <div class="brand-logo-item">
-                        <img src="images/kagi.svg" alt="Kagi Logo">
-                    </div>
-                    
-                    <div class="brand-logo-item">
-                        <img src="images/kent.png" alt="Kent Logo">
-                    </div>
-                    
-                    <div class="brand-logo-item">
-                        <img src="images/mrbrown.png" alt="Mr. Brown Coffee Logo">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/madamhong.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/ferrara.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/unilever.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/brut.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/collection2000.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/hombre.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/badia.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/kellanova.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/kellogs.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/axe.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/arizona.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/planters.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/hormel.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/mondelez.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/kraft.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/lotus.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/nestle.svg">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/ritz.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/pringles.svg">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/pepperidge.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/goldfish.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/cheezeit.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/campbells.png">
-                    </div>
-                     <div class="brand-logo-item">
-                        <img src="images/poptarts.jpeg">
-                    </div>
-                     <div class="brand-logo-item">
-                        <img src="images/nescafe.png">
-                    </div>
+                  <div class="brand-logo-item">
+                    <img src="images/arizona.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/axe.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/badia.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/bauducco.png" alt="Bauducco Logo">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/brut.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/campbells.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/cheezeit.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/collection2000.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/ferrara.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/goldfish.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/gorilla.png" alt="Gorilla Energy Logo">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/hombre.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/hormel.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/kagi.svg" alt="Kagi Logo">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/kellogs.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/kent.png" alt="Kent Logo">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/kraft.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/lotus.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/madamhong.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/mondelez.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/mrbrown.png" alt="Mr. Brown Coffee Logo">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/nescafe.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/nestle.svg">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/pepperidge.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/planters.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/poptarts.jpeg">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/pringles.svg">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/ritz.png">
+                  </div>
+
+                  <div class="brand-logo-item">
+                    <img src="images/unilever.png">
+                  </div>
                 </div>
+
 
                 <div class="section-heading">
                     <h2 class="section-title"><br>Our Private Label Brands</h2>
@@ -1444,43 +1796,73 @@
                     <div class="brand-logo-item">
                         <img src="images/spark.jpg">
                     </div>
+                    <div class="brand-logo-item">
+                        <img src="images/supervec.png">
+                    </div>
                 </div>
             </div>
         </section>
     </div>
-    <!-- END REPLACEMENT -->
 
+    <!-- REPLACEMENT for the entire United States page -->
     <div id="usa" class="page">
-        <div class="page-header">
-            <h1 class="section-title">Univex</h1>
-            <p class="section-subtitle">USA • Est. 2019</p>
-        </div>
-        <section class="section" style="padding-top: 50px;">
-            <div class="container">
-                <div class="content-split">
-                    <div class="text-content">
-                        <h3>Driving Strategy and Innovation</h3>
-                        <p>Established in 2019 in New York City, Univex solidifies our presence in the dominant US market. This division is responsible for the broad strategic initiatives that propel the entire Universal Group forward.</p>
-                        <p>Key functions include establishing authorized distributor partnerships with major international brands, developing our e-commerce strategy, and spearheading technology adoption to modernize our global operations.</p>
-                    </div>
-                    <div class="image-content">
-                        <img src="images/office-usa.jpg" alt="Univex Office in New York City">
+            <section class="section" style="padding-top: 100px;"> <div class="container">
+                    <div class="content-split">
+                        <div class="text-content">
+                            <div class="univex-page-header">
+                                <div>
+                                    <h1 class="section-title" style="text-align: left; margin-bottom: 0;">Univex</h1>
+                                    
+                                </div>
+                                <img src="images/logo-univex-color.png" alt="Univex Logo" class="header-logo">
+                            </div>
+                            <h3 class="sub-headline">Driving Strategy & Innovation</h3>
+                            <p>Since 2019, Univex solidified our presence in the dominant US market.</p>
+                            
+                            <ul class="strategy-list">
+                                <li>
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
+                                    </div>
+                                    <span><strong>Establishing exclusive distributor partnerships</strong> with major international brands.</span>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
+                                    </div>
+                                    <span><strong>Executing our B2B and D2C e-commerce strategy</strong> across subsidiaries.</span>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
+                                    </div>
+                                    <span><strong>Spearheading implementation of technology, automation, and AI</strong> across our global operations.</span>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
+                                    </div>
+                                    <span><strong>Distributing products made by major US brands</strong> to our clients in Central America from key supply hubs such a Miami, New York, and Long Beach.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="image-content">
+                            <img src="images/univexstock.png" alt="A modern office space in New York City">
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </div>
+            </section>
+        </div>
     
-    <div id="mexico" class="page">
-        <section class="section" style="padding-top: 120px; text-align: center;">
-            <div class="container">
-                <h1 class="section-title">Expanding to Mexico in 2025</h1>
-                <p class="section-subtitle" style="font-size: 1.5rem;">We are excited to announce our upcoming expansion into Latin America.</p>
-                <img src="images/flag-mexico.jpg" alt="Flag of Mexico" style="max-width: 400px; margin: 2rem auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                <p>Our new operations will provide comprehensive, cross-border trade solutions, further strengthening our global network and better serving our clients in the Americas. Stay tuned for more details.</p>
-            </div>
-        </section>
-    </div>
+        <div id="mexico" class="page">
+            <section class="mexico-hero">
+                <div class="container">
+                    <h1 class="hero-title-mexico">Launching in Mexico 2025</h1>
+                    <p class="hero-subtitle-mexico">Our clients asked, so we have landed. Our most exciting new chapter serving one of the largest markets in the world is about to begin.</p>
+                </div>
+            </section>
+
+        </div>
 
 
     <div id="brands-partnerships" class="page">
@@ -1512,34 +1894,98 @@
         </section>
     </div>
 
+    <div id="our-brands" class="page">
+        <section class="partner-brands-section" style="padding-top: 120px;">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="section-title">Our Partner Brands</h2>
+                    <p class="section-subtitle">We are proud to be the trusted distribution partner for a wide range of renowned international brands across our regions.</p>
+                </div>
+                <div class="brand-grid">
+                    <div class="brand-logo-item"><img src="images/a-cheese.svg" alt="A-Cheese Logo"></div>
+                    <div class="brand-logo-item"><img src="images/arizona.png" alt="Arizona Logo"></div>
+                    <div class="brand-logo-item"><img src="images/axe.png" alt="Axe Logo"></div>
+                    <div class="brand-logo-item"><img src="images/badia.png" alt="Badia Logo"></div>
+                    <div class="brand-logo-item"><img src="images/bauducco.png" alt="Bauducco Logo"></div>
+                    <div class="brand-logo-item"><img src="images/brut.png" alt="Brut Logo"></div>
+                    <div class="brand-logo-item"><img src="images/campbells.png" alt="Campbell's Logo"></div>
+                    <div class="brand-logo-item"><img src="images/cheezeit.png" alt="Cheez-It Logo"></div>
+                    <div class="brand-logo-item"><img src="images/collection2000.png" alt="Collection 2000 Logo"></div>
+                    <div class="brand-logo-item"><img src="images/ferrara.png" alt="Ferrara Logo"></div>
+                    <div class="brand-logo-item"><img src="images/goldfish.png" alt="Goldfish Logo"></div>
+                    <div class="brand-logo-item"><img src="images/gorilla.png" alt="Gorilla Energy Logo"></div>
+                    <div class="brand-logo-item"><img src="images/hombre.png" alt="Hombre Logo"></div>
+                    <div class="brand-logo-item"><img src="images/hormel.png" alt="Hormel Logo"></div>
+                    <div class="brand-logo-item"><img src="images/kagi.svg" alt="Kagi Logo"></div>
+                    <div class="brand-logo-item"><img src="images/kellanova.png" alt="Kellanova Logo"></div>
+                    <div class="brand-logo-item"><img src="images/kellogs.png" alt="Kellogg's Logo"></div>
+                    <div class="brand-logo-item"><img src="images/kent.png" alt="Kent Logo"></div>
+                    <div class="brand-logo-item"><img src="images/kraft.png" alt="Kraft Logo"></div>
+                    <div class="brand-logo-item"><img src="images/lotus.png" alt="Lotus Logo"></div>
+                    <div class="brand-logo-item"><img src="images/madamhong.png" alt="Madam Hong Logo"></div>
+                    <div class="brand-logo-item"><img src="images/mondelez.png" alt="Mondelez Logo"></div>
+                    <div class="brand-logo-item"><img src="images/mrbrown.png" alt="Mr. Brown Coffee Logo"></div>
+                    <div class="brand-logo-item"><img src="images/nescafe.png" alt="Nescafé Logo"></div>
+                    <div class="brand-logo-item"><img src="images/nestle.svg" alt="Nestlé Logo"></div>
+                    <div class="brand-logo-item"><img src="images/pepperidge.png" alt="Pepperidge Farm Logo"></div>
+                    <div class="brand-logo-item"><img src="images/planters.png" alt="Planters Logo"></div>
+                    <div class="brand-logo-item"><img src="images/poptarts.jpeg" alt="Pop-Tarts Logo"></div>
+                    <div class="brand-logo-item"><img src="images/pringles.svg" alt="Pringles Logo"></div>
+                    <div class="brand-logo-item"><img src="images/ritz.png" alt="Ritz Logo"></div>
+                    <div class="brand-logo-item"><img src="images/unilever.png" alt="Unilever Logo"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--light-bg);">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="section-title">Our Private Label Brands</h2>
+                    <p class="section-subtitle">We own and operate a diverse portfolio of globally recognized private label brands, developed in-house to meet specific market demands.</p>
+                </div>
+                <div class="brand-grid">
+                    <div class="brand-logo-item"><img src="images/aria.png" alt="Aria Logo"></div>
+                    <div class="brand-logo-item"><img src="images/curvy skin.png" alt="Curvy Skin Logo"></div>
+                    <div class="brand-logo-item"><img src="images/deconique.jpg" alt="Deconique Logo"></div>
+                    <div class="brand-logo-item"><img src="images/kidacious.png" alt="Kidacious Logo"></div>
+                    <div class="brand-logo-item"><img src="images/linensecrets.png" alt="Linen Secrets Logo"></div>
+                    <div class="brand-logo-item"><img src="images/nrg.png" alt="NRG Fitness Logo"></div>
+                    <div class="brand-logo-item"><img src="images/spark.jpg" alt="Spark Logo"></div>
+                    <div class="brand-logo-item"><img src="images/supervec.png" alt="Supervec Logo"></div>
+                    <div class="brand-logo-item"><img src="images/venideco.jpg" alt="Venideco Logo"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <div id="leadership" class="page">
         <section class="section" style="padding-top: 120px;">
             <div class="container">
-                <div class="section-heading"><h2 class="section-title">Meet Our Leadership</h2><p class="section-subtitle">Our global operations are guided by a team of experienced executives and dedicated regional managers.</p></div>
+                <div class="section-heading"><h2 class="section-title">Meet Our Leadership Team</h2><p class="section-subtitle">Our global operations are guided by a team of experienced executives and dedicated regional managers.</p></div>
                 <h3 style="text-align: center; color: var(--navy); font-size: 1.8rem; margin-bottom: 2.5rem;">Executive Leadership</h3>
                 <div class="leadership-grid">
-                    <div class="leader-card"><img src="images/headshot-jimmy-v.jpg" alt="Headshot of Jimmy V."><h4>Jimmy V.</h4><div class="leader-title">Founder/CEO of Universal Group & Universal Exports</div><div class="leader-email">jimmy@universaltgy.com</div></div>
-                    <div class="leader-card"><img src="images/headshot-kenny-v.jpg" alt="Headshot of Kenny V."><h4>Kenny V.</h4><div class="leader-title">CEO of Universal Belize</div><div class="leader-email">universalbelize@hotmail.com</div></div>
-                    <div class="leader-card"><img src="images/headshot-deepak-v.jpg" alt="Headshot of Deepak V."><h4>Deepak V.</h4><div class="leader-title">CEO of Univex</div><div class="leader-email">deepak@univexcompany.com</div></div>
-                    <div class="leader-card"><img src="images/headshot-sunny-c.jpg" alt="Headshot of Sunny C."><h4>Sunny C.</h4><div class="leader-title">Head of Universal Guangzhou & Panama</div><div class="leader-email">sunny@universaltgy.com</div></div>
-                    <div class="leader-card"><img src="images/headshot-mike-s.jpg" alt="Headshot of Mike S."><h4>Mike S.</h4><div class="leader-title">Head of Universal Yiwu</div><div class="leader-email">mike@universaltgy.com</div></div>
-                    <div class="leader-card"><img src="images/headshot-sakshi.jpg" alt="Headshot of Sakshi"><h4>Sakshi</h4><div class="leader-title">Director of Universal Belize</div><div class="leader-email">universal.sv12@gmail.com</div></div>
+                    <div class="leader-card"><img src="images/jimmy.jpg" alt="Headshot of Jimmy V."><h4>Jimmy V.</h4><div class="leader-title">Founder/CEO of Universal Group</div><div class="leader-email">jimmy@universaltgy.com</div></div>
+                    <div class="leader-card"><img src="images/kenny.png" alt="Headshot of Kenny V."><h4>Kenny V.</h4><div class="leader-title">CEO of Universal Belize & Mexico</div><div class="leader-email">kenny@unitex.com</div></div>
+                    <div class="leader-card"><img src="images/deepak.png" alt="Headshot of Deepak V."><h4>Deepak V.</h4><div class="leader-title">CEO of Univex & Mexico</div><div class="leader-email">deepak@univexcompany.com</div></div>
+                    <div class="leader-card"><img src="images/sunny.png" alt="Headshot of Sunny C."><h4>Sunny C.</h4><div class="leader-title">Head of Universal Exports Guangzhou & Panama</div><div class="leader-email">sunny@universaltgy.com</div></div>
+                    <div class="leader-card"><img src="images/mike.png" alt="Headshot of Mike S."><h4>Mike S.</h4><div class="leader-title">Head of Universal Exports Yiwu</div><div class="leader-email">mike@universaltgy.com</div></div>
+                    <div class="leader-card"><img src="images/sakshi.png" alt="Headshot of Sakshi"><h4>Sakshi</h4><div class="leader-title">Director of Universal Belize</div><div class="leader-email">universal.sv12@gmail.com</div></div>
                 </div>
                 <h3 style="text-align: center; color: var(--navy); font-size: 1.8rem; margin-top: 5rem; margin-bottom: 2.5rem;">Sales, Marketing & Logistics Leadership</h3>
                 <div class="leadership-grid">
-                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Shirley</h4><div class="leader-title">Head of Logistics</div></div>
-                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Bella</h4><div class="leader-title">Guangzhou Sales</div></div>
-                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Cici</h4><div class="leader-title">Guangzhou Sales</div></div>
-                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Annie</h4><div class="leader-title">Guangzhou Sales</div></div>
-                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Hitesh</h4><div class="leader-title">Belize Sales Manager</div></div>
-                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Bhagwan</h4><div class="leader-title">Belize Sales Manager</div></div>
-                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Mohit</h4><div class="leader-title">Belize Sales Manager</div></div>
-                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Ji</h4><div class="leader-title">Yiwu Sales</div></div>
-                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Max</h4><div class="leader-title">Yiwu Sales</div></div>
-                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>DJ</h4><div class="leader-title">Yiwu Sales</div></div>
-                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Wang</h4><div class="leader-title">Yiwu Sales</div></div>
-                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Jisel</h4><div class="leader-title">Belize Retail Supervisor</div></div>
-                    <div class="leader-card"><img src="images/headshot-placeholder.jpg" alt="Headshot"><h4>Nacho</h4><div class="leader-title">Belize Retail Supervisor</div></div>
+                    <div class="leader-card"><img src="images/shirley.png" alt="Headshot"><h4>Shirley</h4><div class="leader-title">Head of Logistics</div></div>
+                    <div class="leader-card"><img src="images/bella.jpg" alt="Headshot"><h4>Bella</h4><div class="leader-title">Guangzhou Sales</div></div>
+                    <div class="leader-card"><img src="images/cici.jpg" alt="Headshot"><h4>Cici</h4><div class="leader-title">Guangzhou Sales</div></div>
+                    <div class="leader-card"><img src="images/annie.jpg" alt="Headshot"><h4>Annie</h4><div class="leader-title">Guangzhou Sales</div></div>
+                    <div class="leader-card"><img src="images/hitesh.png" alt="Headshot"><h4>Hitesh</h4><div class="leader-title">Belize Sales Manager</div></div>
+                    <div class="leader-card"><img src="images/bhagwan.png" alt="Headshot"><h4>Bhagwan</h4><div class="leader-title">Belize Sales Manager</div></div>
+                    <div class="leader-card"><img src="images/mohit.png" alt="Headshot"><h4>Mohit</h4><div class="leader-title">Belize Sales Manager</div></div>
+                    <div class="leader-card"><img src="images/ji.jpg" alt="Headshot"><h4>Ji</h4><div class="leader-title">Yiwu Sales</div></div>
+                    <div class="leader-card"><img src="images/max.png" alt="Headshot"><h4>Max</h4><div class="leader-title">Yiwu Sales</div></div>
+                    <div class="leader-card"><img src="images/dj.jpg" alt="Headshot"><h4>DJ</h4><div class="leader-title">Yiwu Sales</div></div>
+                    <div class="leader-card"><img src="images/wang.jpg" alt="Headshot"><h4>Wang</h4><div class="leader-title">Yiwu Sales</div></div>
+                    <div class="leader-card"><img src="images/jisel.png" alt="Headshot"><h4>Jisel</h4><div class="leader-title">Belize Retail Supervisor</div></div>
+                    <div class="leader-card"><img src="images/nacho.png" alt="Headshot"><h4>Nacho</h4><div class="leader-title">Belize Retail Supervisor</div></div>
                 </div>
             </div>
         </section>
@@ -1548,11 +1994,67 @@
     <div id="contact" class="page">
         <section class="section contact-section" style="padding-top: 120px;">
             <div class="container">
-                <div class="section-heading"><h2 class="section-title">Get In Touch</h2><p class="section-subtitle">Connect with our offices around the world. We look forward to exploring partnership opportunities with you.</p></div>
-                <div class="contact-grid">
-                    <div class="contact-card"><h3>Universal Exports</h3><div><strong>Address:</strong><br>162, 11F-1, Chung Shan N. Rd., Sec. 2, Taipei, Taiwan</div><div><strong>Email:</strong><br><a href="mailto:business@universal-tgy.com">business@universal-tgy.com</a></div><div><strong>Phone:</strong><br><a href="tel:+886225959198">+886 2 2595 9198</a></div></div>
-                    <div class="contact-card"><h3>Universal Belize</h3><div><strong>Address:</strong><br>Freedom Avenue, Corozal Freezone, Belize</div><div><strong>Email:</strong><br><a href="mailto:business@unitex.bz">business@unitex.bz</a></div><div><strong>Phone:</strong><br><a href="tel:+5016103626">+501 610 3626</a></div></div>
-                    <div class="contact-card"><h3>Univex</h3><div><strong>Address:</strong><br>418 Broadway Ste N, Albany, NY 12207</div><div><strong>Email:</strong><br><a href="mailto:business@univexcompany.com">business@univexcompany.com</a></div><div><strong>Phone:</strong><br><a href="tel:+19142081477">+1 914 208 1477</a></div></div>
+                <div class="section-heading">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <p class="section-subtitle">Connect with our offices around the world. We look forward to exploring partnership opportunities with you.</p>
+                </div>
+
+                <div class="contact-grid-v2">
+                    <div class="contact-card-v2">
+                        <div class="card-header-contact">
+                            <img src="images/flag-tw.png" alt="Taiwan Flag" class="contact-flag">
+                            <h3>Universal Exports</h3>
+                        </div>
+                        <div class="contact-info-item">
+                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-4.198 0-8 3.402-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.198-3.802-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/></svg>
+                            <span>162, 11F-1, Chung Shan N. Rd., Sec. 2, Taipei, Taiwan</span>
+                        </div>
+                        <div class="contact-info-item">
+                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+                            <a href="mailto:business@universal-tgy.com">business@universal-tgy.com</a>
+                        </div>
+                        <div class="contact-info-item">
+                            <img src="images/phone.svg" alt="Phone icon" class="contact-icon">
+                            <a href="tel:+886225959198">+886 2 2595 9198</a>
+                        </div>
+                    </div>
+                    <div class="contact-card-v2">
+                        <div class="card-header-contact">
+                            <img src="images/flag-bz.png" alt="Belize Flag" class="contact-flag">
+                            <h3>Universal Belize</h3>
+                        </div>
+                        <div class="contact-info-item">
+                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-4.198 0-8 3.402-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.198-3.802-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/></svg>
+                            <span>Freedom Avenue, Corozal Freezone, Belize</span>
+                        </div>
+                        <div class="contact-info-item">
+                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+                            <a href="mailto:business@unitex.bz">business@unitex.bz</a>
+                        </div>
+                        <div class="contact-info-item">
+                             <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.384,17.752a2.336,2.336,0,0,1-2.336,2.336,20.82,20.82,0,0,1-17.1-17.095A2.336,2.336,0,0,1,4.284,0a19.714,19.714,0,0,1,4.224,1.256A2.336,2.336,0,0,1,10.032,3.4l.984,3.168A2.336,2.336,0,0,1,9.9,9.48l-2.136,1.488a14.12,14.12,0,0,0,6.264,6.264L15.516,15.1a2.336,2.336,0,0,1,2.912-.12l3.168.984a2.336,2.336,0,0,1,2.148,1.524A19.714,19.714,0,0,1,24,21.716,2.336,2.336,0,0,1,21.384,17.752Z"/></svg>
+                            <a href="tel:+5016103626">+501 610 3626</a>
+                        </div>
+                    </div>
+                    <div class="contact-card-v2">
+                        <div class="card-header-contact">
+                            <img src="images/flag-us.png" alt="USA Flag" class="contact-flag">
+                            <h3>Univex</h3>
+                        </div>
+                        <div class="contact-info-item">
+                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-4.198 0-8 3.402-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.198-3.802-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/></svg>
+                            <span>418 Broadway Ste N, Albany, NY 12207</span>
+                        </div>
+                        <div class="contact-info-item">
+                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+                            <a href="mailto:business@univexcompany.com">business@univexcompany.com</a>
+                        </div>
+                        <div class="contact-info-item">
+                             <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.384,17.752a2.336,2.336,0,0,1-2.336,2.336,20.82,20.82,0,0,1-17.1-17.095A2.336,2.336,0,0,1,4.284,0a19.714,19.714,0,0,1,4.224,1.256A2.336,2.336,0,0,1,10.032,3.4l.984,3.168A2.336,2.336,0,0,1,9.9,9.48l-2.136,1.488a14.12,14.12,0,0,0,6.264,6.264L15.516,15.1a2.336,2.336,0,0,1,2.912-.12l3.168.984a2.336,2.336,0,0,1,2.148,1.524A19.714,19.714,0,0,1,24,21.716,2.336,2.336,0,0,1,21.384,17.752Z"/></svg>
+                            <a href="tel:+19142081477">+1 914 208 1477</a>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </section>
@@ -1684,44 +2186,30 @@
         });
         // Add this code INSIDE your existing DOMContentLoaded listener
         // REPLACE your old timeline animation script with this new logic
-        const timelineItems = document.querySelectorAll('.timeline-item');
+        const animatedItems = document.querySelectorAll('.timeline-item, .strategy-list li');
 
         if ("IntersectionObserver" in window) {
-            const observer = new IntersectionObserver((entries) => {
+            const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
+                        // Add staggered delay for strategy list items
+                        if (entry.target.parentElement && entry.target.parentElement.classList.contains('strategy-list')) {
+                            const items = Array.from(entry.target.parentElement.children);
+                            const index = items.indexOf(entry.target);
+                            entry.target.style.transitionDelay = `${index * 0.1}s`;
+                        }
                         entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Stop observing after it's visible
                     }
                 });
             }, { threshold: 0.2 });
 
-            const setupObserver = () => {
-                timelineItems.forEach(item => {
-                    // Reset visibility on page change before observing
-                    item.classList.remove('visible');
-                    observer.observe(item);
-                });
-            };
-
-            // The function to call when the user navigates to a new page
-            const onPageChange = () => {
-                setTimeout(setupObserver, 50);
-            };
-
-            // Find your showPage function and add onPageChange() to the end of it
-            // Example:
-            // function showPage(pageId, event) {
-            //     ... existing code ...
-            //     window.scrollTo(0, 0);
-            //     onPageChange(); // Make sure this line is there
-            // }
-            
-            // Initial check for the first page load
-            onPageChange();
-
+            animatedItems.forEach(item => {
+                observer.observe(item);
+            });
         } else {
-            // Fallback for older browsers without IntersectionObserver
-            timelineItems.forEach(item => item.classList.add('visible'));
+            // Fallback for older browsers
+            animatedItems.forEach(item => item.classList.add('visible'));
         }
 
         // We need to modify the showPage function to call our new onPageChange function.
