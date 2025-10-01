@@ -1444,6 +1444,29 @@
             }
             /* --- END PADDING & FONT FIXES --- */
 
+            /* --- ADD THIS NEW BLOCK FOR BELIZE PAGE CARD FIXES --- */
+            /* Resets the reversed card order on mobile to fix stacking */
+            .business-card.reversed .image-content {
+                order: initial;
+            }
+
+            /* Centers all the text content within the card */
+            .business-card .text-content {
+                text-align: center;
+            }
+
+            /* Centers the header (title and logo) and adds space */
+            .business-card .business-header {
+                align-items: center;
+                gap: 1rem;
+            }
+
+            /* Centers the social media icons */
+            .social-links {
+                justify-content: center;
+            }
+            /* --- END BELIZE PAGE CARD FIXES --- */
+
         }
         /* --- END MOBILE RESPONSIVE STYLES --- */
         
@@ -2387,4 +2410,5 @@
 </script>
 </body>
 </html>
+
 
