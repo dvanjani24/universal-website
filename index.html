@@ -797,6 +797,7 @@
             .page-header .section-title, .page-title-text .section-title, .section-title { font-size: 2.2rem; }
             .page-header .section-subtitle { padding: 0 1rem; }
             
+            /* --- REPLACE THE ENTIRE BLOCK BELOW --- */
             /* --- REPLACEMENT FOR BELIZE CARD MOBILE STYLES --- */
             .business-card .text-content {
                 display: flex;
@@ -805,28 +806,35 @@
                 gap: 0;
             }
             .business-card .business-header {
-                order: 1;
-                padding: 1.5rem;
+                order: 1; /* Puts header first */
+                padding: 2rem 1.5rem 1.5rem; /* More top padding */
                 margin-bottom: 0;
-                justify-content: space-between;
+                /* New styles for vertical layout */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
             }
             .business-header h2 {
                 font-size: 1.8rem;
+                text-align: center;
             }
             .business-card .image-content {
-                order: 2;
+                order: 2; /* Puts image second */
                 height: 250px;
             }
             .card-text-body {
-                order: 3;
+                order: 3; /* Puts text body last */
                 padding: 1.5rem;
                 text-align: center;
             }
             .card-text-body .social-links {
                 justify-content: center;
             }
+            /* --- END REPLACEMENT --- */
 
         }
+        /* --- END MOBILE RESPONSIVE STYLES --- */
         
     </style>
 </head>
@@ -1673,4 +1681,5 @@
 </script>
 </body>
 </html>
+
 
