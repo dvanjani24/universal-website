@@ -91,7 +91,6 @@
             position: relative;
         }
 
-/* REPLACEMENT for .dropdown-menu */
         .dropdown-menu {
             display: none;
             position: absolute;
@@ -103,7 +102,7 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
             list-style: none;
             padding: 0.5rem 0;
-            margin-top: 0; /* Problematic margin removed */
+            margin-top: 0;
             min-width: 200px;
             z-index: 1001;
             opacity: 0;
@@ -112,15 +111,11 @@
             transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
         }
 
-        /* This new rule makes the hover effect smoother */
         .nav-item:hover .dropdown-menu {
             display: block;
             visibility: visible;
             opacity: 1;
             transform: translateY(0);
-        }
-        .nav-item:hover .dropdown-menu {
-            display: block;
         }
 
         .dropdown-menu li a {
@@ -130,7 +125,7 @@
             font-size: 0.95rem;
         }
         .dropdown-menu li a:after {
-            display: none; /* No underline for dropdown items */
+            display: none;
         }
         .dropdown-menu li a:hover {
             background-color: var(--light-bg);
@@ -256,85 +251,23 @@
         .content-split .image-content img { width: 100%; height: auto; border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         .content-split.reversed .image-content { order: -1; }
 
-        /* --- ADD THIS NEW RULESET FOR THE BULLET POINTS --- */
         .feature-list {
             list-style: disc;
-            padding-left: 25px; /* Adjust indentation */
+            padding-left: 25px;
             margin-top: 1.5rem;
         }
         .feature-list li {
-            margin-bottom: 1.2rem; /* Adjust spacing between items */
+            margin-bottom: 1.2rem;
         }
         .feature-list li:last-child {
             margin-bottom: 0;
         }
-        /* --- END ADD --- */
 
-        /* New Presence Map Section */
+        /* Presence Map Section */
         .presence-map-section {
             background-color: var(--light-bg);
         }
-        .presence-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        .presence-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-        .presence-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            border-color: var(--maroon);
-        }
-        .presence-card h4 {
-            font-size: 1.4rem;
-            color: var(--navy);
-            margin-bottom: 0.5rem;
-        }
-        .presence-card p {
-            color: var(--light-text);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-        .presence-card .coming-soon {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--maroon);
-            text-transform: uppercase;
-        }
-        .presence-card .card-link {
-            position: absolute;
-            bottom: 2rem;
-            right: 2rem;
-            font-size: 1.5rem;
-            color: var(--maroon);
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s ease;
-        }
-        .presence-card:hover .card-link {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .presence-card.disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-         .presence-card.disabled:hover {
-            transform: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border-color: var(--border-color);
-        }
-
-        /* Other Component Styles from previous version */
+        
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
         .card { background: var(--white); padding: 2rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.07); transition: all 0.3s ease; border: 1px solid var(--border-color); text-align: center; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
@@ -355,22 +288,14 @@
         .brand-content { padding: 2rem; flex-grow: 1; }
         .brand-since { color: var(--maroon); font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; display: block; }
         .contact-section { background: var(--light-bg); }
-        .contact-section .section-title { color: var(--navy); }
-        .contact-section .section-subtitle { color: var(--light-text); }
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem; }
-        .contact-card { background: var(--white); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color); }
-        .contact-card h3 { color: var(--maroon); margin-bottom: 1.5rem; font-size: 1.4rem; }
-        .contact-card strong { color: var(--navy); }
-        .contact-card div { margin-bottom: 1rem; color: var(--light-text); }
-        .contact-card a { color: var(--navy); text-decoration: none; }
-        .contact-card a:hover { text-decoration: underline; }
+        
         .cta-button { display: inline-block; background: var(--navy); color: white; padding: 14px 35px; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; }
         .cta-button:hover { background: var(--navy); transform: translateY(-3px); }
         footer { background: var(--navy); color: var(--light-bg); text-align: center; padding: 3rem 0; }
         footer p { opacity: 0.8; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* REPLACEMENT for all Enhanced Presence Card styles */
         .enhanced-presence-section {
             background-color: var(--light-bg);
         }
@@ -444,15 +369,6 @@
             border: 1px solid rgba(255,255,255,0.5);
         }
 
-        .card-text-content {
-            /* This container now holds all text and logos */
-        }
-
-        /* REPLACEMENT for card text, logo, and hover styles */
-        .card-text-content {
-            /* This container now just holds the title */
-        }
-
         .card-text-content h3 {
             font-size: 2rem;
             font-weight: 700;
@@ -461,10 +377,9 @@
             margin-bottom: 0.5rem;
         }
 
-        /* This is a new container for the swappable elements at the bottom */
         .card-footer {
             position: relative;
-            min-height: 50px; /* Ensures space for the logos */
+            min-height: 50px;
             display: flex;
             align-items: center;
         }
@@ -477,36 +392,35 @@
             display: flex;
             gap: 8px;
             align-items: center;
-            opacity: 1; /* Visible by default */
+            opacity: 1;
         }
 
         .logo-container .logo {
-            max-height: 50px; /* Slightly smaller for a cleaner look at the bottom */
+            max-height: 50px;
             max-width: 120px;
         }
 
         .logo-container .logo:nth-child(2) {
                 margin-left: -10px;
-                margin-bottom: 8px; /* Adjust this negative value to get the exact spacing you want */
+                margin-bottom: 8px;
             }
 
         .explore-link {
             font-weight: 600;
             color: var(--white);
-            position: absolute; /* Occupy the same space as logos */
+            position: absolute;
             left: 0;
             top: 50%;
             transform: translateY(-50%);
-            opacity: 0; /* Hidden by default */
+            opacity: 0;
         }
 
-        /* The new hover logic */
         .presence-card-enhanced:hover .logo-container {
-            opacity: 0; /* HIDE logos on hover */
+            opacity: 0;
         }
 
         .presence-card-enhanced:hover .explore-link {
-            opacity: 1; /* SHOW text on hover */
+            opacity: 1;
         }
 
         .presence-card-enhanced.disabled {
@@ -523,7 +437,7 @@
         }
 
         .presence-card-enhanced.disabled:hover .card-background {
-            transform: scale(1.1); /* Adds a very subtle zoom effect */
+            transform: scale(1.1);
         }
 
         .presence-card-enhanced.disabled:hover .card-overlay {
@@ -531,29 +445,27 @@
             background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.0) 50%, rgba(0,0,0,0.2) 100%);
         }
 
-        /* Make sure logos and text are always visible on the disabled card */
         .presence-card-enhanced.disabled .logo-container {
             opacity: 1;
         }
         .presence-card-enhanced.disabled .explore-link {
             opacity: 1;
-            position: static; /* Let it sit normally */
+            position: static;
             transform: none;
         }
         .hero-logo-row {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 3rem; /* Controls space between logos */
-            margin: 2.5rem 0; /* Controls space above and below the row */
-            flex-wrap: wrap; /* Allows logos to wrap on smaller screens */
+            gap: 3rem;
+            margin: 2.5rem 0;
+            flex-wrap: wrap;
         }
 
-        /* REPLACEMENT for .hero-logo-row img */
         .hero-logo-row img {
-            height: 55px; /* Sets a larger, fixed height for all logos */
-            width: 140px; /* Sets a fixed width for the logo's "box" */
-            object-fit: contain; /* Fits the logo inside the box without stretching */
+            height: 55px;
+            width: 140px;
+            object-fit: contain;
             opacity: 0.6;
             filter: grayscale(0%);
             transition: all 0.3s ease;
@@ -565,26 +477,36 @@
             transform: scale(1.05);
         }
 
-        /* START: Add this new CSS for the Belize Page */
+        /* --- START: REPLACEMENT FOR BELIZE BUSINESS CARD STYLES --- */
         .business-split-section {
             padding: 50px 0;
         }
 
+        /* The main card is a simple container */
         .business-card {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            margin-bottom: 5rem; /* This keeps space between Freezone and Unitex */
             background-color: var(--light-bg);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
+        .business-card:not(:last-of-type) {
+            margin-bottom: 3rem;
+        }
 
-        /* ADD THIS NEW RULE to remove space after the LAST card (Unitex) */
-        .business-card:last-of-type {
-            margin-bottom: 0;
+        /* The text-content is the new grid for DESKTOP */
+        .business-card .text-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 3rem;
+        }
+        /* The text part is wrapped and gets padding */
+        .card-text-body {
+            padding: 3rem;
+        }
+        /* For the reversed card, we just change the order of the image */
+        .business-card.reversed .text-content .image-content {
+            order: 2;
         }
 
         .business-card .image-content img {
@@ -593,29 +515,54 @@
             object-fit: cover;
             display: block;
         }
-
-        .business-card .text-content {
-            padding: 3rem;
-        }
-
-        .business-card .text-content h3 {
-            font-size: 2.2rem;
-            color: var(--navy);
-        }
-
-        .business-card .text-content .market-focus {
+        .card-text-body .market-focus {
             font-weight: 600;
             color: var(--maroon);
             margin-bottom: 1rem;
             display: block;
         }
 
-        /* Reverse layout for the second card */
-        .business-card.reversed {
-            grid-template-columns: 1fr 1fr; /* Maintain order */
+        .business-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem; /* This creates space between header and text below it */
         }
-        .business-card.reversed .image-content {
-            order: 2; /* Move image to the right */
+        .business-header h2 {
+            font-size: 2.2rem;
+            color: var(--navy);
+            margin: 0;
+        }
+        .business-header .logo {
+            max-height: 85px;
+            max-width: 140px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        /* --- END: REPLACEMENT FOR BELIZE BUSINESS CARD STYLES --- */
+
+
+        .social-links a {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+        .social-links svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--light-text);
+            transition: fill 0.3s ease;
+        }
+        .social-links a:hover svg {
+            fill: var(--navy);
         }
 
         .partner-brands-section {
@@ -623,16 +570,15 @@
             background-color: var(--white);
         }
 
-        /* REPLACEMENT for all Brand Grid styles */
         .brand-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 3rem 2rem; /* More vertical space */
+            gap: 3rem 2rem;
         }
 
         .brand-logo-item {
-            position: relative; /* For the exclusive tag */
-            height: 80px; /* This is the key to uniform sizing */
+            position: relative;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -656,11 +602,10 @@
             opacity: 1;
         }
 
-        /* New, more subtle exclusive tag */
         .brand-logo-item.exclusive::after {
             content: 'EXCLUSIVE';
             position: absolute;
-            bottom: -25px; /* Position it below the logo */
+            bottom: -25px;
             left: 50%;
             transform: translateX(-50%);
             color: var(--maroon);
@@ -668,90 +613,11 @@
             font-weight: 600;
             letter-spacing: 0.5px;
         }
-        /* END REPLACEMENT */
-
-        /* START: Add this new CSS for the Business Card Header */
-        .business-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .business-header h3 {
-            margin: 0; /* Remove default margin */
-        }
-
-        .business-header .logo {
-            max-height: 85px;
-            max-width: 140px;
-            object-fit: contain;
-            flex-shrink: 0; /* Prevent the logo from shrinking */
-        }
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem; /* Add some space above the icons */
-        }
-
-        .social-links a {
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-
-        .social-links a:hover {
-            transform: scale(1.1);
-        }
-
-        .social-links svg {
-            width: 28px;
-            height: 28px;
-            fill: var(--light-text); /* Default color */
-            transition: fill 0.3s ease;
-        }
-
-        .social-links a:hover svg {
-            fill: var(--navy); /* Darker color on hover */
-        }
-        /* START: Add this new CSS for Taiwan & China Page */
+        
+        /* Office Locations & Categories (Taiwan/China Page) */
         .office-locations-section {
             padding: 60px 0;
             background-color: var(--white);
-        }
-
-        .location-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr; /* Column for flags, column for text */
-            gap: 2rem 3rem;
-            align-items: center;
-        }
-
-        .location-item {
-            display: contents; /* Makes grid children direct children of the grid */
-        }
-
-        .location-flag-col {
-            background-color: var(--light-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .location-flag-col img {
-            width: 60px;
-            margin-bottom: 0.5rem;
-        }
-
-        .location-flag-col h4 {
-            color: var(--navy);
-            margin: 0;
-        }
-
-        .location-desc-col {
-            background-color: var(--light-bg);
-            padding: 1.5rem 2rem;
-            border-radius: 12px;
         }
 
         .product-category-grid {
@@ -766,18 +632,15 @@
             overflow: hidden;
             height: 250px;
         }
-
         .category-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.4s ease;
         }
-
         .category-card:hover img {
             transform: scale(1.1);
         }
-
         .category-card .label {
             position: absolute;
             bottom: 0;
@@ -789,15 +652,6 @@
             font-weight: 600;
         }
 
-        .photo-slider-section {
-            padding: 60px 0;
-            background-color: var(--navy);
-            color: white;
-        }
-        .photo-slider-section .section-title, .photo-slider-section .section-subtitle {
-            color: white;
-        }
-
         .slider-container {
             position: relative;
             max-width: 900px;
@@ -805,470 +659,84 @@
             overflow: hidden;
             border-radius: 12px;
         }
+        .slider-wrapper { display: flex; transition: transform 0.5s ease; }
+        .slide { flex: 0 0 100%; position: relative; }
+        .slide img { width: 100%; display: block; }
+        .slider-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 1rem; }
+        .slider-nav button { background-color: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.5rem; font-weight: bold; color: var(--navy); transition: background-color 0.3s ease; }
+        .slider-nav button:hover { background-color: white; }
 
-        .slider-wrapper {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .slide {
-            flex: 0 0 100%;
-            position: relative;
-        }
-
-        .slide img {
-            width: 100%;
-            display: block;
-        }
-
-        .slide-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-            text-align: center;
-        }
-
-        .slider-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 1rem;
-        }
-
-        .slider-nav button {
-            background-color: rgba(255,255,255,0.8);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--navy);
-            transition: background-color 0.3s ease;
-        }
-
-        .slider-nav button:hover {
-            background-color: white;
-        }
-
-        /* START: Add this new CSS for the Page Title Header */
-        /* REPLACEMENT for .page-title-header */
-        .page-title-header {
-            display: flex;
-            justify-content: flex-start; /* Aligns content to the left */
-            align-items: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .page-title-header img {
-            height: 80px; /* Adjust size as needed */
-        }
-
+        .page-title-header { display: flex; justify-content: flex-start; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .page-title-header img { height: 80px; }
         .page-title-text .section-title,
-        .page-title-text .section-subtitle {
-            text-align: left; /* Align text to the left within its container */
-            margin: 0;
-        }
+        .page-title-text .section-subtitle { text-align: left; margin: 0; }
+        .page-title-text .section-subtitle { padding-left: 2px; }
 
-        .page-title-text .section-subtitle {
-            padding-left: 2px; /* Small adjustment for visual alignment */
-        }
-        /* END: Add this new CSS for the Page Title Header */
-        /* ADD THIS NEW RULE */
-        .content-split .text-content .sub-headline {
-            font-size: 1.2rem; /* Reduced font size */
-            color: var(--maroon); /* Maroon color */
-            margin-bottom: 1rem;
-        }
-        /* ADD THIS NEW RULE */
-        .page-header .container {
-            max-width: 1200px; /* Or your standard container width */
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-    /* START: Add this new CSS for the Branches & Factories Timeline */
-        /* REPLACEMENT for all Timeline and Spacing CSS */
-        .timeline-section {
-            padding: 60px 0;
-            background-color: var(--white);
-        }
-
-        .timeline-container {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            padding: 2rem 0;
-        }
-
-        .timeline-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 20px;
-            height: 100%;
-            width: 4px;
-            background-color: var(--light-bg);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-left: 50px;
-            margin-bottom: 50px;
-            padding-left: 30px;
-            opacity: 0; /* Initially hidden for animation */
-            transform: translateY(20px);
-            transition: opacity 1.2s ease, transform 1.2s ease; /* Slower animation */
-        }
-
-        .timeline-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* This rule removes the extra space after the last item */
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        /* This rule restores a subtle, non-intrusive dot */
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -8px;
-            top: 5px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: var(--light-bg); /* Subtle gray dot */
-            border: 4px solid var(--white);
-            z-index: 1; /* Ensures it's on top of the line */
-        }
-
-        .timeline-flag {
-            width: 40px;
-            margin-right: 1rem;
-            vertical-align: middle;
-        }
-
-        .timeline-title {
-            display: inline-block;
-            color: var(--navy);
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        /* REPLACEMENT for the timeline description and new slide caption styles */
-        .timeline-description {
-            margin-top: 0.5rem;
-            padding-left: 55px; /* Aligns description with title */
-            color: var(--dark-text); /* CHANGED: Now uses the main dark text color */
-        }
-
-        .slide {
-            height: 100%;
-            position: relative; /* ADDED: This is needed for caption positioning */
-        }
+        .content-split .text-content .sub-headline { font-size: 1.2rem; color: var(--maroon); margin-bottom: 1rem; }
+        .page-header .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    
+        .timeline-section { padding: 60px 0; background-color: var(--white); }
+        .timeline-container { max-width: 800px; margin: 0 auto; position: relative; padding: 2rem 0; }
+        .timeline-container::before { content: ''; position: absolute; top: 0; left: 20px; height: 100%; width: 4px; background-color: var(--light-bg); }
+        .timeline-item { position: relative; margin-left: 50px; margin-bottom: 50px; padding-left: 30px; opacity: 0; transform: translateY(20px); transition: opacity 1.2s ease, transform 1.2s ease; }
+        .timeline-item.visible { opacity: 1; transform: translateY(0); }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-item::before { content: ''; position: absolute; left: -8px; top: 5px; width: 20px; height: 20px; border-radius: 50%; background-color: var(--light-bg); border: 4px solid var(--white); z-index: 1; }
+        .timeline-flag { width: 40px; margin-right: 1rem; vertical-align: middle; }
+        .timeline-title { display: inline-block; color: var(--navy); font-size: 1.5rem; font-weight: 600; }
+        .timeline-description { margin-top: 0.5rem; padding-left: 55px; color: var(--dark-text); }
+        .slide { height: 100%; position: relative; }
+        .slide-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem 1rem; background: linear-gradient(to top, rgba(0,0,0,0.75), transparent); color: white; font-weight: 500; text-align: center; transition: all 0.3s ease; }
         
-        /* NEW: This styles the caption you just added */
-        .slide-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem 1rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
-            color: white;
-            font-weight: 500;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        /* END REPLACEMENT */
-        /* END: Add this new CSS for the Branches & Factories Timeline */
-        /* START: Add this CSS for the new Branches & Slider Layout */
-        .branches-layout-grid {
-            display: grid;
-            grid-template-columns: 1.1fr 1fr; /* Text gets slightly more space */
-            gap: 3rem;
-            align-items: start;
-        }
-
-        /* Adjustments for the timeline container */
-        .timeline-container {
-            max-width: none;
-            margin: 0;
-            padding: 1rem 0 0 0; /* Add a little top padding */
-        }
+        .branches-layout-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: start; }
+        .timeline-container { max-width: none; margin: 0; padding: 1rem 0 0 0; }
+        .slider-container { max-width: none; margin: 0; height: 100%; min-height: 550px; }
+        .slider-wrapper, .slide { height: 100%; }
+        .slide img { height: 100%; object-fit: cover; }
         
-        /* Adjustments for the slider container */
-        .slider-container {
-            max-width: none;
-            margin: 0;
-            height: 100%; /* This makes the slider tall */
-            min-height: 550px; /* Ensures a minimum height */
-        }
+        .strategy-list { list-style: none; padding-left: 0; margin-top: 2rem; }
+        .strategy-list li { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; font-size: 1.1rem; color: var(--dark-text); opacity: 0; transform: translateX(-20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .strategy-list li:hover { transform: scale(1.03); transition: transform 0.3s ease; }
+        .strategy-list li.visible { opacity: 1; transform: translateX(0); }
+        .strategy-list .icon { flex-shrink: 0; width: 28px; height: 28px; background-color: var(--navy); border: 1px solid var(--border-color); color: var(--light-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 
-        .slider-wrapper,
-        .slide {
-            height: 100%;
-        }
+        .univex-page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .univex-page-header .header-logo { height: 80px; flex-shrink: 0; }
 
-        .slide img {
-            height: 100%;
-            object-fit: cover; /* Ensures images fill the tall container */
-        }
+        .mexico-hero { position: relative; padding: 160px 0; text-align: center; color: var(--white); background-image: url('images/mexicobackdrop2.png'); background-size: cover; background-position: center; }
+        .mexico-hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 19, 43, 0.8); z-index: 1; }
+        .mexico-hero .container { position: relative; z-index: 2; }
+        .hero-title-mexico { font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -1px; }
+        .hero-subtitle-mexico { font-size: 1.2rem; max-width: 650px; margin-left: auto; margin-right: auto; opacity: 0.9; }
+        .feature-icon { margin-bottom: 1.5rem; color: var(--maroon); }
+        .text-highlight { color: var(--maroon); }
+
+        .contact-card-v2 { background-color: var(--white); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; }
+        .contact-card-v2:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-color: var(--maroon); }
+        .card-header-contact { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
+        .card-header-contact h3 { margin: 0; color: var(--navy); font-size: 1.5rem; }
+        .contact-flag { height: 30px; border-radius: 4px; border: 1px solid var(--border-color); }
+        .contact-info-item { display: flex; align-items: flex-start; gap: 1rem; color: var(--light-text); margin-bottom: 1rem; }
+        .contact-info-item:last-child { margin-bottom: 0; }
+        .contact-info-item a { color: var(--dark-text); font-weight: normal; text-decoration: none; }
+        .contact-info-item a:hover { color: var(--dark-text); text-decoration: underline; }
+        .contact-form { max-width: 750px; margin: 2rem auto 0; display: flex; flex-direction: column; gap: 1rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 14px; border-radius: 8px; border: 1px solid var(--border-color); font-family: 'Inter', sans-serif; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--maroon); box-shadow: 0 0 0 3px rgba(164, 22, 26, 0.1); }
+        .contact-form button { align-self: flex-start; border: none; cursor: pointer; }
+        .contact-icon { width: 20px !important; height: 20px !important; flex-shrink: 0; margin-top: 3px; }
+        .contact-icon path { fill: var(--dark-text); }
+        img.contact-icon { filter: none; }
+        .contact-info-item span { color: var(--dark-text); }
+        .contact-grid-v2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 4rem; }
         
-        /* REPLACEMENT for the ENTIRE Univex Page CSS block */
-        /* REPLACEMENT for the ENTIRE Univex Page CSS block */
-        .strategy-list {
-            list-style: none;
-            padding-left: 0;
-            margin-top: 2rem;
-        }
-
-        .strategy-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            color: var(--dark-text);
-            
-            /* Animation properties */
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        /* New hover effect with its own transition */
-        .strategy-list li:hover {
-            transform: scale(1.03);
-            transition: transform 0.3s ease; /* Makes hover zoom smooth */
-        }
-
-        /* This class will be added by JavaScript to trigger the animation */
-        .strategy-list li.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .strategy-list .icon {
-            flex-shrink: 0;
-            width: 28px;
-            height: 28px;
-            background-color: var(--navy);
-            border: 1px solid var(--border-color);
-            color: var(--light-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* START: Add this new CSS for the Univex Page Header */
-        .univex-page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem; /* Creates space below the header */
-        }
-
-        .univex-page-header .header-logo {
-            height: 80px; /* Controls the size of the logo */
-            flex-shrink: 0; /* Prevents the logo from shrinking */
-        }
-        /* END: Add this new CSS for the Univex Page Header */
-
-        /* START: Add this new CSS for the Mexico Page */
-        .mexico-hero {
-            position: relative;
-            padding: 160px 0;
-            text-align: center;
-            color: var(--white);
-            background-image: url('images/mexicobackdrop2.png'); /* Uses the same image from the home page card */
-            background-size: cover;
-            background-position: center;
-        }
-
-        .mexico-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(11, 19, 43, 0.8); /* Dark navy overlay for readability */
-            z-index: 1;
-        }
-
-        .mexico-hero .container {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-title-mexico {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: -1px;
-        }
-
-        .hero-subtitle-mexico {
-            font-size: 1.2rem;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            opacity: 0.9;
-        }
-        
-        .feature-icon {
-            margin-bottom: 1.5rem;
-            color: var(--maroon);
-        }
-        /* END: Add this new CSS for the Mexico Page */
-
-        .text-highlight {
-            color: var(--maroon); /* A brighter, more distinct navy */
-        }
-
-        /* START: Add this new CSS for the redesigned Contact Page */
-
-        /* New Contact Card Styles */
-        .contact-card-v2 {
-            background-color: var(--white);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-        .contact-card-v2:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            border-color: var(--maroon);
-        }
-
-        .card-header-contact {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .card-header-contact h3 {
-            margin: 0;
-            color: var(--navy);
-            font-size: 1.5rem;
-        }
-        .contact-flag {
-            height: 30px;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-        }
-
-        .contact-info-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            color: var(--light-text);
-            margin-bottom: 1rem;
-        }
-        .contact-info-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .contact-info-item a {
-            color: var(--dark-text); /* Keeps text color black */
-            font-weight: normal; /* Removes bolding */
-            text-decoration: none; /* Removes underline */
-        }
-
-        .contact-info-item a:hover {
-            color: var(--dark-text); /* Keeps text color black on hover */
-            text-decoration: underline; /* Adds underline on hover for feedback */
-        }
-
-        /* New Contact Form Styles */
-        .contact-form {
-            max-width: 750px;
-            margin: 2rem auto 0;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 14px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--maroon);
-            box-shadow: 0 0 0 3px rgba(164, 22, 26, 0.1);
-        }
-        .contact-form button {
-            align-self: flex-start; /* Aligns button to the left */
-            border: none;
-            cursor: pointer;
-        }
-        /* This is the main rule that sets the size for ALL icons */
-        .contact-icon {
-            width: 20px !important;   /* Forces the width */
-            height: 20px !important;  /* Forces the height */
-            flex-shrink: 0;
-            margin-top: 3px;
-        }
-
-        /* This sets the color for the inline SVGs (location, email) */
-        .contact-icon path {
-             fill: var(--dark-text);
-        }
-
-        /* This removes the color filter from the external phone.svg */
-        img.contact-icon {
-            filter: none;
-        }
-
-        .contact-info-item span {
-            color: var(--dark-text);
-        }
-
-        /* New three-card grid layout */
-        .contact-grid-v2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-        
-        /* --- ADD THIS NEW GLOBAL RULE FOR LOGO ORIENTATION --- */
         .logo img, .page-title-header img {
             image-orientation: from-image !important;
             transform: rotate(0deg) !important;
         }
 
         /* --- START MOBILE RESPONSIVE STYLES --- */
-
-        /* Responsive Design */
         @media (max-width: 992px) {
             .content-split, .content-split.reversed { grid-template-columns: 1fr; }
             .content-split .image-content { order: -1; margin-bottom: 2rem; }
@@ -1278,197 +746,87 @@
             }
             .slider-container {
                 margin-top: 2rem;
-                min-height: 400px; /* Adjust height for mobile */
+                min-height: 400px;
             }
             .enhanced-presence-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
             /* --- GENERAL MOBILE STYLES --- */
             .hero h1 { font-size: 2.8rem; }
-            /* ... existing styles ... */
             .form-row { grid-template-columns: 1fr; }
 
-            /* --- NEW HEADER LAYOUT RULES --- */
-            nav {
-                position: relative; /* Required for centering the text */
-            }
-            .logo div {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                pointer-events: none; /* Makes text non-interactive */
-            }
-            .mobile-menu {
-                z-index: 2; /* Ensures menu is clickable */
-            }
-            /* --- END NEW HEADER LAYOUT --- */
+            /* --- HEADER LAYOUT --- */
+            nav { position: relative; }
+            .logo div { position: absolute; left: 50%; transform: translateX(-50%); pointer-events: none; }
+            .mobile-menu { z-index: 2; }
+            .logo img { height: 45px; }
+            .logo div { font-size: 1.2rem; }
 
-            /* --- ADD THIS NEW RULE --- */
-            .logo img {
-                height: 35px; /* Adjust this value if needed */
-            }
-            /* --- END ADD --- */
-
-            .logo div {
-                font-size: 1.2rem; /* Make logo text slightly smaller if needed */
-            }
-
-
-            /* --- FIX 2: HAMBURGER MENU --- */
+            /* --- HAMBURGER MENU --- */
             .mobile-menu { display: flex; flex-direction: column; }
-            
-            .nav-links { 
-                display: none; 
-                position: absolute; 
-                top: 100%; 
-                left: 0; 
-                right: 0; 
-                background: var(--white); 
-                flex-direction: column; 
-                padding: 1rem; 
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1); 
-                border-top: 1px solid var(--border-color);
-                text-align: left; /* Align all text to the left for a cleaner look */
-            }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); flex-direction: column; padding: 1rem; box-shadow: 0 5px 10px rgba(0,0,0,0.1); border-top: 1px solid var(--border-color); text-align: left; }
             .nav-links.active { display: flex; }
             .nav-item { position: static; }
-            
-            /* Hide desktop dropdowns */
             .dropdown-menu { display: none !important; }
+            .nav-links a:after, .nav-item > a:after { display: none; }
+            .nav-links a:hover, .nav-item > a:hover { color: var(--maroon); background-color: var(--light-bg); }
+            .nav-links a.active, .nav-item > a.active { color: var(--maroon); font-weight: 700; background-color: var(--light-bg); }
 
-            /* Remove the underline effect on mobile */
-            .nav-links a:after, .nav-item > a:after {
-                display: none;
-            }
+            /* --- GLOBAL OPERATIONS CARDS --- */
+            .enhanced-presence-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .presence-card-enhanced { height: 350px; }
+
+            /* --- TIMELINE FIX --- */
+            .timeline-container::before { left: 10px; }
+            .timeline-item { margin-left: 20px; padding-left: 25px; margin-bottom: 30px; }
+            .timeline-item::before { display: none; }
+            .timeline-title { font-size: 1.2rem; }
+            .timeline-description { padding-left: 0; margin-top: 0.25rem; }
+
+            /* --- GRID FIXES --- */
+            .product-category-grid, .brand-grid, .leadership-grid { grid-template-columns: repeat(2, 1fr); }
+            .product-category-grid { gap: 1rem; }
+            .brand-grid { gap: 2rem 1.5rem; }
+            .leadership-grid { gap: 1.5rem; }
+
+            /* --- PADDING & FONT FIXES --- */
+            .section { padding: 60px 0; }
+            .page-header .section-title, .page-title-text .section-title, .section-title { font-size: 2.2rem; }
+            .page-header .section-subtitle { padding: 0 1rem; }
             
-            /* New highlighting method for mobile menu */
-            .nav-links a:hover,
-            .nav-item > a:hover {
-                color: var(--maroon);
-                background-color: var(--light-bg);
-            }
-            .nav-links a.active,
-            .nav-item > a.active {
-                color: var(--maroon);
-                font-weight: 700;
-                background-color: var(--light-bg);
-            }
-
-
-            /* --- FIX 3: GLOBAL OPERATIONS CARDS --- */
-            .enhanced-presence-grid {
-                grid-template-columns: 1fr; /* Stack cards into a single column on mobile */
-                gap: 1.5rem;
-            }
-            .presence-card-enhanced {
-                height: 350px; /* Slightly shorter cards for mobile */
-            }
-
-            /* --- ADD THIS NEW BLOCK FOR TIMELINE FIX --- */
-            .timeline-container::before {
-                left: 10px; /* Move the main vertical line closer to the edge */
-            }
-
-            .timeline-item {
-                margin-left: 0px; /* Reduce the main left margin */
-                margin-right: 10px; 
-                padding-left: 25px; /* Reduce the padding inside the item */
-                margin-bottom: 35px; /* Reduce space between items */
-            }
-
-            .timeline-item::before {
-                display: none; /* Hide the grey dot as requested */
-            }
-
-            .timeline-title {
-                font-size: 1.2rem; /* Make the title font smaller */
-            }
-
-            .timeline-description {
-                padding-left: 0; /* Remove extra padding on the description text */
-                margin-top: 0.25rem;
-            }
-            /* --- END TIMELINE FIX --- */
-
-            /* --- ADD THIS NEW BLOCK FOR GRID FIXES --- */
-            /* Makes the category, brand, and leadership grids 2-column on mobile */
-            .product-category-grid,
-            .brand-grid,
-            .leadership-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            /* Adjusts spacing for a tighter mobile layout */
-            .product-category-grid {
-                gap: 1rem;
-            }
-            .brand-grid {
-                gap: 2rem 1.5rem; /* Vertical and horizontal gap */
-            }
-            .leadership-grid {
-                gap: 1.5rem;
-            }
-            /* --- END GRID FIXES --- */
-
-            /* --- ADD THIS NEW BLOCK FOR PADDING & FONT FIXES --- */
-            /* Reduces padding for all sections on mobile */
-            .section {
-                padding: 60px 0;
-            }
-
-            /* Adjusts page headers for better readability */
-            .section-title {
-                font-size: 2.2rem;
-            }
-
-            /* Fixes text bleeding to the edges */
-            .page-header .section-subtitle {
-                padding: 0 1rem;
-            }
-
-            /* Stacks and resizes content within the Belize business cards */
-            .business-card {
-                grid-template-columns: 1fr;
-                margin-bottom: 2rem;
-            }
+            /* --- REPLACEMENT FOR BELIZE CARD MOBILE STYLES --- */
             .business-card .text-content {
-                padding: 2rem 1.5rem;
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+                gap: 0;
             }
             .business-card .business-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
+                order: 1;
+                padding: 1.5rem;
+                margin-bottom: 0;
+                justify-content: space-between;
             }
-            /* --- END PADDING & FONT FIXES --- */
-
-            /* --- ADD THIS NEW BLOCK FOR BELIZE PAGE CARD FIXES --- */
-            /* Resets the reversed card order on mobile to fix stacking */
-            .business-card.reversed .image-content {
-                order: initial;
+            .business-header h2 {
+                font-size: 1.8rem;
             }
-
-            /* Centers all the text content within the card */
-            .business-card .text-content {
+            .business-card .image-content {
+                order: 2;
+                height: 250px;
+            }
+            .card-text-body {
+                order: 3;
+                padding: 1.5rem;
                 text-align: center;
             }
-
-            /* Centers the header (title and logo) and adds space */
-            .business-card .business-header {
-                align-items: center;
-                gap: 1rem;
-            }
-
-            /* Centers the social media icons */
-            .social-links {
+            .card-text-body .social-links {
                 justify-content: center;
             }
-            /* --- END BELIZE PAGE CARD FIXES --- */
 
         }
-        /* --- END MOBILE RESPONSIVE STYLES --- */
         
     </style>
 </head>
@@ -1626,7 +984,7 @@
         </section>
         
     </div>
-    <!-- REPLACEMENT for the entire Taiwan & China page -->
+    
     <div id="taiwan-china" class="page">
         <div class="page-header">
             <div class="container">
@@ -1786,8 +1144,7 @@
             </div>
         </section>
         
-        </div>
-    <!-- END REPLACEMENT -->
+    </div>
 
     <div id="belize" class="page">
         <div class="page-header">
@@ -1800,47 +1157,49 @@
             <div class="container">
                 <!-- Universal Freezone -->
                 <div class="business-card">
-                    <div class="image-content">
-                        <img src="images/belize-freezone.jpg" alt="A busy commercial area at the Belize-Mexico border">
-                    </div>
                     <div class="text-content">
                         <div class="business-header">
                             <h2>Universal Freezone</h2>
-                            <img src="images/universal freezone.png" alt="Unitex Logo" class="logo">
+                            <img src="images/universal freezone.png" alt="Universal Freezone Logo" class="logo">
                         </div>
-                        <span class="market-focus">Our Gateway to the Neighboring Mexico Market</span>
-                        <p>
-                            Catering to bustling cross-border trade, Universal Freezone operates out of the Corozal Freezone. Our 100k+ square foot warehousing facilities have a dual-purpose layout, serving both as wholesale distribution hubs and retail stores for clients in both Mexico and Belize.
-                        </p>
-                        <!-- ADD THIS BLOCK for Universal Freezone social links -->
-                        <div class="social-links">
-                            <a href="https://www.facebook.com/universalfreezone123" target="_blank" title="Facebook">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.494v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.323-1.325z"/></svg>
-                            </a>
-                            <a href="https://www.instagram.com/universalbelize/" target="_blank" title="Instagram">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.585.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
-                            </a>
+                        <div class="image-content">
+                            <img src="images/belize-freezone.jpg" alt="A busy commercial area at the Belize-Mexico border">
                         </div>
-                        <!-- Add more text here if you wish -->
+                        <div class="card-text-body">
+                            <span class="market-focus">Our Gateway to the Neighboring Mexico Market</span>
+                            <p>
+                                Catering to bustling cross-border trade, Universal Freezone operates out of the Corozal Freezone. Our 100k+ square foot warehousing facilities have a dual-purpose layout, serving both as wholesale distribution hubs and retail stores for clients in both Mexico and Belize.
+                            </p>
+                            <div class="social-links">
+                                <a href="https://www.facebook.com/universalfreezone123" target="_blank" title="Facebook">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.494v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.323-1.325z"/></svg>
+                                </a>
+                                <a href="https://www.instagram.com/universalbelize/" target="_blank" title="Instagram">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.585.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Unitex -->
                 <div class="business-card reversed">
-                    <div class="image-content">
-                        <img src="images/belize-local.jpg" alt="A vibrant local market street in a Belizean city">
-                    </div>
-                    <div class="text-content">
+                     <div class="text-content">
                         <div class="business-header">
                             <h2>Unitex</h2>
                             <img src="images/unitex.png" alt="Unitex Logo" class="logo">
                         </div>
-                        <span class="market-focus">Serving the Booming Domestic Belize Market</span>
-                        <p>Unitex is focused on serving wholesale and retail clients within local Belizean cities. With a strong distribution network fueled by our 3-acre warehouse and a deep understanding of the domestic market, we connect Belizean consumers with top international and private label brands.</p>
-                        <div class="social-links">
-                            <a href="https://www.facebook.com/unitexbelize" target="_blank" title="Facebook">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.494v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.323-1.325z"/></svg>
-                            </a>
+                        <div class="image-content">
+                            <img src="images/belize-local.jpg" alt="A vibrant local market street in a Belizean city">
+                        </div>
+                        <div class="card-text-body">
+                            <span class="market-focus">Serving the Booming Domestic Belize Market</span>
+                            <p>Unitex is focused on serving wholesale and retail clients within local Belizean cities. With a strong distribution network fueled by our 3-acre warehouse and a deep understanding of the domestic market, we connect Belizean consumers with top international and private label brands.</p>
+                            <div class="social-links">
+                                <a href="https://www.facebook.com/unitexbelize" target="_blank" title="Facebook">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.494v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.323-1.325z"/></svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1855,125 +1214,36 @@
                     <p class="section-subtitle">We are proud to be the trusted distribution partner for a wide range of renowned international brands.</p>
                 </div>
                 <div class="brand-grid">
-                  <div class="brand-logo-item">
-                    <img src="images/a-cheese.svg" alt="A-Cheese Logo">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/arizona.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/axe.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/badia.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/bauducco.png" alt="Bauducco Logo">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/brut.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/campbells.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/cheezeit.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/collection2000.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/ferrara.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/goldfish.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/gorilla.png" alt="Gorilla Energy Logo">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/hombre.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/hormel.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/kagi.svg" alt="Kagi Logo">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/kellogs.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/kent.png" alt="Kent Logo">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/kraft.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/lotus.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/madamhong.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/mondelez.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/mrbrown.png" alt="Mr. Brown Coffee Logo">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/nescafe.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/nestle.svg">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/pepperidge.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/planters.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/poptarts.jpeg">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/pringles.svg">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/ritz.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/unilever.png">
-                  </div>
+                  <div class="brand-logo-item"><img src="images/a-cheese.svg" alt="A-Cheese Logo"></div>
+                  <div class="brand-logo-item"><img src="images/arizona.png"></div>
+                  <div class="brand-logo-item"><img src="images/axe.png"></div>
+                  <div class="brand-logo-item"><img src="images/badia.png"></div>
+                  <div class="brand-logo-item"><img src="images/bauducco.png" alt="Bauducco Logo"></div>
+                  <div class="brand-logo-item"><img src="images/brut.png"></div>
+                  <div class="brand-logo-item"><img src="images/campbells.png"></div>
+                  <div class="brand-logo-item"><img src="images/cheezeit.png"></div>
+                  <div class="brand-logo-item"><img src="images/collection2000.png"></div>
+                  <div class="brand-logo-item"><img src="images/ferrara.png"></div>
+                  <div class="brand-logo-item"><img src="images/goldfish.png"></div>
+                  <div class="brand-logo-item"><img src="images/gorilla.png" alt="Gorilla Energy Logo"></div>
+                  <div class="brand-logo-item"><img src="images/hombre.png"></div>
+                  <div class="brand-logo-item"><img src="images/hormel.png"></div>
+                  <div class="brand-logo-item"><img src="images/kagi.svg" alt="Kagi Logo"></div>
+                  <div class="brand-logo-item"><img src="images/kellogs.png"></div>
+                  <div class="brand-logo-item"><img src="images/kent.png" alt="Kent Logo"></div>
+                  <div class="brand-logo-item"><img src="images/kraft.png"></div>
+                  <div class="brand-logo-item"><img src="images/lotus.png"></div>
+                  <div class="brand-logo-item"><img src="images/madamhong.png"></div>
+                  <div class="brand-logo-item"><img src="images/mondelez.png"></div>
+                  <div class="brand-logo-item"><img src="images/mrbrown.png" alt="Mr. Brown Coffee Logo"></div>
+                  <div class="brand-logo-item"><img src="images/nescafe.png"></div>
+                  <div class="brand-logo-item"><img src="images/nestle.svg"></div>
+                  <div class="brand-logo-item"><img src="images/pepperidge.png"></div>
+                  <div class="brand-logo-item"><img src="images/planters.png"></div>
+                  <div class="brand-logo-item"><img src="images/poptarts.jpeg"></div>
+                  <div class="brand-logo-item"><img src="images/pringles.svg"></div>
+                  <div class="brand-logo-item"><img src="images/ritz.png"></div>
+                  <div class="brand-logo-item"><img src="images/unilever.png"></div>
                 </div>
 
 
@@ -1982,21 +1252,14 @@
                     <p class="section-subtitle">With our client's trust and strong market position, we are proud to be kicking off our private labeling journey.</p>
                 </div>
                 <div class="brand-grid">
-                    <div class="brand-logo-item">
-                        <img src="images/aria.png">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/spark.jpg">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/supervec.png">
-                    </div>
+                    <div class="brand-logo-item"><img src="images/aria.png"></div>
+                    <div class="brand-logo-item"><img src="images/spark.jpg"></div>
+                    <div class="brand-logo-item"><img src="images/supervec.png"></div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- REPLACEMENT for the entire United States page -->
     <div id="usa" class="page">
             <section class="section" style="padding-top: 100px;"> <div class="container">
                     <div class="content-split">
@@ -2410,5 +1673,4 @@
 </script>
 </body>
 </html>
-
 
