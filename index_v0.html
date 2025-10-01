@@ -356,6 +356,22 @@
         footer p { opacity: 0.8; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .content-split, .content-split.reversed { grid-template-columns: 1fr; }
+            .content-split .image-content { order: -1; margin-bottom: 2rem; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); flex-direction: column; padding: 1rem; box-shadow: 0 5px 10px rgba(0,0,0,0.1); border-top: 1px solid var(--border-color); }
+            .nav-links.active { display: flex; }
+            .nav-item { position: static; }
+            .dropdown-menu { display: none !important; } /* Hide dropdowns on mobile for simplicity */
+            .mobile-menu { display: flex; flex-direction: column; }
+            .hero h1 { font-size: 2.8rem; }
+            .section-title { font-size: 2.2rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .leadership-grid { grid-template-columns: 1fr; }
+        }
         /* REPLACEMENT for all Enhanced Presence Card styles */
         .enhanced-presence-section {
             background-color: var(--light-bg);
@@ -1011,6 +1027,17 @@
             object-fit: cover; /* Ensures images fill the tall container */
         }
         
+        /* Responsive stacking for mobile */
+        @media (max-width: 992px) {
+            .branches-layout-grid {
+                grid-template-columns: 1fr;
+            }
+            .slider-container {
+                margin-top: 2rem;
+                min-height: 400px; /* Adjust height for mobile */
+            }
+        }
+        
         /* REPLACEMENT for the ENTIRE Univex Page CSS block */
         /* REPLACEMENT for the ENTIRE Univex Page CSS block */
         .strategy-list {
@@ -1216,6 +1243,22 @@
             border: none;
             cursor: pointer;
         }
+=
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* END: Add this new CSS for the redesigned Contact Page */
+
+        /* New three-card grid layout */
+        .contact-grid-v2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
         /* This is the main rule that sets the size for ALL icons */
         .contact-icon {
             width: 20px !important;   /* Forces the width */
@@ -1238,103 +1281,6 @@
             color: var(--dark-text);
         }
 
-        /* New three-card grid layout */
-        .contact-grid-v2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-        
-        /* --- START MOBILE RESPONSIVE STYLES --- */
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .content-split, .content-split.reversed { grid-template-columns: 1fr; }
-            .content-split .image-content { order: -1; margin-bottom: 2rem; }
-
-            .branches-layout-grid {
-                grid-template-columns: 1fr;
-            }
-            .slider-container {
-                margin-top: 2rem;
-                min-height: 400px; /* Adjust height for mobile */
-            }
-            .enhanced-presence-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
-            }
-        }
-
-        @media (max-width: 768px) {
-            /* --- GENERAL MOBILE STYLES --- */
-            .hero h1 { font-size: 2.8rem; }
-            .section-title { font-size: 2.2rem; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .leadership-grid { grid-template-columns: 1fr; }
-            .form-row { grid-template-columns: 1fr; }
-
-            /* --- FIX 1: HEADER & LOGO --- */
-            .logo img {
-                /* This prevents any strange transformations on the logo in mobile view. */
-                transform: none !important;
-            }
-             .logo div {
-                font-size: 1.2rem; /* Make logo text slightly smaller if needed */
-            }
-
-
-            /* --- FIX 2: HAMBURGER MENU --- */
-            .mobile-menu { display: flex; flex-direction: column; }
-            
-            .nav-links { 
-                display: none; 
-                position: absolute; 
-                top: 100%; 
-                left: 0; 
-                right: 0; 
-                background: var(--white); 
-                flex-direction: column; 
-                padding: 1rem; 
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1); 
-                border-top: 1px solid var(--border-color);
-                text-align: left; /* Align all text to the left for a cleaner look */
-            }
-            .nav-links.active { display: flex; }
-            .nav-item { position: static; }
-            
-            /* Hide desktop dropdowns */
-            .dropdown-menu { display: none !important; }
-
-            /* Remove the underline effect on mobile */
-            .nav-links a:after, .nav-item > a:after {
-                display: none;
-            }
-            
-            /* New highlighting method for mobile menu */
-            .nav-links a:hover,
-            .nav-item > a:hover {
-                color: var(--maroon);
-                background-color: var(--light-bg);
-            }
-            .nav-links a.active,
-            .nav-item > a.active {
-                color: var(--maroon);
-                font-weight: 700;
-                background-color: var(--light-bg);
-            }
-
-
-            /* --- FIX 3: GLOBAL OPERATIONS CARDS --- */
-            .enhanced-presence-grid {
-                grid-template-columns: 1fr; /* Stack cards into a single column on mobile */
-                gap: 1.5rem;
-            }
-            .presence-card-enhanced {
-                height: 350px; /* Slightly shorter cards for mobile */
-            }
-        }
-        /* --- END MOBILE RESPONSIVE STYLES --- */
-        
     </style>
 </head>
 <body>
@@ -2157,6 +2103,7 @@
             }
             
             window.scrollTo(0, 0);
+            onPageChange();
         }
 
         function toggleMobileMenu() {
@@ -2266,8 +2213,7 @@
         }
 
         // We need to modify the showPage function to call our new onPageChange function.
-        // This is a simple but important change. Find your showPage function and add `onPageChange();` at the end of the original script.
-        // It seems onPageChange() was removed at some point, so we don't need to add it back. The current JS is fine.
+        // This is a simple but important change. Find your showPage function and add `onPageChange();` at the end.
     });
 </script>
 </body>
