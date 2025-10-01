@@ -1245,6 +1245,13 @@
             gap: 2rem;
             margin-top: 4rem;
         }
+
+        /* --- ADD THIS NEW GLOBAL RULE FOR LOGO ORIENTATION --- */
+        .logo img, .page-title-header img {
+            image-orientation: from-image !important;
+            transform: rotate(0deg) !important;
+        }
+
         
         /* --- START MOBILE RESPONSIVE STYLES --- */
 
@@ -1273,13 +1280,7 @@
             .leadership-grid { grid-template-columns: 1fr; }
             .form-row { grid-template-columns: 1fr; }
 
-            /* --- FIX 1: HEADER & LOGO --- */
-            .logo img {
-                /* This prevents any strange transformations on the logo in mobile view. */
-                transform: none !important;
-                image-orientation: from-image;
-            }
-             .logo div {
+            .logo div {
                 font-size: 1.2rem; /* Make logo text slightly smaller if needed */
             }
 
