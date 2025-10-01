@@ -1429,20 +1429,19 @@
             .section-title {
                 font-size: 2.2rem;
             }
-
-            /* Fixes text bleeding to the edges */
+            
+            /* 1. NEW RULE: Increase horizontal padding for page header titles */
+            .page-header .section-title,
             .page-header .section-subtitle {
-                padding: 0 1rem;
+                padding: 0 1.5rem; /* Increased side padding to fix bleeding */
             }
 
-            /* --- START NEW BELIZE CARD MOBILE LAYOUT --- */
-            /* New: Override grid for mobile and use flex column for custom ordering */
+            /* Stacks and resizes content within the Belize business cards */
             .business-card {
                 display: flex;
                 flex-direction: column;
                 margin-bottom: 2rem;
             }
-            /* Hide the entire desktop header elements on mobile */
             .business-card .business-header {
                 display: none;
             }
@@ -1451,11 +1450,11 @@
             .mobile-logo-wrapper {
                 display: block; /* Show on mobile */
                 order: 1;
-                padding: 2rem 1.5rem 0.5rem; /* Padding matches text content, but less at bottom */
+                padding: 2rem 1.5rem 0.5rem; 
                 text-align: center;
             }
             .mobile-logo-wrapper .mobile-logo-img {
-                max-height: 70px; /* Good height for mobile logo */
+                max-height: 70px; 
                 max-width: 100%;
                 object-fit: contain;
                 margin: 0 auto;
@@ -1463,7 +1462,7 @@
 
             /* New: Style for re-added mobile title */
             .mobile-business-title {
-                font-size: 1.2rem; /* Smaller font size for mobile title */
+                font-size: 1.2rem; 
                 font-weight: 700;
                 color: var(--navy);
                 margin-top: 0.5rem;
@@ -1471,7 +1470,7 @@
             
             /* New: Smaller size for Unitex logo */
             #unitex-logo-mobile {
-                max-height: 50px; /* Reduced height for Unitex logo as requested */
+                max-height: 50px; 
             }
 
             /* 2. Image */
@@ -1483,10 +1482,14 @@
             /* 3. Text Content */
             .business-card .text-content {
                 order: 3;
-                padding: 1.5rem; /* General padding, but top is reduced from 3rem to 1.5rem */
+                padding: 1.5rem; 
                 padding-top: 1.5rem;
             }
 
+            /* 2. NEW RULE: Fix alignment/bunching in the brand grid at the bottom */
+            .brand-logo-item {
+                height: 55px; /* Reduced height to ensure alignment, since logos are stacked 2 per row now */
+            }
             /* --- END NEW BELIZE CARD MOBILE LAYOUT --- */
         }
         /* --- END MOBILE RESPONSIVE STYLES --- */
@@ -1812,6 +1815,7 @@
 
     <div id="belize" class="page">
         <div class="page-header">
+            <!-- 1. The section-title and section-subtitle inside page-header will now use the new CSS rules to increase margin on mobile -->
             <h1 class="section-title">Belize's leading wholesale distributor & retailer.</h1>
             <p class="section-subtitle">Our strategic presence in Belize is divided into two core businesses, each serving a distinct and vital market.</p>
         </div>
@@ -1887,6 +1891,7 @@
                     <h2 class="section-title">Our Partner Brands</h2>
                     <p class="section-subtitle">We are proud to be the trusted distribution partner for a wide range of renowned international brands.</p>
                 </div>
+                <!-- 2. This grid is now fixed to better handle 2 columns on mobile. -->
                 <div class="brand-grid">
                   <div class="brand-logo-item">
                     <img src="images/a-cheese.svg" alt="A-Cheese Logo">
