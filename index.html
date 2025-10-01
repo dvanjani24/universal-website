@@ -1379,7 +1379,6 @@
                 margin-bottom: 35px; /* Reduce space between items */
             }
 
-
             .timeline-item::before {
                 display: none; /* Hide the grey dot as requested */
             }
@@ -1393,6 +1392,26 @@
                 margin-top: 0.25rem;
             }
             /* --- END TIMELINE FIX --- */
+
+            /* --- ADD THIS NEW BLOCK FOR GRID FIXES --- */
+            /* Makes the category, brand, and leadership grids 2-column on mobile */
+            .product-category-grid,
+            .brand-grid,
+            .leadership-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            /* Adjusts spacing for a tighter mobile layout */
+            .product-category-grid {
+                gap: 1rem;
+            }
+            .brand-grid {
+                gap: 2rem 1.5rem; /* Vertical and horizontal gap */
+            }
+            .leadership-grid {
+                gap: 1.5rem;
+            }
+            /* --- END GRID FIXES --- */
 
         }
         /* --- END MOBILE RESPONSIVE STYLES --- */
@@ -2337,5 +2356,6 @@
 </script>
 </body>
 </html>
+
 
 
