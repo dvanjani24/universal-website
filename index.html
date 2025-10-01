@@ -1366,6 +1366,32 @@
             .presence-card-enhanced {
                 height: 350px; /* Slightly shorter cards for mobile */
             }
+
+            /* --- ADD THIS NEW BLOCK FOR TIMELINE FIX --- */
+            .timeline-container::before {
+                left: 10px; /* Move the main vertical line closer to the edge */
+            }
+
+            .timeline-item {
+                margin-left: 20px; /* Reduce the main left margin */
+                padding-left: 25px; /* Reduce the padding inside the item */
+                margin-bottom: 30px; /* Reduce space between items */
+            }
+
+            .timeline-item::before {
+                display: none; /* Hide the grey dot as requested */
+            }
+
+            .timeline-title {
+                font-size: 1.2rem; /* Make the title font smaller */
+            }
+
+            .timeline-description {
+                padding-left: 0; /* Remove extra padding on the description text */
+                margin-top: 0.25rem;
+            }
+            /* --- END TIMELINE FIX --- */
+
         }
         /* --- END MOBILE RESPONSIVE STYLES --- */
         
@@ -2309,3 +2335,5 @@
 </script>
 </body>
 </html>
+
+
