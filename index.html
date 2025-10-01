@@ -1461,6 +1461,19 @@
                 margin: 0 auto;
             }
 
+            /* New: Style for re-added mobile title */
+            .mobile-business-title {
+                font-size: 1.2rem; /* Smaller font size for mobile title */
+                font-weight: 700;
+                color: var(--navy);
+                margin-top: 0.5rem;
+            }
+            
+            /* New: Smaller size for Unitex logo */
+            #unitex-logo-mobile {
+                max-height: 50px; /* Reduced height for Unitex logo as requested */
+            }
+
             /* 2. Image */
             .business-card .image-content {
                 order: 2;
@@ -1549,7 +1562,7 @@
                                 <h3>Taiwan & China</h3>
                                 <div class="card-footer">
                                     <div class="logo-container">
-                                        <img src="images/logo-uexports-color.png" alt="Universal Exports Logo" class="logo">
+                                        <img src="images/logo-uexports.png" alt="Universal Exports Logo" class="logo">
                                     </div>
                                     <span class="explore-link">Explore Operations &rarr;</span>
                                 </div>
@@ -1811,6 +1824,7 @@
                     <!-- NEW: Mobile Logo Wrapper (Order 1 on mobile) -->
                     <div class="mobile-logo-wrapper">
                         <img src="images/universal freezone.png" alt="Universal Freezone Logo" class="mobile-logo-img">
+                        <h3 class="mobile-business-title">Universal Freezone</h3>
                     </div>
                     <div class="image-content">
                         <img src="images/belize-freezone.jpg" alt="A busy commercial area at the Belize-Mexico border">
@@ -1842,7 +1856,8 @@
                 <div class="business-card reversed">
                     <!-- NEW: Mobile Logo Wrapper (Order 1 on mobile) -->
                     <div class="mobile-logo-wrapper">
-                        <img src="images/unitex.png" alt="Unitex Logo" class="mobile-logo-img">
+                        <img src="images/unitex.png" alt="Unitex Logo" class="mobile-logo-img" id="unitex-logo-mobile">
+                        <h3 class="mobile-business-title">Unitex</h3>
                     </div>
                     <div class="image-content">
                         <img src="images/belize-local.jpg" alt="A vibrant local market street in a Belizean city">
