@@ -1245,14 +1245,13 @@
             gap: 2rem;
             margin-top: 4rem;
         }
-
+        
         /* --- ADD THIS NEW GLOBAL RULE FOR LOGO ORIENTATION --- */
         .logo img, .page-title-header img {
             image-orientation: from-image !important;
             transform: rotate(0deg) !important;
         }
 
-        
         /* --- START MOBILE RESPONSIVE STYLES --- */
 
         /* Responsive Design */
@@ -1275,10 +1274,23 @@
         @media (max-width: 768px) {
             /* --- GENERAL MOBILE STYLES --- */
             .hero h1 { font-size: 2.8rem; }
-            .section-title { font-size: 2.2rem; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .leadership-grid { grid-template-columns: 1fr; }
+            /* ... existing styles ... */
             .form-row { grid-template-columns: 1fr; }
+
+            /* --- NEW HEADER LAYOUT RULES --- */
+            nav {
+                position: relative; /* Required for centering the text */
+            }
+            .logo div {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                pointer-events: none; /* Makes text non-interactive */
+            }
+            .mobile-menu {
+                z-index: 2; /* Ensures menu is clickable */
+            }
+            /* --- END NEW HEADER LAYOUT --- */
 
             .logo div {
                 font-size: 1.2rem; /* Make logo text slightly smaller if needed */
@@ -2274,3 +2286,6 @@
 </script>
 </body>
 </html>
+
+
+
