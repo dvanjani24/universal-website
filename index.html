@@ -1413,6 +1413,38 @@
             }
             /* --- END GRID FIXES --- */
 
+            /* --- ADD THIS NEW BLOCK FOR PADDING & FONT FIXES --- */
+            /* Reduces padding for all sections on mobile */
+            .section {
+                padding: 60px 0;
+            }
+
+            /* Adjusts page headers for better readability */
+            .page-header .section-title,
+            .page-title-text .section-title {
+                font-size: 2.2rem;
+            }
+
+            /* Fixes text bleeding to the edges */
+            .page-header .section-subtitle {
+                padding: 0 1rem;
+            }
+
+            /* Stacks and resizes content within the Belize business cards */
+            .business-card {
+                grid-template-columns: 1fr;
+                margin-bottom: 2rem;
+            }
+            .business-card .text-content {
+                padding: 2rem 1.5rem;
+            }
+            .business-card .business-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            /* --- END PADDING & FONT FIXES --- */
+
         }
         /* --- END MOBILE RESPONSIVE STYLES --- */
         
@@ -2356,6 +2388,3 @@
 </script>
 </body>
 </html>
-
-
-
