@@ -582,6 +582,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
+        /* NEW GLOBAL RULE: Hide mobile logo wrapper on desktop */
+        .mobile-logo-wrapper {
+            display: none;
+        }
+
         /* ADD THIS NEW RULE to remove space after the LAST card (Unitex) */
         .business-card:last-of-type {
             margin-bottom: 0;
@@ -598,9 +603,10 @@
             padding: 3rem;
         }
 
-        .business-card .text-content h3 {
+        .business-card .text-content h2 { /* Targeting H2 inside text-content for desktop */
             font-size: 2.2rem;
             color: var(--navy);
+            margin: 0;
         }
 
         .business-card .text-content .market-focus {
@@ -679,7 +685,7 @@
             margin-bottom: 0.5rem;
         }
 
-        .business-header h3 {
+        .business-header h2 {
             margin: 0; /* Remove default margin */
         }
 
@@ -1429,21 +1435,46 @@
                 padding: 0 1rem;
             }
 
-            /* Stacks and resizes content within the Belize business cards */
+            /* --- START NEW BELIZE CARD MOBILE LAYOUT --- */
+            /* New: Override grid for mobile and use flex column for custom ordering */
             .business-card {
-                grid-template-columns: 1fr;
+                display: flex;
+                flex-direction: column;
                 margin-bottom: 2rem;
             }
-            .business-card .text-content {
-                padding: 2rem 1.5rem;
-            }
+            /* Hide the entire desktop header elements on mobile */
             .business-card .business-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
+                display: none;
             }
-            /* --- END PADDING & FONT FIXES --- */
+            
+            /* 1. Mobile Logo Wrapper (Order 1 on mobile) */
+            .mobile-logo-wrapper {
+                display: block; /* Show on mobile */
+                order: 1;
+                padding: 2rem 1.5rem 0.5rem; /* Padding matches text content, but less at bottom */
+                text-align: center;
+            }
+            .mobile-logo-wrapper .mobile-logo-img {
+                max-height: 70px; /* Good height for mobile logo */
+                max-width: 100%;
+                object-fit: contain;
+                margin: 0 auto;
+            }
 
+            /* 2. Image */
+            .business-card .image-content {
+                order: 2;
+                margin-bottom: 0 !important;
+            }
+            
+            /* 3. Text Content */
+            .business-card .text-content {
+                order: 3;
+                padding: 1.5rem; /* General padding, but top is reduced from 3rem to 1.5rem */
+                padding-top: 1.5rem;
+            }
+
+            /* --- END NEW BELIZE CARD MOBILE LAYOUT --- */
         }
         /* --- END MOBILE RESPONSIVE STYLES --- */
         
@@ -1518,7 +1549,7 @@
                                 <h3>Taiwan & China</h3>
                                 <div class="card-footer">
                                     <div class="logo-container">
-                                        <img src="images/logo-uexports.png" alt="Universal Exports Logo" class="logo">
+                                        <img src="images/logo-uexports-color.png" alt="Universal Exports Logo" class="logo">
                                     </div>
                                     <span class="explore-link">Explore Operations &rarr;</span>
                                 </div>
@@ -1777,13 +1808,18 @@
             <div class="container">
                 <!-- Universal Freezone -->
                 <div class="business-card">
+                    <!-- NEW: Mobile Logo Wrapper (Order 1 on mobile) -->
+                    <div class="mobile-logo-wrapper">
+                        <img src="images/universal freezone.png" alt="Universal Freezone Logo" class="mobile-logo-img">
+                    </div>
                     <div class="image-content">
                         <img src="images/belize-freezone.jpg" alt="A busy commercial area at the Belize-Mexico border">
                     </div>
                     <div class="text-content">
+                        <!-- Desktop Header (Hidden on mobile) -->
                         <div class="business-header">
                             <h2>Universal Freezone</h2>
-                            <img src="images/universal freezone.png" alt="Unitex Logo" class="logo">
+                            <img src="images/universal freezone.png" alt="Universal Freezone Logo" class="logo">
                         </div>
                         <span class="market-focus">Our Gateway to the Neighboring Mexico Market</span>
                         <p>
@@ -1795,7 +1831,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.494v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.323-1.325z"/></svg>
                             </a>
                             <a href="https://www.instagram.com/universalbelize/" target="_blank" title="Instagram">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.585.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.585.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
                             </a>
                         </div>
                         <!-- Add more text here if you wish -->
@@ -1804,10 +1840,15 @@
 
                 <!-- Unitex -->
                 <div class="business-card reversed">
+                    <!-- NEW: Mobile Logo Wrapper (Order 1 on mobile) -->
+                    <div class="mobile-logo-wrapper">
+                        <img src="images/unitex.png" alt="Unitex Logo" class="mobile-logo-img">
+                    </div>
                     <div class="image-content">
                         <img src="images/belize-local.jpg" alt="A vibrant local market street in a Belizean city">
                     </div>
                     <div class="text-content">
+                        <!-- Desktop Header (Hidden on mobile) -->
                         <div class="business-header">
                             <h2>Unitex</h2>
                             <img src="images/unitex.png" alt="Unitex Logo" class="logo">
@@ -1917,7 +1958,7 @@
                   </div>
 
                   <div class="brand-logo-item">
-                    <img src="images/mrbrown.png" alt="Mr. Brown Coffee Logo">
+                    <img src="images/mrbrown.png">
                   </div>
 
                   <div class="brand-logo-item">
@@ -2387,4 +2428,3 @@
 </script>
 </body>
 </html>
-
