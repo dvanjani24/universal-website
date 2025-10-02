@@ -895,7 +895,7 @@
 
         .page-title-text .section-title,
         .page-title-text .section-subtitle {
-            text-align: left; /* Align text to the left within its container */
+            text-align: center; /* Align text to the left within its container */
             margin: 0;
         }
 
@@ -1015,12 +1015,15 @@
         /* END: Add this new CSS for the Branches & Factories Timeline */
         /* START: Add this CSS for the new Branches & Slider Layout */
        /* --- CONSOLIDATED FIX for Branches & Slider Layout --- */
+        /* --- FINAL Version for Branches & Slider Layout --- */
         .branches-layout-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr; /* Gives more space to text */
-            gap: 2rem;
+            grid-template-columns: 1.4fr 1fr; /* Gives even more space to text */
+            gap: 3rem;
             align-items: flex-start;
             padding-bottom: 4rem;
+            max-width: 1100px; /* Constrains the width of the entire section */
+            margin: 0 auto;    /* Centers the constrained section */
         }
 
         /* Adjustments for the timeline container within this grid */
@@ -1046,8 +1049,8 @@
 
         .branches-layout-grid .slide img {
             width: 100%;
-            height: 100%;           /* Make image fill the tall slide area */
-            object-fit: contain;    /* CRITICAL: 'contain' ensures the full image is visible without cropping */
+            height: 100%;
+            object-fit: cover; /* RESTORED: This crops the image to fill the space cleanly */
         }
         
         /* REPLACEMENT for the ENTIRE Univex Page CSS block */
