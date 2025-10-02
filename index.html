@@ -807,10 +807,12 @@
 
         .slider-container {
             position: relative;
-            max-width: 800px;
+            max-width: 750px;          /* Reduced from 900px for a smaller size */
             margin: 0 auto;
             overflow: hidden;
             border-radius: 12px;
+            aspect-ratio: 16 / 9;      /* This enforces a consistent widescreen shape */
+            background-color: #f8f9fa; /* Adds a light background for letterboxing */
         }
 
         .slider-wrapper {
@@ -1945,12 +1947,16 @@
                     <div class="slider-wrapper">
                         <div class="slide"><img src="images/billboard1.jpg"><div class="slide-caption">Universal Billboard in Corozal Freezone</div></div>
                         <div class="slide"><img src="images/billboard2.jpg"><div class="slide-caption">Universal Billboard in Corozal Freezone</div></div>
-                        <div class="slide"><img src="images/wh3.jpg"><div class="slide-caption">Warehousing facilities</div></div>
-                        <div class="slide"><img src="images/wh2.jpg"><div class="slide-caption">Warehousing facilities</div></div>
-                        <div class="slide"><img src="images/wh1.jpg"><div class="slide-caption">Warehousing facilities</div></div>
                         <div class="slide"><img src="images/Picture1.jpg"><div class="slide-caption">Freedom Avenue Retail Store</div></div>
-                        <div class="slide"><img src="images/retail1.jpg"><div class="slide-caption">Delamo Plaza Retail Store</div></div>
+                        <div class="slide"><img src="images/retailfreedom.png"><div class="slide-caption">Freedom Avenue Retail Store</div></div>
                         <div class="slide"><img src="images/ad1.png"><div class="slide-caption">Brands distributed by Universal</div></div>
+                        <div class="slide"><img src="images/ad2.png"><div class="slide-caption">Brands distributed by Universal</div></div>
+                        <div class="slide"><img src="images/ad3.png"><div class="slide-caption">Brands distributed by Universal</div></div>
+                        <div class="slide"><img src="images/retail1.jpg"><div class="slide-caption">Delamo Plaza Retail Store</div></div>
+                        <div class="slide"><img src="images/wh3.jpg"><div class="slide-caption">Wholesale warehousing facilities</div></div>
+                        <div class="slide"><img src="images/wh2.jpg"><div class="slide-caption">Wholesale warehousing facilities</div></div>
+                        <div class="slide"><img src="images/wh1.jpg"><div class="slide-caption">Wholesale warehousing facilities</div></div>
+
                     </div>
                     <div class="slider-nav">
                         <button class="prev-slide">&lt;</button>
