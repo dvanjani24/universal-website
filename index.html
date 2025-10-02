@@ -1024,7 +1024,8 @@
         }
         
         /* Adjustments for the slider container */
-        .slider-container {
+        /* Adjustments for the slider container inside the branches grid */
+        .branches-layout-grid .slider-container {
             max-width: none;
             margin: 0;
             height: 100%; /* This makes the slider tall */
@@ -1380,6 +1381,11 @@
             .nav-links .dropdown-menu li a {
                 padding: 8px 16px;
                 font-size: 0.9rem;
+            }
+
+            .slider-container {
+                max-width: 100%;       /* Ensures slider fits within the screen's padding */
+                aspect-ratio: 16 / 10; /* A slightly taller ratio looks better on phones */
             }
 
             /* Styles for the dropdown arrow (caret) */
