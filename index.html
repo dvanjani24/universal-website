@@ -2337,11 +2337,11 @@
             if(universalLink) universalLink.classList.add('active');
         }
         
-        // Only push a new state to history if this is a user click (not a back/forward action)
+        // Only push a new state to history if this is a user click
         if (!isPopState) {
-            const currentHash = window.location.hash.substring(1);
-            if (currentHash !== pageId) {
-                history.pushState({ page: pageId }, '', `#${pageId}`);
+            const newUrl = (pageId === 'universal') ? '/' : `/${pageId}`;
+            if (window.location.pathname !== newUrl) {
+                history.pushState({ page: pageId }, '', newUrl);
             }
         }
         
@@ -2352,7 +2352,6 @@
         
         window.scrollTo(0, 0);
 
-        // Re-run animations if the home page is shown
         if (pageId === 'universal') {
             animateCounters();
         }
@@ -2365,19 +2364,18 @@
     }
 
     function toggleSubMenu(event) {
-    // This function only runs on mobile screen sizes
-    if (window.innerWidth <= 768) {
-        event.preventDefault();
-        event.stopPropagation();
-        
-        const link = event.currentTarget;
-        const parentItem = link.closest('.nav-item');
-        const submenu = parentItem.querySelector('.dropdown-menu');
+        if (window.innerWidth <= 768) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const link = event.currentTarget;
+            const parentItem = link.closest('.nav-item');
+            const submenu = parentItem.querySelector('.dropdown-menu');
 
-        link.classList.toggle('open');
-        submenu.classList.toggle('open');
+            link.classList.toggle('open');
+            submenu.classList.toggle('open');
+        }
     }
-}
 
     // --- HEADER SHADOW ON SCROLL ---
     window.addEventListener('scroll', () => {
@@ -2392,7 +2390,7 @@
     // --- ANIMATED COUNTERS ---
     function animateCounters() {
         document.querySelectorAll('.stat-number').forEach(counter => {
-            if(counter.classList.contains('animated')) return; // Prevent re-animation
+            if(counter.classList.contains('animated')) return;
             counter.classList.add('animated');
             
             const targetText = counter.innerText;
@@ -2417,67 +2415,63 @@
         });
     }
 
-    // --- NEW: BROWSER BACK/FORWARD BUTTON HANDLER ---
+    // --- BROWSER BACK/FORWARD BUTTON HANDLER ---
     window.addEventListener('popstate', function(event) {
-        if (event.state && event.state.page) {
-            showPage(event.state.page, null, true);
-        } else {
-            showPage('universal', null, true);
-        }
+        const page = (event.state && event.state.page) ? event.state.page : 'universal';
+        showPage(page, null, true);
     });
-
 
     // --- ALL OTHER INITIALIZATION LOGIC ---
     document.addEventListener('DOMContentLoaded', function() {
-        // --- Slider Functionality ---
-        // --- Slider Functionality (with Auto-Play) ---
-    const sliderWrappers = document.querySelectorAll('.slider-wrapper');
-    sliderWrappers.forEach(wrapper => {
-        const container = wrapper.closest('.slider-container');
-        if (!container) return;
-        const prevButton = container.querySelector('.prev-slide');
-        const nextButton = container.querySelector('.next-slide');
-        const slides = wrapper.querySelectorAll('.slide');
-        // Don't initialize if there's only one slide or less
-        if (!prevButton || !nextButton || slides.length <= 1) return;
+        // --- Slider Functionality (with Video Pause) ---
+        const sliderWrappers = document.querySelectorAll('.slider-wrapper');
+        sliderWrappers.forEach(wrapper => {
+            const container = wrapper.closest('.slider-container');
+            if (!container) return;
+            const prevButton = container.querySelector('.prev-slide');
+            const nextButton = container.querySelector('.next-slide');
+            const slides = wrapper.querySelectorAll('.slide');
+            if (!prevButton || !nextButton || slides.length <= 1) return;
 
-        let currentIndex = 0;
-        let autoSlideInterval;
+            let currentIndex = 0;
+            let autoSlideInterval;
 
-        function updateSlider() {
-            const offset = -currentIndex * 100;
-            wrapper.style.transform = `translateX(${offset}%)`;
-        }
+            function updateSlider() {
+                const offset = -currentIndex * 100;
+                wrapper.style.transform = `translateX(${offset}%)`;
+            }
 
-        // Function to start the automatic sliding
-        function startAutoSlide() {
-            autoSlideInterval = setInterval(() => {
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(() => {
+                    const currentSlide = slides[currentIndex];
+                    const isVideoSlide = currentSlide.querySelector('video');
+                    if (isVideoSlide) { return; }
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    updateSlider();
+                }, 5000);
+            }
+
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                startAutoSlide();
+            }
+
+            nextButton.addEventListener('click', () => {
                 currentIndex = (currentIndex + 1) % slides.length;
                 updateSlider();
-            }, 5000); // Slides will change every 5000ms (5 seconds)
-        }
+                resetAutoSlide();
+            });
 
-        // Function to reset the timer when a user clicks an arrow
-        function resetAutoSlide() {
-            clearInterval(autoSlideInterval);
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateSlider();
+                resetAutoSlide();
+            });
+            
+            updateSlider();
             startAutoSlide();
-        }
-
-        nextButton.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateSlider();
-            resetAutoSlide(); // Reset timer on manual navigation
         });
 
-        prevButton.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            updateSlider();
-            resetAutoSlide(); // Reset timer on manual navigation
-        });
-        
-        updateSlider();    // Set the initial slide position
-        startAutoSlide();  // Start the automatic slideshow
-    });
         // --- Intersection Observer for Animations ---
         const animatedItems = document.querySelectorAll('.timeline-item, .strategy-list li');
         if ("IntersectionObserver" in window) {
@@ -2499,16 +2493,17 @@
             animatedItems.forEach(item => item.classList.add('visible'));
         }
 
-        // --- NEW: Initial Page Load Handler (checks URL for hash) ---
-        const initialPage = window.location.hash.substring(1);
+        // --- Initial Page Load Handler (now reads pathname) ---
+        const path = window.location.pathname;
+        const initialPage = path.substring(1) || 'universal';
         const validPages = Array.from(document.querySelectorAll('.page')).map(p => p.id);
         
-        if (initialPage && validPages.includes(initialPage)) {
-            showPage(initialPage, null, true);
-        } else {
-            showPage('universal', null, true);
-            history.replaceState({ page: 'universal' }, '', '#universal');
-        }
+        const pageToLoad = validPages.includes(initialPage) ? initialPage : 'universal';
+
+        showPage(pageToLoad, null, true);
+        
+        const correctUrl = (pageToLoad === 'universal') ? '/' : `/${pageToLoad}`;
+        history.replaceState({ page: pageToLoad }, '', correctUrl);
     });
 </script>
 </body>
