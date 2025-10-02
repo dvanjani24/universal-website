@@ -819,12 +819,12 @@
 
         .slider-container {
             position: relative;
-            max-width: 750px;          /* Reduced from 900px for a smaller size */
+            max-width: 1100px; /* Increased from 750px to match the grid's width */
             margin: 0 auto;
             overflow: hidden;
             border-radius: 12px;
-            aspect-ratio: 16 / 9;      /* This enforces a consistent widescreen shape */
-            background-color: #f8f9fa; /* Adds a light background for letterboxing */
+            aspect-ratio: 16 / 9;
+            background-color: #f8f9fa;
         }
 
         .slider-wrapper {
@@ -835,6 +835,7 @@
         .slide {
             flex: 0 0 100%;
             position: relative;
+            height: 100%;
         }
 
         .slide img {
@@ -842,14 +843,10 @@
             display: block;
         }
 
-        .slide-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-            text-align: center;
+        .slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .slider-nav {
@@ -1006,51 +1003,56 @@
             right: 0;
             padding: 1.5rem 1rem;
             background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
-            color: white;
+            color: white; /* This is the critical fix */
             font-weight: 500;
             text-align: center;
             transition: all 0.3s ease;
         }
-        /* END REPLACEMENT */
-        /* END: Add this new CSS for the Branches & Factories Timeline */
-        /* START: Add this CSS for the new Branches & Slider Layout */
-       /* --- CONSOLIDATED FIX for Branches & Slider Layout --- */
-        /* --- FINAL Version for Branches & Slider Layout --- */
-        .branches-layout-grid {
+        /* --- NEW 2x2 Branches Grid Layout --- */
+        .branches-grid-2x2 {
             display: grid;
-            grid-template-columns: 1.4fr 1fr; /* Gives even more space to text */
-            gap: 3rem;
-            align-items: flex-start;
-            padding-bottom: 4rem;
-            max-width: 1100px; /* Constrains the width of the entire section */
-            margin: 0 auto;    /* Centers the constrained section */
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;           /* Further reduced for a tighter layout */
+            max-width: 1100px;
+            margin: 0 auto;
+            align-items: start;    /* This stops the cards from stretching vertically */
         }
 
-        /* Adjustments for the timeline container within this grid */
-        .branches-layout-grid .timeline-container {
-            max-width: none;
+        .branches-grid-2x2 .timeline-item {
             margin: 0;
-            padding: 1rem 0 0 0;
+        }
+        .branch-card {
+            background-color: var(--light-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid transparent; /* Prevents layout shift on hover */
+            transition: all 0.3s ease;     /* Smooth transition for the hover effect */
+            cursor: default;               /* Indicates it's not a link */
         }
 
-        /* Adjustments for the slider container within this grid */
-        .branches-layout-grid .slider-container {
-            max-width: none;
-            margin: 0;
-            height: 100%;
-            min-height: 550px;
+        /* NEW: Interactive hover effect */
+        .branch-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(11, 19, 43, 0.08); /* Adds a subtle "glow" */
+            border-color: #E9ECEF;
         }
 
-        /* Rules for the slider elements ONLY within this grid */
-        .branches-layout-grid .slider-wrapper,
-        .branches-layout-grid .slide {
-            height: 100%;
+        .branch-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--navy);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
-        .branches-layout-grid .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* RESTORED: This crops the image to fill the space cleanly */
+        .branch-flag {
+            width: 40px;
+        }
+
+        .branch-description {
+            color: var(--dark-text);
         }
         
         /* REPLACEMENT for the ENTIRE Univex Page CSS block */
@@ -1779,90 +1781,63 @@
             </div>
         </section>
 
-        <section class="timeline-section">
+        <section class="section">
             <div class="container">
                 <div class="section-heading">
                     <h2 class="section-title">Branches & Factories</h2>
                     <p class="section-subtitle">Our strategic presence across Asia and the Americas gives us unparalleled access to the world's largest manufacturing and wholesale ecosystems.</p>
                 </div>
-                <div class="branches-layout-grid">
-                    <div class="timeline-container">
-                        <div class="timeline-item">
-                            <h4 class="timeline-title">
-                                <img src="images/flag-tw.png" alt="Taiwan Flag" class="timeline-flag">
-                                Taipei, Taiwan (HQ)
-                            </h4>
-                            <p class="timeline-description">Managing all banking, payments, logistics, and shipping activities for the Universal Group.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h4 class="timeline-title">
-                                <img src="images/flag-cn.png" alt="China Flag" class="timeline-flag">
-                                Guangzhou, China
-                            </h4>
-                            <p class="timeline-description">Partnering with manufacturers across key production hubs such as Shenzhen, Tianjin, Xiamen, Nantong across numerous of high-volume categories.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h4 class="timeline-title">
-                                <img src="images/flag-cn.png" alt="China Flag" class="timeline-flag">
-                                Yiwu, China
-                            </h4>
-                            <p class="timeline-description">Sourcing, manufacturing, and consolidating products from the world's largest and most dynamic 59 million square foot wholesale market complex.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h4 class="timeline-title">
-                                <img src="images/flag-pa.png" alt="Panama Flag" class="timeline-flag">
-                                Panama
-                            </h4>
-                            <p class="timeline-description">Import and export distribution network catering to the Colon Free Trade Zone.</p>
-                        </div>
+
+                <div class="branches-grid-2x2">
+                    <div class="branch-card timeline-item">
+                        <h4 class="branch-title">
+                            <img src="images/flag-tw.png" alt="Taiwan Flag" class="branch-flag">
+                            Taipei, Taiwan (HQ)
+                        </h4>
+                        <p class="branch-description">Managing all banking, payments, logistics, and shipping activities for the Universal Group.</p>
                     </div>
-                    <div class="slider-container">
-                        <div class="slider-wrapper">
-                            <div class="slide">
-                                <img src="images/stock.png">
-                                <div class="slide-caption"></div>
-                            </div>
-                            <div class="slide">
-                                <img src="images/twoffice1.png">
-                                <div class="slide-caption">Taipei Office</div>
-                            </div>
-                            <div class="slide">
-                                <img src="images/twoffice2.png">
-                                <div class="slide-caption">Taipei Office</div>
-                            </div>
-                            <div class="slide">
-                                <img src="images/gzoffice1.png">
-                                <div class="slide-caption">Guangzhou Office</div>
-                            </div>
-                            <div class="slide">
-                                <img src="images/gzoffice2.png">
-                                <div class="slide-caption">Guangzhou Office</div>
-                            </div>
-                            <div class="slide">
-                                <img src="images/yiwuoffice1.png">
-                                <div class="slide-caption">Yiwu Office</div>
-                            </div>
-                            <div class="slide">
-                                <img src="images/yiwuoffice2.png">
-                                <div class="slide-caption">Yiwu Office</div>
-                            </div>
-                            <div class="slide">
-                                <img src="images/yiwumarket.jpg">
-                                <div class="slide-caption">Yiwu Market</div>
-                            </div>
-                            <div class="slide">
-                                <img src="images/yiwumarket2.png">
-                                <div class="slide-caption">Yiwu Market</div>
-                            </div>
-                            <div class="slide">
-                                <img src="images/yiwumarket1.jpg">
-                                <div class="slide-caption">Yiwu Market</div>
-                            </div>
-                        </div>
-                        <div class="slider-nav">
-                            <button class="prev-slide">&lt;</button>
-                            <button class="next-slide">&gt;</button>
-                        </div>
+                    <div class="branch-card timeline-item">
+                        <h4 class="branch-title">
+                            <img src="images/flag-cn.png" alt="China Flag" class="branch-flag">
+                            Guangzhou, China
+                        </h4>
+                        <p class="branch-description">Partnering with manufacturers across key production hubs such as Shenzhen, Tianjin, Xiamen, and Nantong.</p>
+                    </div>
+                    <div class="branch-card timeline-item">
+                        <h4 class="branch-title">
+                            <img src="images/flag-cn.png" alt="China Flag" class="branch-flag">
+                            Yiwu, China
+                        </h4>
+                        <p class="branch-description">Sourcing and consolidating products from the world's largest 59 million sq-ft wholesale market complex.</p>
+                    </div>
+                    <div class="branch-card timeline-item">
+                        <h4 class="branch-title">
+                            <img src="images/flag-pa.png" alt="Panama Flag" class="branch-flag">
+                            Panama
+                        </h4>
+                        <p class="branch-description">Import and export distribution network catering to the Colon Free Trade Zone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <div class="slider-container">
+                    <div class="slider-wrapper">
+                        <div class="slide"><img src="images/stockbranches.png"><div class="slide-caption"></div></div>
+                        <div class="slide"><img src="images/twoffice.png"><div class="slide-caption">Taipei Office</div></div>
+                        <div class="slide"><img src="images/yiwuoffice.png"><div class="slide-caption">Yiwu Office</div></div>
+                        <div class="slide"><img src="images/yiwumarket.png"><div class="slide-caption">Yiwu - World's largest wholesale market</div></div>
+                        <div class="slide"><img src="images/yiwumarket2.png"><div class="slide-caption">Yiwu Market</div></div>
+                        <div class="slide"><img src="images/yiwumarket3.png"><div class="slide-caption">Yiwu Market</div></div>
+                        <div class="slide"><img src="images/gzoffice.png"><div class="slide-caption">Guangzhou Office</div></div>
+                        <div class="slide"><img src="images/fanfactory.png"><div class="slide-caption">Electric Fan Factory in Taiwan</div></div>
+                        <div class="slide"><img src="images/glassbottlefactory.png"><div class="slide-caption">Glass Bottle Factory in Nanjing</div></div>
+                    </div>
+                    <div class="slider-nav">
+                        <button class="prev-slide">&lt;</button>
+                        <button class="next-slide">&gt;</button>
                     </div>
                 </div>
             </div>
@@ -2026,22 +2001,19 @@
             <div class="container">
                 <div class="section-heading">
                     <h2 class="section-title">A Glimpse Into Our Belize Operations</h2>
-                    <p class="section-subtitle">From our bustling retail storefronts to our expansive warehousing and distribution centers.</p>
+                    <p class="section-subtitle">Come visit us at our bustling retail storefronts and our expansive wholesale distribution centers.</p>
                 </div>
                 <div class="slider-container">
                     <div class="slider-wrapper">
-                        <div class="slide"><img src="images/billboard1.jpg"><div class="slide-caption">Universal Billboard in Corozal Freezone</div></div>
-                        <div class="slide"><img src="images/billboard2.jpg"><div class="slide-caption">Universal Billboard in Corozal Freezone</div></div>
-                        <div class="slide"><img src="images/Picture1.jpg"><div class="slide-caption">Freedom Avenue Retail Store</div></div>
-                        <div class="slide"><img src="images/retailfreedom.png"><div class="slide-caption">Freedom Avenue Retail Store</div></div>
-                        <div class="slide"><img src="images/ad1.png"><div class="slide-caption">Brands distributed by Universal</div></div>
-                        <div class="slide"><img src="images/ad2.png"><div class="slide-caption">Brands distributed by Universal</div></div>
-                        <div class="slide"><img src="images/ad3.png"><div class="slide-caption">Brands distributed by Universal</div></div>
-                        <div class="slide"><img src="images/retail1.jpg"><div class="slide-caption">Delamo Plaza Retail Store</div></div>
-                        <div class="slide"><img src="images/wh3.jpg"><div class="slide-caption">Wholesale warehousing facilities</div></div>
-                        <div class="slide"><img src="images/wh2.jpg"><div class="slide-caption">Wholesale warehousing facilities</div></div>
-                        <div class="slide"><img src="images/wh1.jpg"><div class="slide-caption">Wholesale warehousing facilities</div></div>
-
+                        <div class="slide"><img src="images/billboard.png"><div class="slide-caption">Universal Billboard in Corozal Freezone</div></div>
+                        <div class="slide"><img src="images/billboard2.png"><div class="slide-caption">Universal Billboard in Corozal Freezone</div></div>
+                        <div class="slide"><img src="images/warehouse.png"><div class="slide-caption">3+ Acre Wholesale Warehousing</div></div>
+                        <div class="slide"><img src="images/freedomavestore.png"><div class="slide-caption">Freedom Avenue Retail Store</div></div>
+                        <div class="slide"><img src="images/brandsinstore.png"><div class="slide-caption">Brands distributed by Universal</div></div>
+                        <div class="slide"><img src="images/brandsinstore2.png"><div class="slide-caption">Brands distributed by Universal</div></div>
+                        <div class="slide"><img src="images/brandsinstore3.png"><div class="slide-caption">Brands distributed by Universal</div></div>
+                        <div class="slide"><img src="images/brandsinstore4.png"><div class="slide-caption">Brands distributed by Universal</div></div>
+                        <div class="slide"><img src="images/delamostore.png"><div class="slide-caption">Delamo Plaza Retail Store</div></div>
                     </div>
                     <div class="slider-nav">
                         <button class="prev-slide">&lt;</button>
@@ -2439,30 +2411,54 @@
     // --- ALL OTHER INITIALIZATION LOGIC ---
     document.addEventListener('DOMContentLoaded', function() {
         // --- Slider Functionality ---
-        const sliderWrappers = document.querySelectorAll('.slider-wrapper');
-        sliderWrappers.forEach(wrapper => {
-            const container = wrapper.closest('.slider-container');
-            if (!container) return;
-            const prevButton = container.querySelector('.prev-slide');
-            const nextButton = container.querySelector('.next-slide');
-            const slides = wrapper.querySelectorAll('.slide');
-            if (!prevButton || !nextButton || slides.length === 0) return;
-            let currentIndex = 0;
-            function updateSlider() {
-                const offset = -currentIndex * 100;
-                wrapper.style.transform = `translateX(${offset}%)`;
-            }
-            nextButton.addEventListener('click', () => {
+        // --- Slider Functionality (with Auto-Play) ---
+    const sliderWrappers = document.querySelectorAll('.slider-wrapper');
+    sliderWrappers.forEach(wrapper => {
+        const container = wrapper.closest('.slider-container');
+        if (!container) return;
+        const prevButton = container.querySelector('.prev-slide');
+        const nextButton = container.querySelector('.next-slide');
+        const slides = wrapper.querySelectorAll('.slide');
+        // Don't initialize if there's only one slide or less
+        if (!prevButton || !nextButton || slides.length <= 1) return;
+
+        let currentIndex = 0;
+        let autoSlideInterval;
+
+        function updateSlider() {
+            const offset = -currentIndex * 100;
+            wrapper.style.transform = `translateX(${offset}%)`;
+        }
+
+        // Function to start the automatic sliding
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
                 currentIndex = (currentIndex + 1) % slides.length;
                 updateSlider();
-            });
-            prevButton.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-                updateSlider();
-            });
+            }, 5000); // Slides will change every 5000ms (5 seconds)
+        }
+
+        // Function to reset the timer when a user clicks an arrow
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
             updateSlider();
+            resetAutoSlide(); // Reset timer on manual navigation
         });
 
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider();
+            resetAutoSlide(); // Reset timer on manual navigation
+        });
+        
+        updateSlider();    // Set the initial slide position
+        startAutoSlide();  // Start the automatic slideshow
+    });
         // --- Intersection Observer for Animations ---
         const animatedItems = document.querySelectorAll('.timeline-item, .strategy-list li');
         if ("IntersectionObserver" in window) {
