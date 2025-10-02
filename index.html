@@ -687,11 +687,12 @@
 
         .business-header h2 {
             margin: 0; /* Remove default margin */
+            white-space: nowrap; /* Prevents the title from wrapping to a new line */
         }
 
         .business-header .logo {
-            max-height: 85px;
-            max-width: 140px;
+            max-height: 95px;  /* Increased from 85px */
+            max-width: 160px;  /* Increased from 140px */
             object-fit: contain;
             flex-shrink: 0; /* Prevent the logo from shrinking */
         }
@@ -806,7 +807,7 @@
 
         .slider-container {
             position: relative;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             overflow: hidden;
             border-radius: 12px;
@@ -1826,17 +1827,13 @@
 
     <div id="belize" class="page">
         <div class="page-header">
-            <!-- 1. The section-title and section-subtitle inside page-header will now use the new CSS rules to increase margin on mobile -->
             <h1 class="section-title">Belize's leading wholesale distributor & retailer.</h1>
             <p class="section-subtitle">Our strategic presence in Belize is divided into two core businesses, each serving a distinct and vital market.</p>
         </div>
 
-        <!-- Business Split Section -->
         <section class="business-split-section">
             <div class="container">
-                <!-- Universal Freezone -->
                 <div class="business-card">
-                    <!-- NEW: Mobile Logo Wrapper (Order 1 on mobile) -->
                     <div class="mobile-logo-wrapper">
                         <img src="images/universal freezone.png" alt="Universal Freezone Logo" class="mobile-logo-img">
                         <h3 class="mobile-business-title">Universal Freezone</h3>
@@ -1845,16 +1842,12 @@
                         <img src="images/belize-freezone.jpg" alt="A busy commercial area at the Belize-Mexico border">
                     </div>
                     <div class="text-content">
-                        <!-- Desktop Header (Hidden on mobile) -->
                         <div class="business-header">
                             <h2>Universal Freezone</h2>
                             <img src="images/universal freezone.png" alt="Universal Freezone Logo" class="logo">
                         </div>
                         <span class="market-focus">Our Gateway to the Neighboring Mexico Market</span>
-                        <p>
-                            Catering to bustling cross-border trade, Universal Freezone operates out of the Corozal Freezone. Our 100k+ square foot warehousing facilities have a dual-purpose layout, serving both as wholesale distribution hubs and retail stores for clients in both Mexico and Belize.
-                        </p>
-                        <!-- ADD THIS BLOCK for Universal Freezone social links -->
+                        <p>Catering to bustling cross-border trade, Universal Freezone operates out of the Corozal Freezone. Our 100k+ square foot warehousing facilities have a dual-purpose layout, serving both as wholesale distribution hubs and retail stores for clients in both Mexico and Belize.</p>
                         <div class="social-links">
                             <a href="https://www.facebook.com/universalfreezone123" target="_blank" title="Facebook">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.494v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.323-1.325z"/></svg>
@@ -1863,13 +1856,10 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.585.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
                             </a>
                         </div>
-                        <!-- Add more text here if you wish -->
                     </div>
                 </div>
 
-                <!-- Unitex -->
                 <div class="business-card reversed">
-                    <!-- NEW: Mobile Logo Wrapper (Order 1 on mobile) -->
                     <div class="mobile-logo-wrapper">
                         <img src="images/unitex.png" alt="Unitex Logo" class="mobile-logo-img" id="unitex-logo-mobile">
                         <h3 class="mobile-business-title">Unitex</h3>
@@ -1878,7 +1868,6 @@
                         <img src="images/belize-local.jpg" alt="A vibrant local market street in a Belizean city">
                     </div>
                     <div class="text-content">
-                        <!-- Desktop Header (Hidden on mobile) -->
                         <div class="business-header">
                             <h2>Unitex</h2>
                             <img src="images/unitex.png" alt="Unitex Logo" class="logo">
@@ -1895,150 +1884,77 @@
             </div>
         </section>
 
-        <!-- Partner Brands Section -->
         <section class="partner-brands-section">
             <div class="container">
                 <div class="section-heading">
                     <h2 class="section-title">Our Partner Brands</h2>
                     <p class="section-subtitle">We are proud to be the trusted distribution partner for a wide range of renowned international brands.</p>
                 </div>
-                <!-- 2. This grid is now fixed to better handle 2 columns on mobile. -->
                 <div class="brand-grid">
-                  <div class="brand-logo-item">
-                    <img src="images/a-cheese.svg" alt="A-Cheese Logo">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/arizona.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/axe.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/badia.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/bauducco.png" alt="Bauducco Logo">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/brut.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/campbells.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/cheezeit.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/collection2000.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/ferrara.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/goldfish.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/gorilla.png" alt="Gorilla Energy Logo">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/hombre.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/hormel.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/kagi.svg" alt="Kagi Logo">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/kellogs.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/kent.png" alt="Kent Logo">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/kraft.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/lotus.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/madamhong.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/mondelez.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/mrbrown.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/nescafe.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/nestle.svg">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/pepperidge.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/planters.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/poptarts.jpeg">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/pringles.svg">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/ritz.png">
-                  </div>
-
-                  <div class="brand-logo-item">
-                    <img src="images/unilever.png">
-                  </div>
+                    <div class="brand-logo-item"><img src="images/a-cheese.svg" alt="A-Cheese Logo"></div>
+                    <div class="brand-logo-item"><img src="images/arizona.png"></div>
+                    <div class="brand-logo-item"><img src="images/axe.png"></div>
+                    <div class="brand-logo-item"><img src="images/badia.png"></div>
+                    <div class="brand-logo-item"><img src="images/bauducco.png" alt="Bauducco Logo"></div>
+                    <div class="brand-logo-item"><img src="images/brut.png"></div>
+                    <div class="brand-logo-item"><img src="images/campbells.png"></div>
+                    <div class="brand-logo-item"><img src="images/cheezeit.png"></div>
+                    <div class="brand-logo-item"><img src="images/collection2000.png"></div>
+                    <div class="brand-logo-item"><img src="images/ferrara.png"></div>
+                    <div class="brand-logo-item"><img src="images/goldfish.png"></div>
+                    <div class="brand-logo-item"><img src="images/gorilla.png" alt="Gorilla Energy Logo"></div>
+                    <div class="brand-logo-item"><img src="images/hombre.png"></div>
+                    <div class="brand-logo-item"><img src="images/hormel.png"></div>
+                    <div class="brand-logo-item"><img src="images/kagi.svg" alt="Kagi Logo"></div>
+                    <div class="brand-logo-item"><img src="images/kellogs.png"></div>
+                    <div class="brand-logo-item"><img src="images/kent.png" alt="Kent Logo"></div>
+                    <div class="brand-logo-item"><img src="images/kraft.png"></div>
+                    <div class="brand-logo-item"><img src="images/lotus.png"></div>
+                    <div class="brand-logo-item"><img src="images/madamhong.png"></div>
+                    <div class="brand-logo-item"><img src="images/mondelez.png"></div>
+                    <div class="brand-logo-item"><img src="images/mrbrown.png"></div>
+                    <div class="brand-logo-item"><img src="images/nescafe.png"></div>
+                    <div class="brand-logo-item"><img src="images/nestle.svg"></div>
+                    <div class="brand-logo-item"><img src="images/pepperidge.png"></div>
+                    <div class="brand-logo-item"><img src="images/planters.png"></div>
+                    <div class="brand-logo-item"><img src="images/poptarts.jpeg"></div>
+                    <div class="brand-logo-item"><img src="images/pringles.svg"></div>
+                    <div class="brand-logo-item"><img src="images/ritz.png"></div>
+                    <div class="brand-logo-item"><img src="images/unilever.png"></div>
                 </div>
-
 
                 <div class="section-heading">
                     <h2 class="section-title"><br>Our Private Label Brands</h2>
                     <p class="section-subtitle">With our client's trust and strong market position, we are proud to be kicking off our private labeling journey.</p>
                 </div>
                 <div class="brand-grid">
-                    <div class="brand-logo-item">
-                        <img src="images/aria.png">
+                    <div class="brand-logo-item"><img src="images/aria.png"></div>
+                    <div class="brand-logo-item"><img src="images/spark.jpg"></div>
+                    <div class="brand-logo-item"><img src="images/supervec.png"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top: 40px; background-color: var(--light-bg);">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="section-title">A Glimpse Into Our Belize Operations</h2>
+                    <p class="section-subtitle">From our bustling retail storefronts to our expansive warehousing and distribution centers.</p>
+                </div>
+                <div class="slider-container">
+                    <div class="slider-wrapper">
+                        <div class="slide"><img src="images/billboard1.jpg"><div class="slide-caption">Universal Billboard in Corozal Freezone</div></div>
+                        <div class="slide"><img src="images/billboard2.jpg"><div class="slide-caption">Universal Billboard in Corozal Freezone</div></div>
+                        <div class="slide"><img src="images/wh3.jpg"><div class="slide-caption">Warehousing facilities</div></div>
+                        <div class="slide"><img src="images/wh2.jpg"><div class="slide-caption">Warehousing facilities</div></div>
+                        <div class="slide"><img src="images/wh1.jpg"><div class="slide-caption">Warehousing facilities</div></div>
+                        <div class="slide"><img src="images/Picture1.jpg"><div class="slide-caption">Freedom Avenue Retail Store</div></div>
+                        <div class="slide"><img src="images/retail1.jpg"><div class="slide-caption">Delamo Plaza Retail Store</div></div>
+                        <div class="slide"><img src="images/ad1.png"><div class="slide-caption">Brands distributed by Universal</div></div>
                     </div>
-                    <div class="brand-logo-item">
-                        <img src="images/spark.jpg">
-                    </div>
-                    <div class="brand-logo-item">
-                        <img src="images/supervec.png">
+                    <div class="slider-nav">
+                        <button class="prev-slide">&lt;</button>
+                        <button class="next-slide">&gt;</button>
                     </div>
                 </div>
             </div>
