@@ -1558,6 +1558,27 @@
                 height: 55px; /* Reduced height to ensure alignment, since logos are stacked 2 per row now */
             }
             /* --- END NEW BELIZE CARD MOBILE LAYOUT --- */
+
+            /* --- Center Taiwan/China Page Header on Mobile --- */
+            .page-title-header {
+                flex-direction: column;    /* Stack logo and title vertically */
+                align-items: center;       /* Center them horizontally */
+                gap: 1rem;                 /* Adjust vertical space between them */
+            }
+
+            .page-title-header img {
+                order: 1;                  /* Move logo to the top */
+                height: 70px;              /* Make logo slightly smaller for mobile */
+            }
+
+            .page-title-header .page-title-text {
+                order: 2;                  /* Move text below the logo */
+            }
+
+            /* This ensures the title text itself is centered */
+            .page-title-text .section-title {
+                text-align: center;
+            }
         }
         /* --- END MOBILE RESPONSIVE STYLES --- */
         
