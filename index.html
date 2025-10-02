@@ -1362,8 +1362,47 @@
             .nav-links.active { display: flex; }
             .nav-item { position: static; }
             
-            /* Hide desktop dropdowns */
-            .dropdown-menu { display: none !important; }
+            /* --- NEW: Accordion Menu Styles for Mobile --- */
+            .nav-links .dropdown-menu {
+                display: none; /* Hidden by default */
+                position: static;
+                box-shadow: none;
+                border: none;
+                padding-left: 1.5rem; /* Indents the country links */
+                background-color: transparent;
+                min-width: 100%;
+            }
+
+            .nav-links .dropdown-menu.open {
+                display: block; /* Shows the submenu when toggled */
+            }
+
+            .nav-links .dropdown-menu li a {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            /* Styles for the dropdown arrow (caret) */
+            .nav-link.has-dropdown {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .caret {
+                border: solid var(--dark-text);
+                border-width: 0 2px 2px 0;
+                display: inline-block;
+                padding: 3px;
+                margin-right: 8px;
+                transform: rotate(45deg);
+                transition: transform 0.3s ease;
+            }
+
+            /* Rotates the caret when the menu is open */
+            .nav-link.has-dropdown.open .caret {
+                transform: rotate(-135deg);
+            }
 
             /* Remove the underline effect on mobile */
             .nav-links a:after, .nav-item > a:after {
@@ -1525,8 +1564,9 @@
             </a>
             <ul class="nav-links" id="navLinks">
                 <li class="nav-item">
-                    <a href="#" onclick="showPage('universal', event)" class="nav-link active">Universal Group</a>
+                    <a href="#" onclick="toggleSubMenu(event)" class="nav-link active has-dropdown">Universal Group <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a href="#" onclick="showPage('universal', event)">Home (Universal Group)</a></li>
                         <li><a href="#" onclick="showPage('taiwan-china', event)">Taiwan & China</a></li>
                         <li><a href="#" onclick="showPage('belize', event)">Belize</a></li>
                         <li><a href="#" onclick="showPage('usa', event)">United States</a></li>
@@ -2293,6 +2333,21 @@
         const navLinks = document.getElementById('navLinks');
         navLinks.classList.toggle('active');
     }
+
+    function toggleSubMenu(event) {
+    // This function only runs on mobile screen sizes
+    if (window.innerWidth <= 768) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const link = event.currentTarget;
+        const parentItem = link.closest('.nav-item');
+        const submenu = parentItem.querySelector('.dropdown-menu');
+
+        link.classList.toggle('open');
+        submenu.classList.toggle('open');
+    }
+}
 
     // --- HEADER SHADOW ON SCROLL ---
     window.addEventListener('scroll', () => {
