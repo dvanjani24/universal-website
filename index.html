@@ -1296,8 +1296,10 @@
                 grid-template-columns: 1fr;
             }
             .branches-layout-grid .slider-container {
+                max-width: 100%;
                 margin-top: 2rem;
-                min-height: 400px; /* Adjust height for mobile */
+                min-height: auto;          /* This resets the conflicting height value */
+                aspect-ratio: 16 / 10;     /* This ensures a consistent shape */
             }
             .enhanced-presence-grid {
                 grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
