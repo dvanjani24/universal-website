@@ -1477,6 +1477,25 @@
                 padding-left: 0; /* Remove extra padding on the description text */
                 margin-top: 0.25rem;
             }
+
+            /* --- Mobile Optimizations for Taiwan Page Grid --- */
+            .branches-grid-2x2 {
+                grid-template-columns: 1fr; /* Switch to a single, centered column */
+                max-width: none;            /* Reset desktop width to prevent overflow */
+                gap: 1.5rem;                /* Adjust vertical space between cards */
+            }
+
+            .branch-card {
+                padding: 1.5rem;            /* Slightly reduce padding inside cards */
+            }
+
+            .branch-title {
+                font-size: 1.3rem;          /* Make the title text smaller */
+            }
+
+            .branch-description {
+                font-size: 0.9rem;          /* Make the description text smaller */
+            }
             /* --- END TIMELINE FIX --- */
 
             /* --- ADD THIS NEW BLOCK FOR GRID FIXES --- */
