@@ -1277,7 +1277,9 @@
         /* Responsive Design */
         @media (max-width: 992px) {
             .content-split, .content-split.reversed { grid-template-columns: 1fr; }
-            .content-split .image-content { order: -1; margin-bottom: 2rem; }
+            .content-split .image-content {
+                display: none;
+            }
 
             .branches-layout-grid {
                 grid-template-columns: 1fr;
@@ -1330,10 +1332,6 @@
             .leadership-grid {
                 grid-template-columns: 47% 47%;
                 justify-content: center;
-            }
-
-            .content-split .image-content {
-                margin-bottom: 1px;
             }
 
             /* --- FIX 2: HAMBURGER MENU --- */
