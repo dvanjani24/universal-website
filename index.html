@@ -2238,152 +2238,169 @@
     </footer>
 
     <script>
-        function showPage(pageId, event) {
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
-            
-            const newPage = document.getElementById(pageId);
-            if (newPage) {
-                newPage.classList.add('active');
-            }
-            
-            const navLinks = document.querySelectorAll('.nav-link');
-            const universalLink = document.querySelector('.nav-item > .nav-link');
-            const countryPages = ['taiwan-china', 'belize', 'usa', 'mexico'];
-
-            navLinks.forEach(link => link.classList.remove('active'));
-
-            const targetLink = document.querySelector(`.nav-link[onclick*="'${pageId}'"]`);
-            if (targetLink && !targetLink.closest('.dropdown-menu')) {
-                 targetLink.classList.add('active');
-            }
-
-            if (countryPages.includes(pageId) || pageId === 'universal') {
-                if(universalLink) universalLink.classList.add('active');
-            }
-            
-            const navLinksContainer = document.getElementById('navLinks');
-            if (navLinksContainer.classList.contains('active')) {
-                 navLinksContainer.classList.remove('active');
-            }
-            
-            window.scrollTo(0, 0);
+    // --- CORE NAVIGATION & PAGE DISPLAY ---
+    function showPage(pageId, event, isPopState = false) {
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
         }
 
-        function toggleMobileMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
-
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 2px 15px rgba(0,0,0,0.1)';
-            } else {
-                header.style.boxShadow = 'none';
-            }
-        });
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(page => page.classList.remove('active'));
         
-        function animateCounters() {
-            document.querySelectorAll('.stat-number').forEach(counter => {
-                const targetText = counter.innerText;
-                const target = +targetText.replace(/[^0-9]/g, '');
-                const suffix = targetText.replace(/[0-9,]/g, '');
-                const duration = 2000;
-                let startTime = null;
+        const newPage = document.getElementById(pageId);
+        if (newPage) {
+            newPage.classList.add('active');
+        }
+        
+        const navLinks = document.querySelectorAll('.nav-link');
+        const universalLink = document.querySelector('.nav-item > a.nav-link');
+        const countryPages = ['taiwan-china', 'belize', 'usa', 'mexico'];
 
-                const step = (timestamp) => {
-                    if (!startTime) startTime = timestamp;
-                    const progress = Math.min((timestamp - startTime) / duration, 1);
-                    const easeOut = 1 - Math.pow(1 - progress, 3);
-                    const currentNum = Math.floor(easeOut * target);
-                    counter.innerText = currentNum.toLocaleString('en-US') + suffix;
-                    if (progress < 1) {
-                        requestAnimationFrame(step);
-                    } else {
-                        counter.innerText = target.toLocaleString('en-US') + suffix;
-                    }
-                };
-                requestAnimationFrame(step);
-            });
+        navLinks.forEach(link => link.classList.remove('active'));
+
+        const targetLink = document.querySelector(`.nav-link[onclick*="'${pageId}'"]`);
+        if (targetLink && !targetLink.closest('.dropdown-menu')) {
+             targetLink.classList.add('active');
         }
 
-        window.addEventListener('load', () => {
-            if(document.getElementById('universal').classList.contains('active')){
-                animateCounters();
+        if (countryPages.includes(pageId) || pageId === 'universal') {
+            if(universalLink) universalLink.classList.add('active');
+        }
+        
+        // Only push a new state to history if this is a user click (not a back/forward action)
+        if (!isPopState) {
+            const currentHash = window.location.hash.substring(1);
+            if (currentHash !== pageId) {
+                history.pushState({ page: pageId }, '', `#${pageId}`);
             }
-        });
-    </script>
-    <!-- Add this new script block at the end of your body -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const sliderWrappers = document.querySelectorAll('.slider-wrapper');
+        }
+        
+        const navLinksContainer = document.getElementById('navLinks');
+        if (navLinksContainer.classList.contains('active')) {
+             navLinksContainer.classList.remove('active');
+        }
+        
+        window.scrollTo(0, 0);
 
+        // Re-run animations if the home page is shown
+        if (pageId === 'universal') {
+            animateCounters();
+        }
+    }
+
+    // --- MOBILE MENU ---
+    function toggleMobileMenu() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('active');
+    }
+
+    // --- HEADER SHADOW ON SCROLL ---
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        if (window.scrollY > 50) {
+            header.style.boxShadow = '0 2px 15px rgba(0,0,0,0.1)';
+        } else {
+            header.style.boxShadow = 'none';
+        }
+    });
+    
+    // --- ANIMATED COUNTERS ---
+    function animateCounters() {
+        document.querySelectorAll('.stat-number').forEach(counter => {
+            if(counter.classList.contains('animated')) return; // Prevent re-animation
+            counter.classList.add('animated');
+            
+            const targetText = counter.innerText;
+            const target = +targetText.replace(/[^0-9]/g, '');
+            const suffix = targetText.replace(/[0-9,]/g, '');
+            const duration = 2000;
+            let startTime = null;
+
+            const step = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const currentNum = Math.floor(easeOut * target);
+                counter.innerText = currentNum.toLocaleString('en-US') + suffix;
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    counter.innerText = target.toLocaleString('en-US') + suffix;
+                }
+            };
+            requestAnimationFrame(step);
+        });
+    }
+
+    // --- NEW: BROWSER BACK/FORWARD BUTTON HANDLER ---
+    window.addEventListener('popstate', function(event) {
+        if (event.state && event.state.page) {
+            showPage(event.state.page, null, true);
+        } else {
+            showPage('universal', null, true);
+        }
+    });
+
+
+    // --- ALL OTHER INITIALIZATION LOGIC ---
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- Slider Functionality ---
+        const sliderWrappers = document.querySelectorAll('.slider-wrapper');
         sliderWrappers.forEach(wrapper => {
             const container = wrapper.closest('.slider-container');
             if (!container) return;
-
             const prevButton = container.querySelector('.prev-slide');
             const nextButton = container.querySelector('.next-slide');
             const slides = wrapper.querySelectorAll('.slide');
-            
             if (!prevButton || !nextButton || slides.length === 0) return;
-
             let currentIndex = 0;
-
             function updateSlider() {
                 const offset = -currentIndex * 100;
                 wrapper.style.transform = `translateX(${offset}%)`;
             }
-
             nextButton.addEventListener('click', () => {
                 currentIndex = (currentIndex + 1) % slides.length;
                 updateSlider();
             });
-
             prevButton.addEventListener('click', () => {
                 currentIndex = (currentIndex - 1 + slides.length) % slides.length;
                 updateSlider();
             });
-            
             updateSlider();
         });
-        // Add this code INSIDE your existing DOMContentLoaded listener
-        // REPLACE your old timeline animation script with this new logic
-        const animatedItems = document.querySelectorAll('.timeline-item, .strategy-list li');
 
+        // --- Intersection Observer for Animations ---
+        const animatedItems = document.querySelectorAll('.timeline-item, .strategy-list li');
         if ("IntersectionObserver" in window) {
-            const observer = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Add staggered delay for strategy list items
                         if (entry.target.parentElement && entry.target.parentElement.classList.contains('strategy-list')) {
                             const items = Array.from(entry.target.parentElement.children);
                             const index = items.indexOf(entry.target);
                             entry.target.style.transitionDelay = `${index * 0.1}s`;
                         }
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); // Stop observing after it's visible
+                        observer.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.2 });
-
-            animatedItems.forEach(item => {
-                observer.observe(item);
-            });
+            animatedItems.forEach(item => observer.observe(item));
         } else {
-            // Fallback for older browsers
             animatedItems.forEach(item => item.classList.add('visible'));
         }
 
-        // We need to modify the showPage function to call our new onPageChange function.
-        // This is a simple but important change. Find your showPage function and add `onPageChange();` at the end of the original script.
-        // It seems onPageChange() was removed at some point, so we don't need to add it back. The current JS is fine.
+        // --- NEW: Initial Page Load Handler (checks URL for hash) ---
+        const initialPage = window.location.hash.substring(1);
+        const validPages = Array.from(document.querySelectorAll('.page')).map(p => p.id);
+        
+        if (initialPage && validPages.includes(initialPage)) {
+            showPage(initialPage, null, true);
+        } else {
+            showPage('universal', null, true);
+            history.replaceState({ page: 'universal' }, '', '#universal');
+        }
     });
 </script>
 </body>
