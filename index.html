@@ -641,16 +641,18 @@
             background-color: var(--white);
         }
 
-        /* REPLACEMENT for all Brand Grid styles */
         .brand-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 3rem 2rem; /* More vertical space */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem 2rem;
+            justify-content: center;
         }
 
         .brand-logo-item {
-            position: relative; /* For the exclusive tag */
-            height: 80px; /* This is the key to uniform sizing */
+            position: relative;
+            flex-basis: 180px; /* Sets the ideal minimum width */
+            flex-grow: 1;      /* Allows the item to grow and fill space */
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
