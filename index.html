@@ -1508,6 +1508,14 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            /* --- Restore 2-Column Brand Grid on Mobile --- */
+            .brand-grid .brand-logo-item {
+                /* Set a basis of less than 50% to allow two items per row, accounting for the gap */
+                flex-basis: calc(50% - 1rem); 
+                /* Prevent a single item on the last row from stretching to full width */
+                flex-grow: 0;
+            }
+
             /* Adjusts spacing for a tighter mobile layout */
             .product-category-grid {
                 gap: 1rem;
